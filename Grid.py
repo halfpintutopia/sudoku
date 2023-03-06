@@ -9,6 +9,9 @@ class Grid:
         # self.__reset_board()
 
     def __str__(self):
+        """
+        Print out the grid with style and headings for columns and rows
+        """
         grid_string = "    "
         index = 1
         for letter in range(ord('a'), ord('j')):
@@ -21,10 +24,6 @@ class Grid:
 
         for row in range(9):
             grid_string += str(row + 1) + " | "
-
-            if row % 3 == 0 and row != 0:
-                print("-" * 30)
-
             for column in range(9):
                 if column % 3 == 0 and column != 0:
                     grid_string += " | "
@@ -37,7 +36,7 @@ class Grid:
             if (row + 1) % 3 == 0 and (row + 1) != 9:
                 grid_string += "   " + "-" * 43 + "\n"
 
-        return f"{grid_string}"
+        return grid_string
 
     def create_empy_board(self):
         """
