@@ -19,24 +19,24 @@ class Grid:
 
         grid_string += "\n   " + "-" * 43 + "\n"
 
-        for i in range(9):
-            grid_string += str(i + 1) + " | "
+        for row in range(9):
+            grid_string += str(row + 1) + " | "
 
-            if i % 3 == 0 and i != 0:
+            if row % 3 == 0 and row != 0:
                 print("-" * 30)
 
-            for j in range(9):
-                if j % 3 == 0 and j != 0:
+            for column in range(9):
+                if column % 3 == 0 and column != 0:
                     grid_string += " | "
-                if j == 8:
-                    grid_string += "  " + str(self.grid[i][j]) + " "
+                if column == 8:
+                    grid_string += "  " + str(self.grid[row][column]) + " "
                 else:
-                    grid_string += "  " + str(self.grid[i][j]) + " "
+                    grid_string += "  " + str(self.grid[row][column]) + " "
             grid_string += "\n"
 
-            if (i + 1) % 3 == 0 and (i + 1) != 9:
-                "--------------------------------------------"
+            if (row + 1) % 3 == 0 and (row + 1) != 9:
                 grid_string += "   " + "-" * 43 + "\n"
+
         return f"{grid_string}"
 
     def create_empy_board(self):
