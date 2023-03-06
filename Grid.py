@@ -17,7 +17,7 @@ class Grid:
                 grid_string += "   "
             index += 1
 
-        grid_string += "\n " + "_____" * 9 + "\n"
+        grid_string += "\n   " + "-" * 43 + "\n"
 
         for i in range(9):
             grid_string += str(i + 1) + " | "
@@ -34,7 +34,9 @@ class Grid:
                     grid_string += "  " + str(self.grid[i][j]) + " "
             grid_string += "\n"
 
-            grid_string += " " + "_____" * 9 + "\n"
+            if (i + 1) % 3 == 0 and (i + 1) != 9:
+                "--------------------------------------------"
+                grid_string += "   " + "-" * 43 + "\n"
         return f"{grid_string}"
 
     def create_empy_board(self):
