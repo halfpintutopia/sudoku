@@ -1,3 +1,13 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+from Grid import *
+from pprint import pprint
+from pprint import pprint
+
+def main():
+    grid = Grid()
+    print(grid)
+    pprint(grid.create_completed_game())
+    # grid.create_empy_board()
+    # pprint(grid.create_styled_board())
+
+
+main()
