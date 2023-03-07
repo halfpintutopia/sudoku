@@ -1,12 +1,12 @@
 # from Label import *
 from pprint import pprint
+import random
 
 
 class Grid:
     def __init__(self):
         self.grid = None
         self.create_empy_board()
-        # self.__reset_board()
 
     def __str__(self):
         """
@@ -42,9 +42,30 @@ class Grid:
         """
         Initialises with an empty board
         """
-        # self.grid = [[(chr(x), y) for x in range(ord('a'), ord('j') + 1)] for y in range(1, 10)]
         self.grid = [[0 for x in range(ord('a'), ord('j') + 1)] for y in range(1, 10)]
         return self.grid
 
+    def create_completed_game(self):
+        """
+        Main function to create a filled in grid
+        """
+        self.create_empy_board()
+        self.fill_diagonal_sections([(0, 3), (3, 6), (6, 9)])
+        return self.grid
 
-
+    def fill_diagonal_sections(self, range_array):
+        """
+        Initial 3 sections filled in
+        Fills the grid with the 1/9 5/9 and 9/9 3x3 areas on sudoku grid
+        Provides a unique number for each line and row
+        Once the numbers are filled in for the 3 sections the rest of the numbers can be added
+        """
+        for range_values in range_array:
+            sudoku_numbers = list(range(1, 10))
+            if type(range_values) is tuple:
+                for row in range(range_values[0], range_values[1]):
+                    for column in range(range_values[0], range_values[1]):
+                        random_num = random.choice(sudoku_numbers)
+                        self.grid[row][column] = random_num
+                        print(self.grid)
+                        sudoku_numbers.remove(random_num)
