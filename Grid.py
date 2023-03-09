@@ -43,7 +43,7 @@ class Grid:
         Initialises with an empty board
         """
         self.grid = [[0 for x in range(9)] for y in range(9)]
-        return self.grid
+        # return self.grid
 
     def create_completed_game(self):
         """
@@ -84,38 +84,41 @@ class Grid:
         Fills in the grid.
         Replaces the cells that contain 0 with a random number
         """
+        # create a list of numbers missing from the row
+        # randomly choose a number from the list and then check the cell
+        # if the cell row, column 3x3 has the number choose another
+        # loop until the number can be put into the cell
+
         for row in range(len(self.grid)):
+            missing_numbers = self.get_missing_numbers_in_row(row)
             for column in range(len(self.grid[row])):
+                random_number = random.choice(missing_numbers)
                 if self.grid[row][column] == 0:
-                    random_number = random.randint(1, 9)
-                    cell = self.find_zeroes()
-                    # print(self.find_zeroes()[0])
-                    if self.check_cell(random_number, cell):
-                        self.grid[cell[0]][cell[1]] = random_number
+                    # random_number = random.randint(1, 9)
+                    if self.check_cell(random_number, (row, column)):
+                        self.grid[row][column] = random_number
 
-        # print(type(self.grid[row]))
-        # print(self.grid[row].index(random_number))
-        # if random_number in self.grid[row]:
-        #     print(f"random number is already in {self.grid[row]}, {random_number}")
-        # elif random_number in self.grid[column]:
-        #     # return False
-        #     print(f"random number is already in {self.grid[column]}, {random_number}")
-        # else:
-        #     # self.grid[row][column] = random_number
-        #     print(f"random number is not in {self.grid[column]} or {self.grid[row]}, {random_number}")
+    def check_number_is_unique(self, missing_numbers, cell):
+        while True:
+            random_number = random.choice(missing_numbers)
+            if self.check_cell(random_number, (cell[0], cell[1])):
+                break
 
-        # try:
-        #     self.grid[row].index(random_number)
-        #     return True
-        # except ValueError as e:
-        #     print(f"random: {random_number}")
+        return random_number
 
-        # pprint(f"column: {self.grid[row]} {self.grid[column]}")
+    def get_missing_numbers_in_row(self, row):
+        missing_numbers = []
+        for num in range(1, 10):
+            if num not in self.grid[row]:
+                missing_numbers.append(num)
+
+        return missing_numbers
 
     def check_cell(self, number, cell):
         """
         Checks if the cell contains a zero and is not already in the row or column
         cell is a tuple, first in tuple is row, second in tuple is column
+        First checks row, the column and then 3x3 area
         """
         if number in self.grid[cell[0]]:
             return False
@@ -131,4 +134,3 @@ class Grid:
             return False
 
         return True
-        # print(f"three by three: {three_by_three}")
