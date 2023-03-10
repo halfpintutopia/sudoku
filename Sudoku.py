@@ -1,3 +1,4 @@
+import copy
 from pprint import pprint
 import random
 
@@ -39,19 +40,44 @@ class Sudoku:
         Copy the grid to find a solution or multiple solutions
         Get missing numbers in the row lists
         """
-        # available_nums = self.get_missing_numbers_in_row(cell[0])
-        for row in range(len(self.grid)):
+        new_sudoku = copy.deepcopy(self.grid)
+        for row in range(len(new_sudoku)):
             available_nums = self.get_missing_numbers_in_row(row)
-            for col in range(len(self.grid[row])):
+            for col in range(len(new_sudoku[row])):
                 if self.check_row_column_3_by_3(available_nums[0], (row, col)):
-                    self.grid[row][col] = available_nums[0]
+                    new_sudoku[row][col] = available_nums[0]
                     available_nums.pop(0)
                 else:
-                    not_poss_num = available_nums[0]
-                    available_nums.pop(0)
-                    available_nums.append(not_poss_num)
+                    if self.remove_last_filled_in_zero((row, col)):
+                        col_num = self.remove_last_filled_in_zero((row, col))
+                        new_sudoku[row][col_num] = 0
+                    # not_poss_num = available_nums[0]
+                    # available_nums.pop(0)
+                    # available_nums.append(not_poss_num)
+                    # for num in available_nums:
+                    #     if self.check_row_column_3_by_3(num, (row, col_num)):
+                    #         new_sudoku[row][col_num] = num
+                    #         print(f"first num = {num}")
+                    # available_nums.remove(num)
+                    # if self.check_row_column_3_by_3(num, (row, col)):
+                    #     new_sudoku[row][col] = num
+                    #     print(f"second num = {num}")
+                    # available_nums.remove(num)
 
             print(available_nums)
+        pprint(new_sudoku)
+
+    # def backtrack(self):
+
+    def remove_last_filled_in_zero(self, cell):
+        if cell[1] != 0:
+            for i in range(cell[1] - 1, -1, -1):
+                if self.grid[cell[0]][i] == 0:
+                    print(f"i = column:  {cell[0]}, {i}")
+                    return i
+
+        print(f"return original: {cell[0]}, {cell[1]}")
+        return False
 
     def find_next_zero(self):
         """
