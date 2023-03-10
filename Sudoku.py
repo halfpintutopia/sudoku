@@ -13,13 +13,14 @@ class Sudoku:
 
     def create_puzzle(self):
         self.fill_diagonal_3_by_3([(0, 3), (3, 6), (6, 9)])
+        self.create_solutions()
         return self.grid
 
     def fill_diagonal_3_by_3(self, range_list):
         """
         Initial 3 x 3 by 3 sections filled in
         Fills the grid with the 1/9 5/9 and 9/9 3x3 areas on sudoku grid
-        Provides a unique number for each line and row
+        Provides a unique number for each line and row and makes recursion a bit easier
         Once the numbers are filled in for the 3 sections the rest of the numbers can be added
         """
         for range_values in range_list:
@@ -32,3 +33,21 @@ class Sudoku:
                         nums.remove(rand_num)
 
         return self.grid
+
+    def create_solutions(self):
+        """
+        Copy the grid to find a solution or multiple solutions
+        Get missing numbers in the row lists
+        """
+        cell = self.find_next_zero()
+        print(f"cell: {cell}")
+
+        return True
+
+    def find_next_zero(self):
+        for row in range(len(self.grid)):
+            for col in range(len(self.grid[row])):
+                if self.grid[row][col] == 0:
+                    return row, col
+
+        return True
