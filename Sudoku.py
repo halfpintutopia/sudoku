@@ -39,15 +39,30 @@ class Sudoku:
         Copy the grid to find a solution or multiple solutions
         Get missing numbers in the row lists
         """
-        cell = self.find_next_zero()
-        print(f"cell: {cell}")
-
-        return True
+        # available_nums = self.get_missing_numbers_in_row(cell[0])
+        for row in range(len(self.grid)):
+            available_nums = self.get_missing_numbers_in_row(row)
+            print(available_nums)
+            # for col in range(len(self.grid[row])):
 
     def find_next_zero(self):
+        """
+        Use recursion to check the row for zero
+        """
         for row in range(len(self.grid)):
             for col in range(len(self.grid[row])):
                 if self.grid[row][col] == 0:
                     return row, col
 
-        return True
+    def get_missing_numbers_in_row(self, row):
+        """
+        Use recursion to get the missing numbers in the row
+        """
+        missing_nums = []
+        for num in range(1, 10):
+            if num not in self.grid[row]:
+                missing_nums.append(num)
+
+        random.shuffle(missing_nums)
+
+        return missing_nums
