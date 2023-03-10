@@ -42,8 +42,16 @@ class Sudoku:
         # available_nums = self.get_missing_numbers_in_row(cell[0])
         for row in range(len(self.grid)):
             available_nums = self.get_missing_numbers_in_row(row)
+            for col in range(len(self.grid[row])):
+                if self.check_row_column_3_by_3(available_nums[0], (row, col)):
+                    self.grid[row][col] = available_nums[0]
+                    available_nums.pop(0)
+                else:
+                    not_poss_num = available_nums[0]
+                    available_nums.pop(0)
+                    available_nums.append(not_poss_num)
+
             print(available_nums)
-            # for col in range(len(self.grid[row])):
 
     def find_next_zero(self):
         """
@@ -66,3 +74,19 @@ class Sudoku:
         random.shuffle(missing_nums)
 
         return missing_nums
+
+    def check_row_column_3_by_3(self, num, cell):
+        """
+        Check number is not in the row, column or 3 by 3
+        """
+        if num in self.grid[cell[0]]:
+            return False
+
+        if num in [self.grid[row][cell[1]] for row in range(len(self.grid))]:
+            return False
+
+        if num in [self.grid[row + ((cell[0] // 3) * 3)][col + ((cell[1] // 3) * 3)] for row in range(3) for col in
+                   range(3)]:
+            return False
+
+        return True
