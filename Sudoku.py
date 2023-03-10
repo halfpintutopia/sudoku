@@ -108,11 +108,13 @@ class Sudoku:
         if num in self.grid[cell[0]]:
             return False
 
-        if num in [self.grid[row][cell[1]] for row in range(len(self.grid))]:
+        nums_in_column = [self.grid[row][cell[1]] for row in range(len(self.grid))]
+        if num in nums_in_column:
             return False
 
-        if num in [self.grid[row + ((cell[0] // 3) * 3)][col + ((cell[1] // 3) * 3)] for row in range(3) for col in
-                   range(3)]:
+        three_by_three = [self.grid[row + ((cell[0] // 3) * 3)][column + ((cell[1] // 3) * 3)] for row in range(3) for
+                          column in range(3)]
+        if num in three_by_three:
             return False
 
         return True
