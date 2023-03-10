@@ -43,7 +43,7 @@ class Grid:
         Initialises with an empty board
         """
         self.grid = [[0 for x in range(ord('a'), ord('j') + 1)] for y in range(1, 10)]
-        # return self.grid
+        return self.grid
 
     def create_completed_game(self):
         """
