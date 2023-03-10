@@ -2,41 +2,43 @@
 from pprint import pprint
 import random
 
+TEST = 'test string'
+
 
 class Grid:
     def __init__(self):
         self.grid = None
         self.create_empy_board()
 
-    def __str__(self):
-        """
-        Print out the grid with style and headings for columns and rows
-        """
-        grid_string = "    "
-        index = 1
-        for letter in range(ord('a'), ord('j')):
-            grid_string += "  " + chr(letter) + " "
-            if index % 3 == 0 and index != 9:
-                grid_string += "   "
-            index += 1
-
-        grid_string += "\n   " + "-" * 43 + "\n"
-
-        for row in range(9):
-            grid_string += str(row + 1) + " | "
-            for column in range(9):
-                if column % 3 == 0 and column != 0:
-                    grid_string += " | "
-                if column == 8:
-                    grid_string += "  " + str(self.grid[row][column]) + " "
-                else:
-                    grid_string += "  " + str(self.grid[row][column]) + " "
-            grid_string += "\n"
-
-            if (row + 1) % 3 == 0 and (row + 1) != 9:
-                grid_string += "   " + "-" * 43 + "\n"
-
-        return grid_string
+    # def __str__(self):
+    #     """
+    #     Print out the grid with style and headings for columns and rows
+    #     """
+    #     grid_string = "    "
+    #     index = 1
+    #     for letter in range(ord('a'), ord('j')):
+    #         grid_string += "  " + chr(letter) + " "
+    #         if index % 3 == 0 and index != 9:
+    #             grid_string += "   "
+    #         index += 1
+    #
+    #     grid_string += "\n   " + "-" * 43 + "\n"
+    #
+    #     for row in range(9):
+    #         grid_string += str(row + 1) + " | "
+    #         for column in range(9):
+    #             if column % 3 == 0 and column != 0:
+    #                 grid_string += " | "
+    #             if column == 8:
+    #                 grid_string += "  " + str(self.grid[row][column]) + " "
+    #             else:
+    #                 grid_string += "  " + str(self.grid[row][column]) + " "
+    #         grid_string += "\n"
+    #
+    #         if (row + 1) % 3 == 0 and (row + 1) != 9:
+    #             grid_string += "   " + "-" * 43 + "\n"
+    #
+    #     return grid_string
 
     def create_empy_board(self):
         """
@@ -51,6 +53,7 @@ class Grid:
         """
         self.create_empy_board()
         self.fill_diagonal_sections([(0, 3), (3, 6), (6, 9)])
+        self.fill_in_zeroes()
         return self.grid
 
     def fill_diagonal_sections(self, range_array):
@@ -69,8 +72,6 @@ class Grid:
                         self.grid[row][column] = random_num
                         sudoku_numbers.remove(random_num)
 
-        self.fill_in_zeroes()
-
     def find_zeroes(self):
         for row in range(len(self.grid)):
             for column in range(len(self.grid[row])):
@@ -83,26 +84,31 @@ class Grid:
         """
         Fills in the grid.
         Replaces the cells that contain 0 with a random number
+        - create a list of numbers missing from the row
+        - randomly choose a number from the list and then check the cell
+        - if the cell row, column 3x3 has the number choose another
+        - loop until the number can be put into the cell
         """
-        # create a list of numbers missing from the row
-        # randomly choose a number from the list and then check the cell
-        # if the cell row, column 3x3 has the number choose another
-        # loop until the number can be put into the cell
 
         for row in range(len(self.grid)):
             missing_numbers = self.get_missing_numbers_in_row(row)
             for column in range(len(self.grid[row])):
-                random_number = random.choice(missing_numbers)
-                if self.grid[row][column] == 0:
-                    # random_number = random.randint(1, 9)
-                    if self.check_cell(random_number, (row, column)):
-                        self.grid[row][column] = random_number
+                if len(missing_numbers) > 1:
+                    if self.grid[row][column] == 0:
+                        number = self.check_number_is_unique(missing_numbers, (row, column))
+                        self.grid[row][column] = number
+                        missing_numbers.remove(number)
+                else:
+                    self.grid[row][column] = missing_numbers[0]
 
     def check_number_is_unique(self, missing_numbers, cell):
+        numbers_to_check = missing_numbers.copy()
         while True:
-            random_number = random.choice(missing_numbers)
+            random_number = random.choice(numbers_to_check)
             if self.check_cell(random_number, (cell[0], cell[1])):
                 break
+            else:
+                numbers_to_check.remove(random_number)
 
         return random_number
 
