@@ -32,7 +32,7 @@ class Sudoku:
                         rand_num = random.choice(nums)
                         self.grid[row][col] = rand_num
                         nums.remove(rand_num)
-
+        pprint(self.grid)
         return self.grid
 
     def create_solutions(self):
@@ -40,36 +40,88 @@ class Sudoku:
         Copy the grid to find a solution or multiple solutions
         Get missing numbers in the row lists
         """
-        new_sudoku = copy.deepcopy(self.grid)
-        for row in range(len(new_sudoku)):
+        # new_sudoku = copy.deepcopy(self.grid)
+        # for row in range(len(new_sudoku)):
+        #     available_nums = self.get_missing_numbers_in_row(row)
+        #     for col in range(len(new_sudoku[row])):
+        #         if new_sudoku[row][col] == 0:
+        #             for num in available_nums:
+        #                 if self.check_row_column_3_by_3(num, (row, col)):
+        #                     new_sudoku[row][col] = num
+        #                     # available_nums.remove(num)
+        #
+        #                     # if self.find_solution():
+        #
+        #                 prev_col = self.remove_last_filled_in_zero((row, col))
+        #                 new_sudoku[row][prev_col] = 0
+        # new_sudoku = copy.deepcopy(self.grid)
+        for row in range(len(self.grid)):
             available_nums = self.get_missing_numbers_in_row(row)
-            for col in range(len(new_sudoku[row])):
-                if self.check_row_column_3_by_3(available_nums[0], (row, col)):
-                    new_sudoku[row][col] = available_nums[0]
-                    available_nums.pop(0)
-                else:
-                    if self.remove_last_filled_in_zero((row, col)):
-                        col_num = self.remove_last_filled_in_zero((row, col))
-                        new_sudoku[row][col_num] = 0
-                    # not_poss_num = available_nums[0]
-                    # available_nums.pop(0)
-                    # available_nums.append(not_poss_num)
-                    # for num in available_nums:
-                    #     if self.check_row_column_3_by_3(num, (row, col_num)):
-                    #         new_sudoku[row][col_num] = num
-                    #         print(f"first num = {num}")
-                    # available_nums.remove(num)
-                    # if self.check_row_column_3_by_3(num, (row, col)):
-                    #     new_sudoku[row][col] = num
-                    #     print(f"second num = {num}")
-                    # available_nums.remove(num)
+            for col in range(len(self.grid[row])):
+                if self.grid[row][col] == 0:
+                    for num in available_nums:
+                        if self.check_row_column_3_by_3(num, (row, col)):
+                            self.grid[row][col] = num
+
+                            # available_nums.remove(num)
+
+                            if self.find_solution():
+                                self.create_solutions()
+                                return self.grid
+
+                            self.grid[row][col] = 0
+
+                        # prev_col = self.remove_last_filled_in_zero((row, col))
+                        # self.grid[row][prev_col] = 0
+                # else:
+                #     if self.remove_last_filled_in_zero((row, col)):
+                #         col_num = self.remove_last_filled_in_zero((row, col))
+                #         new_sudoku[row][col_num] = 0
+                # not_poss_num = available_nums[0]
+                # available_nums.pop(0)
+                # available_nums.append(not_poss_num)
+                # for num in available_nums:
+                #     if self.check_row_column_3_by_3(num, (row, col_num)):
+                #         new_sudoku[row][col_num] = num
+                #         print(f"first num = {num}")
+                # available_nums.remove(num)
+                # if self.check_row_column_3_by_3(num, (row, col)):
+                #     new_sudoku[row][col] = num
+                #     print(f"second num = {num}")
+                # available_nums.remove(num)
 
             print(available_nums)
-        pprint(new_sudoku)
+        pprint(self.grid)
 
-    # def backtrack(self):
+    def find_solution(self):
+        """
+        Checking cell to fill in
+        If possible to fill in then will set a number otherwise will reset the number to 0
+        """
+        available_cell = self.find_next_zero()
+
+        if not available_cell:
+            return True
+        else:
+            row, col = available_cell
+
+        available_nums = self.get_missing_numbers_in_row(row)
+
+        for num in available_nums:
+            if self.check_row_column_3_by_3(num, (row, col)):
+                self.grid[row][col] = num
+
+                if self.find_solution():
+                    return self.grid
+
+                self.grid[row][col] = 0
+
+        return False
 
     def remove_last_filled_in_zero(self, cell):
+        """
+        Use recursion to find the previous column in the row that was a 0 in the original grid
+        """
         if cell[1] != 0:
             for i in range(cell[1] - 1, -1, -1):
                 if self.grid[cell[0]][i] == 0:
@@ -109,11 +161,13 @@ class Sudoku:
             return False
 
         nums_in_column = [self.grid[row][cell[1]] for row in range(len(self.grid))]
+        # print(nums_in_column)
         if num in nums_in_column:
             return False
 
         three_by_three = [self.grid[row + ((cell[0] // 3) * 3)][column + ((cell[1] // 3) * 3)] for row in range(3) for
                           column in range(3)]
+        # print(three_by_three)
         if num in three_by_three:
             return False
 
