@@ -90,8 +90,8 @@ class Sudoku:
                 #     print(f"second num = {num}")
                 # available_nums.remove(num)
 
-            print(available_nums)
-        pprint(self.grid)
+        #     print(available_nums)
+        # pprint(self.grid)
 
     def find_solution(self):
         """
