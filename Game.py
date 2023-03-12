@@ -2,6 +2,7 @@ from Grid import *
 from pyfiglet import Figlet
 from termcolor import colored
 from Sudoku import *
+import time
 
 
 class Game:
@@ -35,11 +36,18 @@ class Game:
         print(f"\x1b[12;50H3. Solve a puzzle")
         print(f"\x1b[13;50H4. Instructions")
 
+        print(f"\x1b[10;50H")
+        print(f"\x1b[0K")
+        print(f"\x1b[10;50H1. Test")
+        # print(f"\x1b[11;50K")
+        # print(f"\x1b[12;50K")
+        # print(f"\x1b[13;50K")
+
         choice = input(f"\x1b[15;50HEnter a number please:\n")
         print(f"\u001b[16;50H")
-        print(f"\x1b[2J")  # Erase entire screen
-        print(f"\x1b[H")  # Puts cursor back to home position
-        print(f"\x1b[15;50H{choice}", end="\r")
+        # print(f"\x1b[2J")  # Erase entire screen
+        # print(f"\x1b[H")  # Puts cursor back to home position
+        # print(f"\x1b[15;50H{choice}", end="\r")
         # print("1. Play")
         # print("2. Enter your own puzzle")
         # print("3. Solve a puzzle")
