@@ -41,21 +41,6 @@ class Sudoku:
         Copy the grid to find a solution or multiple solutions
         Get missing numbers in the row lists
         """
-        # new_sudoku = copy.deepcopy(self.grid)
-        # for row in range(len(new_sudoku)):
-        #     available_nums = self.get_missing_numbers_in_row(row)
-        #     for col in range(len(new_sudoku[row])):
-        #         if new_sudoku[row][col] == 0:
-        #             for num in available_nums:
-        #                 if self.check_row_column_3_by_3(num, (row, col)):
-        #                     new_sudoku[row][col] = num
-        #                     # available_nums.remove(num)
-        #
-        #                     # if self.find_solution():
-        #
-        #                 prev_col = self.remove_last_filled_in_zero((row, col))
-        #                 new_sudoku[row][prev_col] = 0
-        # new_sudoku = copy.deepcopy(self.grid)
         for row in range(len(self.grid)):
             available_nums = self.get_missing_numbers_in_row(row)
             for col in range(len(self.grid[row])):
@@ -71,28 +56,6 @@ class Sudoku:
                                 return self.grid
 
                             self.grid[row][col] = 0
-
-                        # prev_col = self.remove_last_filled_in_zero((row, col))
-                        # self.grid[row][prev_col] = 0
-                # else:
-                #     if self.remove_last_filled_in_zero((row, col)):
-                #         col_num = self.remove_last_filled_in_zero((row, col))
-                #         new_sudoku[row][col_num] = 0
-                # not_poss_num = available_nums[0]
-                # available_nums.pop(0)
-                # available_nums.append(not_poss_num)
-                # for num in available_nums:
-                #     if self.check_row_column_3_by_3(num, (row, col_num)):
-                #         new_sudoku[row][col_num] = num
-                #         print(f"first num = {num}")
-                # available_nums.remove(num)
-                # if self.check_row_column_3_by_3(num, (row, col)):
-                #     new_sudoku[row][col] = num
-                #     print(f"second num = {num}")
-                # available_nums.remove(num)
-
-        #     print(available_nums)
-        # pprint(self.grid)
 
     def find_solution(self):
         """
