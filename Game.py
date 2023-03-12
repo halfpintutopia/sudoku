@@ -39,9 +39,9 @@ class Game:
         print(f"\x1b[10;50H")
         print(f"\x1b[0K")
         print(f"\x1b[10;50H1. Test")
-        # print(f"\x1b[11;50K")
-        # print(f"\x1b[12;50K")
-        # print(f"\x1b[13;50K")
+        print(f"\x1b[11;50H2. Test")
+        print(f"\x1b[12;50H3. Test")
+        print(f"\x1b[13;50H4. Test")
 
         choice = input(f"\x1b[15;50HEnter a number please:\n")
         print(f"\u001b[16;50H")

@@ -20,6 +20,7 @@ def esc(code):
 
 
 def main():
+    print(f"\x1b[2J")
     # wrapper(set_up)
     # grid = Grid()
     # # for x in range(10):
