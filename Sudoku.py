@@ -260,18 +260,18 @@ class Sudoku:
         """
         Print out the grid with style and headings for columns and rows
         """
-        grid_string = "    "
+        grid_string = "\x1b[10:5H    "
         index = 1
-        for letter in range(ord('a'), ord('j')):
+        for letter in range(ord('A'), ord('J')):
             grid_string += "  " + chr(letter) + " "
             if index % 3 == 0 and index != 9:
                 grid_string += "   "
             index += 1
 
-        grid_string += "\n   " + "-" * 43 + "\n"
+        grid_string += "\x1b[10:5H\n   " + "-" * 43 + "\n"
 
         for row in range(9):
-            grid_string += str(row + 1) + " | "
+            grid_string += "\x1b[10:5H" + str(row + 1) + " | "
             for column in range(9):
                 if column % 3 == 0 and column != 0:
                     grid_string += " | "
@@ -284,5 +284,5 @@ class Sudoku:
             if (row + 1) % 3 == 0 and (row + 1) != 9:
                 grid_string += "   " + "-" * 43 + "\n"
 
-        print(f"\x1b[10:0H{grid_string}")
+        print(grid_string)
         # return grid_string
