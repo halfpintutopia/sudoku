@@ -35,7 +35,7 @@ class Game:
         print(f"\x1b[12;50H3. Solve a puzzle")
         print(f"\x1b[13;50H4. Instructions")
 
-        choice = input(f"\x1b[15;50HEnter a number:\n")
+        choice = input(f"\x1b[15;50HEnter a number please:\n")
         print(f"\x1b[16;50f")
         print(f"\x1b[2J")  # Erase entire screen
         print(f"\x1b[H")  # Puts cursor back to home position
