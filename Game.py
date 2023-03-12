@@ -22,7 +22,7 @@ class Game:
         Create title for the start screen
         """
         custom_fig = Figlet(font='block')
-        print(colored(custom_fig.renderText('SUDOKU'), 'red'))
+        print(colored(custom_fig.renderText('SUDOKU'), 'blue'))
 
     def add_initial_options(self):
         """
@@ -34,7 +34,7 @@ class Game:
         print(f"\x1b[12;50H3. Solve a puzzle")
         print(f"\x1b[13;50H4. Instructions")
 
-        choice = input(f"\x1b[15:50HEnter a number:\n")
+        choice = input(f"\x1b[15;50HEnter a number:\n")
         print(f"\x1b[2J")  # Erase entire screen
         print(f"\x1b[H")  # Puts cursor back to home position
         print(f"\x1b[15:50H{choice}", end="\r")
