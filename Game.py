@@ -37,19 +37,19 @@ class Game:
         print(f"\x1b[13;50H4. Instructions")
 
         print(f"\x1b[10;50H")
-        print(f"\x1b[0K")
+        print(f"\x1b[0J")
         print(f"\x1b[10;50H1. Test")
 
         print(f"\x1b[11;50H")
-        print(f"\x1b[0K")
+        print(f"\x1b[0J")
         print(f"\x1b[11;50H2. Test")
 
         print(f"\x1b[12;50H")
-        print(f"\x1b[0K")
+        print(f"\x1b[0J")
         print(f"\x1b[12;50H3. Test")
 
         print(f"\x1b[13;50H")
-        print(f"\x1b[0K")
+        print(f"\x1b[0J")
         print(f"\x1b[13;50H4. Test")
 
         print(f"\x1b[15;50H")
