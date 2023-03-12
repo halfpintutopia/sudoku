@@ -31,30 +31,30 @@ class Game:
         Show options for the user to enter their choice
         """
         # self.set_title()
-        print(f"\x1b[10;50H1. Play")
-        print(f"\x1b[11;50H2. Enter your own puzzle")
-        print(f"\x1b[12;50H3. Solve a puzzle")
-        print(f"\x1b[13;50H4. Instructions")
+        print(f"\x1b[10;55H1. Play")
+        print(f"\x1b[11;55H2. Enter your own puzzle")
+        print(f"\x1b[12;55H3. Solve a puzzle")
+        print(f"\x1b[13;55H4. Instructions")
 
-        print(f"\x1b[10;60H{' ' * 30}")
+        print(f"\x1b[10;55H{' ' * 30}")
         # print(f"\x1b[0K")
-        print(f"\x1b[10;60H1. Test-1")
+        print(f"\x1b[10;55H1. Test-1")
 
-        print(f"\x1b[11;60H{' ' * 30}")
+        print(f"\x1b[11;55H{' ' * 30}")
         # print(f"\x1b[0K")
-        print(f"\x1b[11;60H2. Test-2")
+        print(f"\x1b[11;55H2. Test-2")
 
-        print(f"\x1b[12;60H{' ' * 30}")
+        print(f"\x1b[12;55H{' ' * 30}")
         # print(f"\x1b[0K")
-        print(f"\x1b[12;60H3. Test-3")
+        print(f"\x1b[12;55H3. Test-3")
 
-        print(f"\x1b[13;60H{' ' * 30}")
+        print(f"\x1b[13;55H{' ' * 30}")
         # print(f"\x1b[0K")
-        print(f"\x1b[13;60H4. Test-4")
+        print(f"\x1b[13;55H4. Test-4")
 
-        print(f"\x1b[15;60H")
-        choice = input(f"\x1b[15;60HEnter a number please:\n")
-        print(f"\x1b[16;60H")
+        print(f"\x1b[15;55H")
+        choice = input(f"\x1b[15;55HEnter a number please:\n")
+        print(f"\x1b[16;55H")
         # print(f"\x1b[2J")  # Erase entire screen
         # print(f"\x1b[H")  # Puts cursor back to home position
         # print(f"\x1b[15;50H{choice}", end="\r")
