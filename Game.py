@@ -36,19 +36,19 @@ class Game:
         print(f"\x1b[12;55H3. Solve a puzzle")
         print(f"\x1b[13;55H4. Instructions")
 
-        print(f"\x1b[10;55H{' ' * 30}")
+        print(f"\x1b[10;55H{' ' * 25}")
         # print(f"\x1b[0K")
         print(f"\x1b[10;55H1. Test-1")
 
-        print(f"\x1b[11;55H{' ' * 30}")
+        print(f"\x1b[11;55H{' ' * 25}")
         # print(f"\x1b[0K")
         print(f"\x1b[11;55H2. Test-2")
 
-        print(f"\x1b[12;55H{' ' * 30}")
+        print(f"\x1b[12;55H{' ' * 25}")
         # print(f"\x1b[0K")
         print(f"\x1b[12;55H3. Test-3")
 
-        print(f"\x1b[13;55H{' ' * 30}")
+        print(f"\x1b[13;55H{' ' * 25}")
         # print(f"\x1b[0K")
         print(f"\x1b[13;55H4. Test-4")
 
