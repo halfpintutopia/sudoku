@@ -26,13 +26,14 @@ class Game:
         """
         Show options for the user to enter their choice
         """
-        print(f"\x1b[30;0H1. Play")
-        print(f"\x1b[31;0H2. Enter your own puzzle")
-        print(f"\x1b[32;0H3. Solve a puzzle")
-        print(f"\x1b[33;0H4. Instructions")
+        print(f"\x1b[10;1H1. Play")
+        print(f"\x1b[11;1H2. Enter your own puzzle")
+        print(f"\x1b[12;1H3. Solve a puzzle")
+        print(f"\x1b[13;1H4. Instructions")
 
-        choice = input(f"\x1b[35:0HEnter a number:\n")
-        print(f"\x1b[35:0H{choice}")
+        choice = input(f"\x1b[15:1HEnter a number:\n")
+        print(f"\x1b[15;1H{' ' * 20}")
+        print(f"\x1b[15:1H{choice}")
         # print("1. Play")
         # print("2. Enter your own puzzle")
         # print("3. Solve a puzzle")
