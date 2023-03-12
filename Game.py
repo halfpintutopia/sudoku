@@ -1,6 +1,7 @@
 from Grid import *
 from pyfiglet import Figlet
 from termcolor import colored
+from Sudoku import *
 
 
 class Game:
@@ -13,6 +14,7 @@ class Game:
         Start game screen
         """
         self.set_title()
+        Sudoku().add_grid_style()
         self.add_initial_options()
 
     def set_title(self):
@@ -26,6 +28,7 @@ class Game:
         """
         Show options for the user to enter their choice
         """
+        # self.set_title()
         print(f"\x1b[10;50H1. Play")
         print(f"\x1b[11;50H2. Enter your own puzzle")
         print(f"\x1b[12;50H3. Solve a puzzle")

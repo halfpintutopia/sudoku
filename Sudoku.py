@@ -147,10 +147,10 @@ class Sudoku:
             # print(f'\x1b[{20};{0}H\x1b[{2}K')
             # print(f'\x1b[{21};{0}H', "Please choose difficulty. Enter one of the following numbers")
             # print('\u001b[u', end='')
-            print("Please choose difficulty. Enter one of the following numbers")
-            print("  - 1 for easy")
-            print("  - 2 for medium")
-            print("  - 3 for hard\n")
+            print(f"Please choose difficulty. Enter one of the following numbers")
+            print(f"  - 1 for easy")
+            print(f"  - 2 for medium")
+            print(f"  - 3 for hard\n")
 
             difficulty_level = input("Enter number: \n")
             # self.validate_difficulty_input(difficulty_level)
@@ -250,7 +250,7 @@ class Sudoku:
         self.create_user_puzzle(puzzle)
         self.find_solution()
         self.add_grid_style()
-        print(self.add_grid_style())
+        # print(f"\x1b[35:0H{self.add_grid_style()}")
 
     def create_user_puzzle(self, puzzle):
         self.grid = puzzle
@@ -284,4 +284,5 @@ class Sudoku:
             if (row + 1) % 3 == 0 and (row + 1) != 9:
                 grid_string += "   " + "-" * 43 + "\n"
 
-        return grid_string
+        print(f"\x1b[10:0H{grid_string}")
+        # return grid_string
