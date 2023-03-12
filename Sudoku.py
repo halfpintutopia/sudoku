@@ -249,8 +249,39 @@ class Sudoku:
         ]
         self.create_user_puzzle(puzzle)
         self.find_solution()
-        pprint(self.grid)
+        self.add_grid_style()
+        print(self.add_grid_style())
 
     def create_user_puzzle(self, puzzle):
         self.grid = puzzle
         return self.grid
+
+    def add_grid_style(self):
+        """
+        Print out the grid with style and headings for columns and rows
+        """
+        grid_string = "    "
+        index = 1
+        for letter in range(ord('a'), ord('j')):
+            grid_string += "  " + chr(letter) + " "
+            if index % 3 == 0 and index != 9:
+                grid_string += "   "
+            index += 1
+
+        grid_string += "\n   " + "-" * 43 + "\n"
+
+        for row in range(9):
+            grid_string += str(row + 1) + " | "
+            for column in range(9):
+                if column % 3 == 0 and column != 0:
+                    grid_string += " | "
+                if column == 8:
+                    grid_string += "  " + str(self.grid[row][column]) + " "
+                else:
+                    grid_string += "  " + str(self.grid[row][column]) + " "
+            grid_string += "\n"
+
+            if (row + 1) % 3 == 0 and (row + 1) != 9:
+                grid_string += "   " + "-" * 43 + "\n"
+
+        return grid_string
