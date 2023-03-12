@@ -5,6 +5,7 @@ import random
 
 class Sudoku:
     def __init__(self):
+        self.puzzle = None
         self.grid = None
         self.create_blank_sudoku()
 
@@ -217,21 +218,28 @@ class Sudoku:
         print("Sudoku puzzles are a 9 by 9 grid.")
         print("Each puzzle has 9 rows. There are 9 numbers in each row.")
         print("Please enter each row when prompted.")
+        print("Enter 9 numbers separated by a comma.")
+        print("Each number must be between 0-9. Please use 0 for a blank.")
+        print("e.g. 4,7,0,0,2,6,9,0,0")
         puzzle = []
         for row in range(len(self.grid)):
             while True:
-                print("Enter 9 numbers separated by a comma.")
-                print("Each number must be between 0-9. Please use 0 for a blank.")
-                print("e.g. 4,7,0,0,2,6,9,0,0")
-
                 puzzle_row = input(f"Enter row {row + 1} of your puzzle.\n")
-                current_row = self.create_nums_list(puzzle_row)
+                current_row = []
+                if self.create_nums_list(puzzle_row):
+                    current_row = self.create_nums_list(puzzle_row)
                 if self.check_amount_of_nums(current_row):
                     print("you have entered the correct number")
-                    break
 
     def create_nums_list(self, numbers):
-        return numbers.replace(" ", "").rstrip(",").split(",")
+        """
+        Create list from user's input
+        """
+        list_of_nums = numbers.replace(" ", "").rstrip(",").split(",")
+        if self.check_inputs_are_numbers(list_of_nums):
+            return [int(num) for num in list_of_nums]
+
+        return False
 
     def check_amount_of_nums(self, numbers):
         """
@@ -247,3 +255,39 @@ class Sudoku:
             return False
 
         return True
+
+    def check_inputs_are_numbers(self, numbers):
+        """
+        Check the list of numbers are all integers
+        """
+        for num in numbers:
+            try:
+                if type(num) == int:
+                    continue
+                else:
+                    raise ValueError(f"Please enter a number")
+            except ValueError as e:
+                print(f"Invalid input: {e}, please try again")
+                return False
+
+        return True
+
+    def solve_puzzle(self):
+        puzzle = [
+            [4, 7, 0, 0, 2, 6, 9, 0, 0],
+            [0, 0, 5, 0, 0, 0, 0, 0, 0],
+            [1, 0, 6, 0, 0, 0, 0, 0, 8],
+            [0, 3, 0, 0, 0, 9, 0, 0, 7],
+            [0, 8, 0, 5, 0, 0, 0, 0, 4],
+            [0, 0, 2, 0, 1, 0, 0, 0, 0],
+            [2, 0, 0, 6, 0, 0, 7, 4, 0],
+            [8, 4, 0, 0, 5, 2, 0, 0, 1],
+            [0, 5, 9, 0, 0, 0, 8, 0, 2]
+        ]
+        self.create_user_puzzle(puzzle)
+        self.find_solution()
+        pprint(self.grid)
+
+    def create_user_puzzle(self, puzzle):
+        self.grid = puzzle
+        return self.grid
