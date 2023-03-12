@@ -33,6 +33,7 @@ class Game:
 
         choice = input(f"\x1b[15:1HEnter a number:\n")
         # print(f"\x1b[15;1H{' ' * 20}")
+        print(f"\x1b[2J")
         print(f"\x1b[15:1H{choice}", end="\r")
         # print("1. Play")
         # print("2. Enter your own puzzle")
