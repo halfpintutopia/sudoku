@@ -209,3 +209,41 @@ class Sudoku:
             return False
 
         return True
+
+    def solve_user_puzzle(self):
+        """
+        Prompt the user to add 9 rows, to solve a puzzle
+        """
+        print("Sudoku puzzles are a 9 by 9 grid.")
+        print("Each puzzle has 9 rows. There are 9 numbers in each row.")
+        print("Please enter each row when prompted.")
+        puzzle = []
+        for row in range(len(self.grid)):
+            while True:
+                print("Enter 9 numbers separated by a comma.")
+                print("Each number must be between 0-9. Please use 0 for a blank.")
+                print("e.g. 4,7,0,0,2,6,9,0,0")
+
+                puzzle_row = input(f"Enter row {row + 1} of your puzzle.\n")
+                current_row = self.create_nums_list(puzzle_row)
+                if self.check_amount_of_nums(current_row):
+                    print("you have entered the correct number")
+                    break
+
+    def create_nums_list(self, numbers):
+        return numbers.replace(" ", "").rstrip(",").split(",")
+
+    def check_amount_of_nums(self, numbers):
+        """
+        Validates the string of numbers inputted
+        Removes all spaces from the string if the user has entered them
+        Splits the string up and creates a list
+        """
+        try:
+            if not len(numbers) == 9:
+                raise ValueError(f"You have entered {len(numbers)}. Please enter 9 numbers per row")
+        except ValueError as e:
+            print(f"Invalid input: {e}, please try again")
+            return False
+
+        return True
