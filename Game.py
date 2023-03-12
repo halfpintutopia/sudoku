@@ -37,24 +37,19 @@ class Game:
         print(f"\x1b[13;55H4. Instructions")
 
         print(f"\x1b[10;55H{' ' * 25}")
-        # print(f"\x1b[0K")
         print(f"\x1b[10;55H1. Test-1")
 
         print(f"\x1b[11;55H{' ' * 25}")
-        # print(f"\x1b[0K")
         print(f"\x1b[11;55H2. Test-2")
 
         print(f"\x1b[12;55H{' ' * 25}")
-        # print(f"\x1b[0K")
         print(f"\x1b[12;55H3. Test-3")
 
         print(f"\x1b[13;55H{' ' * 25}")
-        # print(f"\x1b[0K")
         print(f"\x1b[13;55H4. Test-4")
 
         print(f"\x1b[15;55H")
-        choice = input(f"\x1b[15;55HEnter a number please:\n")
-        print(f"\x1b[16;55H")
+        choice = input(f"\x1b[15;55HEnter a number please: ")
         # print(f"\x1b[2J")  # Erase entire screen
         # print(f"\x1b[H")  # Puts cursor back to home position
         # print(f"\x1b[15;50H{choice}", end="\r")
