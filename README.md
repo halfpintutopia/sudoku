@@ -125,7 +125,7 @@ My partner's mother, Andrea Tschudi, really enjoys puzzles such as [Doplo](https
 - Git
 - GitHub
 - PyCharm
-  - debugging tools
+  - including debugging tools
 
 # Remote & Local Development
 
@@ -140,10 +140,16 @@ My partner's mother, Andrea Tschudi, really enjoys puzzles such as [Doplo](https
 # Testing
 
 ## Bugs
+| Bug / Errors | Where / Location | Device | Remarks | Fixed | Solution |
+|--------------|------------------|--------|---------|:-----:|----------|
 
 ## Remaining Bugs
+| Bug / Errors | Where / Location | Device | Remarks | Fixed | Solution |
+|--------------|------------------|--------|---------|:-----:|----------|
 
 ## Validator Testing
+| Bug / Errors | Where / Location | Device | Remarks | Fixed | Solution |
+|--------------|------------------|--------|---------|:-----:|----------|
 
 # Credits
 ## Code Used
