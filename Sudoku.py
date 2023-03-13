@@ -1,10 +1,19 @@
 import copy
 from pprint import pprint
 import random
+from enum import Enum
+from termcolor import colored
+
+
+class Difficulty(Enum):
+    EASY = 51
+    MEDIUM = 53
+    HARD = 56
 
 
 class Sudoku:
     def __init__(self):
+        self.current_puzzle = None
         self.puzzle = None
         self.grid = None
         self.create_blank_sudoku()
@@ -12,6 +21,9 @@ class Sudoku:
     def create_blank_sudoku(self):
         self.grid = [[0 for x in range(9)] for y in range(9)]
         return self.grid
+
+    def creat_puzzle_with_difficulty(self, difficulty):
+        self.create_puzzle()
 
     def create_puzzle(self):
         self.fill_diagonal_3_by_3([(0, 3), (3, 6), (6, 9)])
@@ -137,28 +149,6 @@ class Sudoku:
 
         return True
 
-    def choose_difficulty(self):
-        """
-        Get user input.
-        Input should allow the user to choose the difficulty of the game
-        """
-        while True:
-            # print('\u001b[s')
-            # print(f'\x1b[{20};{0}H\x1b[{2}K')
-            # print(f'\x1b[{21};{0}H', "Please choose difficulty. Enter one of the following numbers")
-            # print('\u001b[u', end='')
-            print(f"Please choose difficulty. Enter one of the following numbers")
-            print(f"  - 1 for easy")
-            print(f"  - 2 for medium")
-            print(f"  - 3 for hard\n")
-
-            difficulty_level = input("Enter number: \n")
-            # self.validate_difficulty_input(difficulty_level)
-            # break
-            if self.validate_difficulty_input(difficulty_level):
-                print(int(difficulty_level))
-                break
-
     def validate_difficulty_input(self, difficulty):
         # print(type(int(difficulty)))
         try:
@@ -260,7 +250,7 @@ class Sudoku:
         """
         Print out the grid with style and headings for columns and rows
         """
-        grid_string = "\x1b[10:5H    "
+        grid_string = "    "
         index = 1
         for letter in range(ord('A'), ord('J')):
             grid_string += "  " + chr(letter) + " "
@@ -268,17 +258,31 @@ class Sudoku:
                 grid_string += "   "
             index += 1
 
-        grid_string += "\x1b[10:5H\n   " + "-" * 43 + "\n"
+        grid_string += "\n   " + "-" * 43 + "\n"
 
         for row in range(9):
-            grid_string += "\x1b[10:5H" + str(row + 1) + " | "
+            grid_string += str(row + 1) + " | "
             for column in range(9):
                 if column % 3 == 0 and column != 0:
                     grid_string += " | "
                 if column == 8:
-                    grid_string += "  " + str(self.grid[row][column]) + " "
+                    if self.grid[row][column] != 0 and self.grid[row][column] == self.current_puzzle[row][column]:
+                        grid_string += "  " + colored(str(self.grid[row][column]), 'red', attrs=['bold', 'dark']) + " "
+                    elif self.grid[row][column] == 0 and self.current_puzzle[row][column] != self.grid[row][column] and \
+                            self.current_puzzle[row][column] != 0:
+                        grid_string += "  " + colored(str(self.grid[row][column]), 'yellow',
+                                                      attrs=['bold', 'dark']) + " "
+                    else:
+                        grid_string += "  " + colored(str(self.grid[row][column]), attrs=['bold']) + " "
                 else:
-                    grid_string += "  " + str(self.grid[row][column]) + " "
+                    if self.grid[row][column] != 0 and self.grid[row][column] == self.current_puzzle[row][column]:
+                        grid_string += "  " + colored(str(self.grid[row][column]), 'red', attrs=['bold', 'dark']) + " "
+                    elif self.grid[row][column] == 0 and self.current_puzzle[row][column] != self.grid[row][column] and \
+                            self.current_puzzle[row][column] != 0:
+                        grid_string += "  " + colored(str(self.grid[row][column]), 'yellow',
+                                                      attrs=['bold', 'dark']) + " "
+                    else:
+                        grid_string += "  " + colored(str(self.grid[row][column]), attrs=['bold']) + " "
             grid_string += "\n"
 
             if (row + 1) % 3 == 0 and (row + 1) != 9:
@@ -286,3 +290,34 @@ class Sudoku:
 
         print(grid_string)
         # return grid_string
+
+    def set_difficulty(self, difficulty):
+        match difficulty:
+            case 1:
+                self.create_new_puzzle(Difficulty.EASY.value)
+            case 2:
+                self.create_new_puzzle(Difficulty.MEDIUM.value)
+            case 3:
+                self.create_new_puzzle(Difficulty.HARD.value)
+
+    def create_new_puzzle(self, number_of_zeroes):
+        self.create_puzzle()
+        threes = [(0, 2), (3, 5), (6, 8)]
+        for across in threes:
+            for down in threes:
+                for num in range(0, 5):
+                    row = random.randint(across[0], across[1])
+                    col = random.randint(down[0], down[1])
+                    if self.grid[row][col] != 0:
+                        self.grid[row][col] = 0
+                        number_of_zeroes -= 1
+
+        while number_of_zeroes > 0:
+            row = random.randint(0, 8)
+            col = random.randint(0, 8)
+            if self.grid[row][col] != 0:
+                self.grid[row][col] = 0
+                number_of_zeroes -= 1
+
+        self.current_puzzle = self.grid
+        self.add_grid_style()
