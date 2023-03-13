@@ -270,7 +270,7 @@ class Sudoku:
                         grid_string += "  " + colored(str(self.grid[row][column]), 'red', attrs=['bold', 'dark']) + " "
                     elif self.grid[row][column] == 0 and self.current_puzzle[row][column] != self.grid[row][column] and \
                             self.current_puzzle[row][column] != 0:
-                        grid_string += "  " + colored(str(self.grid[row][column]), 'yellow',
+                        grid_string += "  " + colored(str(self.current_puzzle[row][column]), 'yellow',
                                                       attrs=['bold', 'dark']) + " "
                     else:
                         grid_string += "  " + colored(str(self.grid[row][column]), attrs=['bold']) + " "
@@ -279,7 +279,7 @@ class Sudoku:
                         grid_string += "  " + colored(str(self.grid[row][column]), 'red', attrs=['bold', 'dark']) + " "
                     elif self.grid[row][column] == 0 and self.current_puzzle[row][column] != self.grid[row][column] and \
                             self.current_puzzle[row][column] != 0:
-                        grid_string += "  " + colored(str(self.grid[row][column]), 'yellow',
+                        grid_string += "  " + colored(str(self.current_puzzle[row][column]), 'blue',
                                                       attrs=['bold', 'dark']) + " "
                     else:
                         grid_string += "  " + colored(str(self.grid[row][column]), attrs=['bold']) + " "
@@ -319,5 +319,18 @@ class Sudoku:
                 self.grid[row][col] = 0
                 number_of_zeroes -= 1
 
-        self.current_puzzle = self.grid
+        self.grid = [[5, 3, 0, 0, 0, 4, 6, 0, 2],
+                     [0, 1, 0, 0, 3, 2, 0, 5, 0],
+                     [0, 2, 0, 0, 0, 0, 0, 0, 3],
+                     [8, 0, 2, 9, 0, 0, 0, 0, 6],
+                     [0, 0, 0, 0, 0, 1, 0, 0, 9],
+                     [3, 0, 0, 0, 5, 0, 0, 2, 8],
+                     [7, 0, 0, 0, 0, 0, 0, 4, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 6, 0],
+                     [1, 0, 3, 2, 0, 7, 9, 0, 5]]
+
+        pprint(self.grid)
+        self.current_puzzle = copy.deepcopy(self.grid)
+        self.current_puzzle[1][0] = 1
+        pprint(self.grid)
         self.add_grid_style()
