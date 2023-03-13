@@ -73,6 +73,36 @@ My partner's mother, Andrea Tschudi, really enjoys puzzles such as [Doplo](https
 # Design
 
 ## Flowchart
+### Creating the game
+<details>
+<summary>Create board</summary>
+<br>
+
+![Flowchart - using recursion to crete a 9 x 9 grid](./docs/media/images/flowchart/initial_grid_creation.png)
+
+*Flowchart - using recursion to crete a 9 x 9 grid*
+</details>
+<br>
+
+<details>
+<summary>Fill board</summary>
+<br>
+
+![Flowchart - using recursion to fill board with numbers 1 - 9](./docs/media/images/flowchart/fill_board_with_numbers.png)
+
+*Flowchart - using recursion to fill board with numbers 1 - 9*
+</details>
+<br>
+
+<details>
+<summary>Remove numbers from completed board, dependent on difficulty</summary>
+<br>
+
+![Flowchart - using recursion remove a set number of numbers from board](./docs/media/images/flowchart/remove_numbers.png)
+
+*Flowchart - using recursion remove a set number of numbers from board*
+</details>
+<br>
 
 ## Data Model
 
@@ -87,8 +117,15 @@ My partner's mother, Andrea Tschudi, really enjoys puzzles such as [Doplo](https
 # Technologies Used
 
 ## Languages Used
+- Python
+- HTML5
+- CSS3
 
 ## Frameworks, Libraries & Programs Used
+- Git
+- GitHub
+- PyCharm
+  - debugging tools
 
 # Remote & Local Development
 
@@ -116,15 +153,15 @@ References and guides used
 * [How to print bold text in Python, in Stackoverflow](https://stackoverflow.com/a/20210807/8614652)
 * [Create ASCII Art Text Banners in Python](https://www.devdungeon.com/content/create-ascii-art-text-banners-python)
 * Python libraries
-  * Built in
+  * Built in:
     * [enum](https://docs.python.org/3/library/enum.html)
     * [copy](https://docs.python.org/3/library/copy.html)
     * [pprint](https://docs.python.org/3/library/pprint.html)
     * [random](https://docs.python.org/3/library/random.html)
-  * Installed
+  * Installed:
     * [termcolor](https://pypi.org/project/termcolor/)
     * [pyfiglet](https://github.com/pwaller/pyfiglet/tree/master)
-      * Additional references
+      * Additional references:
         - [Checking fonts tool](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20)
         - [Prettify your Terminal Text with Termcolor and Pyfiglet](https://towardsdatascience.com/prettify-your-terminal-text-with-termcolor-and-pyfiglet-880de83fda6b)
         - [Fonts overview](http://www.jave.de/figlet/fonts/overview.html)
