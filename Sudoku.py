@@ -275,20 +275,20 @@ class Sudoku:
                     grid_string += " | "
                 if column == 8:
                     if self.grid[row][column] != 0 and self.grid[row][column] == self.current_puzzle[row][column]:
-                        grid_string += "  " + colored(str(self.grid[row][column]), 'red', attrs=['bold', 'dark']) + " "
+                        grid_string += "  " + colored(str(self.grid[row][column]), 'yellow', attrs=['bold']) + " "
                     elif self.grid[row][column] == 0 and self.current_puzzle[row][column] != self.grid[row][column] and \
                             self.current_puzzle[row][column] != 0:
-                        grid_string += "  " + colored(str(self.current_puzzle[row][column]), 'yellow',
-                                                      attrs=['bold', 'dark']) + " "
+                        grid_string += "  " + colored(str(self.current_puzzle[row][column]), 'blue',
+                                                      attrs=['bold']) + " "
                     else:
                         grid_string += "  " + colored(str(self.grid[row][column]), attrs=['bold']) + " "
                 else:
                     if self.grid[row][column] != 0 and self.grid[row][column] == self.current_puzzle[row][column]:
-                        grid_string += "  " + colored(str(self.grid[row][column]), 'red', attrs=['bold', 'dark']) + " "
+                        grid_string += "  " + colored(str(self.grid[row][column]), 'yellow', attrs=['bold']) + " "
                     elif self.grid[row][column] == 0 and self.current_puzzle[row][column] != self.grid[row][column] and \
                             self.current_puzzle[row][column] != 0:
                         grid_string += "  " + colored(str(self.current_puzzle[row][column]), 'blue',
-                                                      attrs=['bold', 'dark']) + " "
+                                                      attrs=['bold']) + " "
                     else:
                         grid_string += "  " + colored(str(self.grid[row][column]), attrs=['bold']) + " "
             grid_string += "\n"
@@ -342,3 +342,16 @@ class Sudoku:
         self.current_puzzle[1][0] = 1
         pprint(self.grid)
         self.add_grid_style()
+
+    def compare_current_puzzle_and_grid(self):
+        """
+        Compare the set grid and current puzzle.
+        If number is part of the grid, must not be overwritten
+        """
+        for row in range(9):
+            for col in range(9):
+                if self.grid[row][col] != 0 and self.grid[row][col] == self.current_puzzle[row][col]:
+                    print('The number cannot be overwritten as part of the puzzle.')
+                    # return False
+
+        # return True
