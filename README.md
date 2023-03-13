@@ -23,7 +23,6 @@ My partner's mother, Andrea Tschudi, really enjoys puzzles such as [Doplo](https
 * [Features](#features)
   * [General Features on Each Page](#general-features-on-each-page)
   * [Future Implementations](#future-implementations)
-  * [Accessibility](#accessibility)
 
 * [Technologies Used](#technologies-used)
   * [Languages Used](#languages-used)
@@ -111,8 +110,6 @@ My partner's mother, Andrea Tschudi, really enjoys puzzles such as [Doplo](https
 ## General Features on Each Page
 
 ## Future Implementations
-
-## Accessibility
 
 # Technologies Used
 
