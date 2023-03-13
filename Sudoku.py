@@ -11,6 +11,14 @@ class Difficulty(Enum):
     HARD = 56
 
 
+class TermcolorSettings(Enum):
+    RED = 'red'
+    YELLOW = 'yellow'
+    BLUE = 'blue'
+    BOLD = 'bold'
+    DARK = 'dark'
+
+
 class Sudoku:
     def __init__(self):
         self.current_puzzle = None
