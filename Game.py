@@ -3,6 +3,7 @@ from pyfiglet import Figlet
 from termcolor import colored
 from Sudoku import *
 import time
+from screen import on, clear, write
 
 
 class Game:
@@ -24,25 +25,24 @@ class Game:
         """
         custom_fig = Figlet(font='block')
         print(f"\x1b[1;50H")
-        print(colored(custom_fig.renderText('SUDOKU'), 'blue'))
+        print(colored(custom_fig.renderText('SUDOKU'), 'yellow'))
 
     def add_initial_options(self):
         """
         Show options for the user to enter their choice
         """
         # self.set_title()
-        self.on(10, 55, '1. Play')
-        self.on(11, 55, '2. Enter your own puzzle')
-        self.on(12, 55, '3. Solve a puzzle')
-        self.on(13, 55, '4. Instructions')
+        on(10, 55, '1. Play')
+        on(11, 55, '2. Enter your own puzzle')
+        on(12, 55, '3. Solve a puzzle')
+        on(13, 55, '4. Instructions')
 
         choice = 0
 
         while True:
             try:
-                self.clear_line(16, 55)
-                print(f"\x1b[15;55H")
-                choice = int(input(f"\x1b[15;55HEnter a number: "))
+                clear(16, 55)
+                choice = int(input(f"\x1b[15;55HEnter a number: \x1b[16;55H"))
             except ValueError as e:
                 print(f"Please choose one of the options. 1, 2, 3, or 4")
                 continue
@@ -51,7 +51,11 @@ class Game:
 
         match choice:
             case 1:
-                print('You selected 1')
+                for row in range(10, 17):
+                    clear(row, 55)
+
+                self.create_username()
+                # self.choose_difficulty()
             case 2:
                 print('You selected 2')
             case 3:
@@ -59,7 +63,32 @@ class Game:
             case 4:
                 print('You selected 4')
 
+    def create_username(self):
+        username = int(input(f"\x1b[10;55HEnter a username: \x1b[11;55H"))
 
+    def choose_difficulty(self):
+        """
+        Input should allow the user to choose the difficulty of the game
+        """
+        clear(15, 55)
+        clear(16, 55)
+
+        on(10, 55, 'Please choose difficulty')
+        on(11, 55, '1 for easy')
+        on(12, 55, '2 for medium')
+        on(13, 55, '3 for hard')
+
+        while True:
+            try:
+                difficulty_level = int(input(f"\x1b[15;55HEnter a number: "))
+                # self.validate_difficulty_input(difficulty_level)
+                # break
+            except ValueError as e:
+                print(f"Please choose one of the options. 1, 2, 3, or 4")
+                continue
+            # else:
+        # sudoku = Sudoku()
+        # self.original_puzzle = sudoku.
 
         # print(f"\x1b[15;55H")
         # choice = input(f"\x1b[15;55HEnter a number: ")
@@ -78,24 +107,3 @@ class Game:
         # if self.validate_difficulty_input(difficulty_level):
         #     print(int(difficulty_level))
         #     break
-
-    def on(self, row, col, string, num_of_blanks=25):
-        """
-        Combine clear_line and write_line
-        """
-        self.clear_line(row, col, num_of_blanks)
-        self.write_line(row, col, string)
-
-    def clear_line(self, row, col, num_of_blanks=25):
-        """
-        Before writing a new line, clears the line by over-writing with blank spaces
-        This is used for the right side of the screen
-        Set number of blank spaces to be more or less dependent on the number of character needed to be overwritten
-        """
-        print(f"\x1b[{row};{col}H{' ' * num_of_blanks}")
-
-    def write_line(self, row, col, string):
-        """
-        Add text at a particular row and column of the screen
-        """
-        print(f"\x1b[{row};{col}H{string}")
