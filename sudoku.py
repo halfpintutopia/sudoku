@@ -2,7 +2,7 @@ import copy
 from pprint import pprint
 import random
 from termcolor import colored
-from HelperEnums import Difficulty, TermcolorSettings
+from helper_enums import Difficulty, TermcolorSettings
 
 
 class Sudoku:
@@ -209,7 +209,7 @@ class Sudoku:
         """
         for num in numbers:
             try:
-                if type(num) == int:
+                if isinstance(num, int):
                     continue
                 else:
                     raise ValueError(f"Please enter a number")

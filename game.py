@@ -1,7 +1,7 @@
-from Grid import *
+from grid import Grid
 from pyfiglet import Figlet
 from termcolor import colored
-from Sudoku import *
+from sudoku import Sudoku
 import time
 from screen import on, clear, write
 
@@ -107,3 +107,5 @@ class Game:
         # if self.validate_difficulty_input(difficulty_level):
         #     print(int(difficulty_level))
         #     break
+
+
