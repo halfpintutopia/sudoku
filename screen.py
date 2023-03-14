@@ -1,3 +1,9 @@
+def clear_screen():
+    """
+    Helper function to clear the entire 24 row / 80 col screen
+    """
+    print(f"\x1b[2J")
+
 def on(row, col, string, num_of_blanks=25):
     """
     Combine clear_line and write_line
@@ -20,3 +26,7 @@ def write(row, col, string):
     Add text at a particular row and column of the screen
     """
     print(f"\x1b[{row};{col}H{string}")
+
+
+def esc(code):
+    return f'\033[{code}m'
