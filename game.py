@@ -5,6 +5,8 @@ from sudoku import Sudoku
 import time
 from screen import on, clear, write, clear_screen
 import keyboard
+from helper_enums import Instructions, MainMenu, InputPrompt
+
 
 class Game:
     def __init__(self):
@@ -43,8 +45,8 @@ class Game:
         while True:
             try:
                 clear(16, 1)
-                choice = int(self.add_input_at_position(15, 1, 'Enter a number: '))
-                # choice = int(input(f"\x1b[15;1HEnter a number: \x1b[16;1H"))
+                choice = int(
+                    self.add_input_at_position(15, 1, 'Enter a number: '))
             except ValueError as e:
                 print(f"Please choose one of the options. 1, 2, 3, or 4")
                 continue
@@ -64,12 +66,6 @@ class Game:
                 print('You selected 3')
             case 4:
                 self.show_instructions()
-
-    def add_input_at_position(self, row, col, string):
-        """
-        A helper function to return an input at a set row and column
-        """
-        return input(f"\x1b[{row};{col}H{string}\x1b[16;1H")
 
     def create_username(self):
         username = int(input(f"\x1b[10;55HEnter a username: \x1b[11;55H"))
@@ -94,20 +90,6 @@ class Game:
             except ValueError as e:
                 print(f"Please choose one of the options. 1, 2, 3, or 4")
                 continue
-            # else:
-        # sudoku = Sudoku()
-        # self.original_puzzle = sudoku.
-
-        # print(f"\x1b[15;55H")
-        # choice = input(f"\x1b[15;55HEnter a number: ")
-
-        # print(f"\x1b[2J")  # Erase entire screen
-        # print(f"\x1b[H")  # Puts cursor back to home position
-        # print(f"\x1b[15;50H{choice}", end="\r")
-        # print("1. Play")
-        # print("2. Enter your own puzzle")
-        # print("3. Solve a puzzle")
-        # print("4. Instructions\n")
 
         # difficulty_level = input("Enter number: \n")
         # # self.validate_difficulty_input(difficulty_level)
@@ -116,24 +98,35 @@ class Game:
         #     print(int(difficulty_level))
         #     break
 
+    def show_main_menu(self, row, col):
+        """
+        Create the main menu
+        Placement dependent on where it should be positioned at row and col
+        """
+        clear_screen()
+        self.set_title()
+        on({row}, {col}, MainMenu.PLAY.value)
+        on({row}, {col}, MainMenu.ENTER_OWN.value)
+        on({row}, {col}, MainMenu.SOLVE.value)
+        on({row}, {col}, MainMenu.INSTRUCTIONS.value)
+
     def show_instructions(self):
         """
         Show the instructions for the game, when option chosen
         """
         clear_screen()
         self.set_title()
-        on(10, 1, 'A Sudoku puzzle is created with a 9 by 9 square (9 rows and 9 columns).')
-        on(11, 1, 'The 9 by 9 square is also divided into 3 by 3 areas (a total of 9 x 3 by 3 areas).')
-        on(12, 1, 'Each row, column and 3 by 3 area must contain numbers 1 - 9 (inclusive).')
-        on(13, 1, 'Numbers cannot be repeated in the row, column nor 3 by 3 area.')
+        on(10, 1, Instructions.FIRST_LINE.value)
+        on(11, 1, Instructions.SECOND_LINE.value)
+        on(12, 1, Instructions.THIRD_LINE.value)
+        on(13, 1, Instructions.FOURTH_LINE.value)
 
-        self.add_return_input()
+        self.add_input_at_position(15, 1, InputPrompt.PRESS_ENTER.value)
         self.add_initial_options()
 
-
-
-    def add_return_input(self):
+    def add_input_at_position(self, row, col, string):
         """
-        Show the prompt to press enter to continue
+        Show the input
+        A helper function to return an input at a set row and column
         """
-        return input(f"\x1b[15;1HPress Enter to return to menu... \x1b[16;1H")
+        return input(f"\x1b[{row};{col}H{string}\x1b[{row + 1};{col}H")
