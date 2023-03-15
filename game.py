@@ -3,8 +3,8 @@ from pyfiglet import Figlet
 from termcolor import colored
 from sudoku import Sudoku
 import time
-from screen import on, clear, write
-
+from screen import on, clear, write, clear_screen
+import keyboard
 
 class Game:
     def __init__(self):
@@ -31,18 +31,20 @@ class Game:
         """
         Show options for the user to enter their choice
         """
-        # self.set_title()
-        on(10, 55, '1. Play')
-        on(11, 55, '2. Enter your own puzzle')
-        on(12, 55, '3. Solve a puzzle')
-        on(13, 55, '4. Instructions')
+        clear_screen()
+        self.set_title()
+        on(10, 1, '1. Play')
+        on(11, 1, '2. Enter your own puzzle')
+        on(12, 1, '3. Solve a puzzle')
+        on(13, 1, '4. Instructions')
 
         choice = 0
 
         while True:
             try:
-                clear(16, 55)
-                choice = int(input(f"\x1b[15;55HEnter a number: \x1b[16;55H"))
+                clear(16, 1)
+                choice = int(self.add_input_at_position(15, 1, 'Enter a number: '))
+                # choice = int(input(f"\x1b[15;1HEnter a number: \x1b[16;1H"))
             except ValueError as e:
                 print(f"Please choose one of the options. 1, 2, 3, or 4")
                 continue
@@ -61,7 +63,13 @@ class Game:
             case 3:
                 print('You selected 3')
             case 4:
-                print('You selected 4')
+                self.show_instructions()
+
+    def add_input_at_position(self, row, col, string):
+        """
+        A helper function to return an input at a set row and column
+        """
+        return input(f"\x1b[{row};{col}H{string}\x1b[16;1H")
 
     def create_username(self):
         username = int(input(f"\x1b[10;55HEnter a username: \x1b[11;55H"))
@@ -108,4 +116,24 @@ class Game:
         #     print(int(difficulty_level))
         #     break
 
+    def show_instructions(self):
+        """
+        Show the instructions for the game, when option chosen
+        """
+        clear_screen()
+        self.set_title()
+        on(10, 1, 'A Sudoku puzzle is created with a 9 by 9 square (9 rows and 9 columns).')
+        on(11, 1, 'The 9 by 9 square is also divided into 3 by 3 areas (a total of 9 x 3 by 3 areas).')
+        on(12, 1, 'Each row, column and 3 by 3 area must contain numbers 1 - 9 (inclusive).')
+        on(13, 1, 'Numbers cannot be repeated in the row, column nor 3 by 3 area.')
 
+        self.add_return_input()
+        self.add_initial_options()
+
+
+
+    def add_return_input(self):
+        """
+        Show the prompt to press enter to continue
+        """
+        return input(f"\x1b[15;1HPress Enter to return to menu... \x1b[16;1H")
