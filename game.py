@@ -92,6 +92,7 @@ class Game:
             difficulty_level = write_input(16, 1, InputPrompt.NUMBER.value)
 
             if self.validate_difficulty_input(difficulty_level):
+                clear_screen_from_pos(10, 1)
                 Sudoku().set_difficulty(int(difficulty_level))
                 break
 

@@ -3,6 +3,7 @@ from pprint import pprint
 import random
 from termcolor import colored
 from helper_enums import Difficulty, TermcolorSettings
+from screen import on
 
 
 class Sudoku:
@@ -39,7 +40,6 @@ class Sudoku:
                         rand_num = random.choice(nums)
                         self.grid[row][col] = rand_num
                         nums.remove(rand_num)
-        pprint(self.grid)
         return self.grid
 
     def create_solutions(self):
@@ -130,20 +130,21 @@ class Sudoku:
         if num in self.grid[cell[0]]:
             return False
 
-        nums_in_column = [self.grid[row][cell[1]] for row in range(len(self.grid))]
+        nums_in_column = [self.grid[row][cell[1]] for row in
+                          range(len(self.grid))]
         # print(nums_in_column)
         if num in nums_in_column:
             return False
 
-        three_by_three = [self.grid[row + ((cell[0] // 3) * 3)][column + ((cell[1] // 3) * 3)] for row in range(3) for
+        three_by_three = [self.grid[row + ((cell[0] // 3) * 3)][
+                              column + ((cell[1] // 3) * 3)] for row in
+                          range(3) for
                           column in range(3)]
         # print(three_by_three)
         if num in three_by_three:
             return False
 
         return True
-
-
 
     def solve_user_puzzle(self):
         """
@@ -183,7 +184,8 @@ class Sudoku:
         """
         try:
             if not len(numbers) == 9:
-                raise ValueError(f"You have entered {len(numbers)}. Please enter 9 numbers per row")
+                raise ValueError(
+                    f"You have entered {len(numbers)}. Please enter 9 numbers per row")
         except ValueError as e:
             print(f"Invalid input: {e}, please try again")
             return False
@@ -274,29 +276,43 @@ class Sudoku:
                 if column % 3 == 0 and column != 0:
                     grid_string += " | "
                 if column == 8:
-                    if self.grid[row][column] != 0 and self.grid[row][column] == self.current_puzzle[row][column]:
-                        grid_string += "  " + colored(str(self.grid[row][column]), 'yellow', attrs=['bold']) + " "
-                    elif self.grid[row][column] == 0 and self.current_puzzle[row][column] != self.grid[row][column] and \
+                    if self.grid[row][column] != 0 and self.grid[row][
+                        column] == self.current_puzzle[row][column]:
+                        grid_string += "  " + colored(
+                            str(self.grid[row][column]), 'yellow',
+                            attrs=['bold']) + " "
+                    elif self.grid[row][column] == 0 and \
+                            self.current_puzzle[row][column] != self.grid[row][
+                        column] and \
                             self.current_puzzle[row][column] != 0:
-                        grid_string += "  " + colored(str(self.current_puzzle[row][column]), 'blue',
-                                                      attrs=['bold']) + " "
+                        grid_string += "  " + colored(
+                            str(self.current_puzzle[row][column]), 'blue',
+                            attrs=['bold']) + " "
                     else:
-                        grid_string += "  " + colored(str(self.grid[row][column]), attrs=['bold']) + " "
+                        grid_string += "  " + colored(
+                            str(self.grid[row][column]), attrs=['bold']) + " "
                 else:
-                    if self.grid[row][column] != 0 and self.grid[row][column] == self.current_puzzle[row][column]:
-                        grid_string += "  " + colored(str(self.grid[row][column]), 'yellow', attrs=['bold']) + " "
-                    elif self.grid[row][column] == 0 and self.current_puzzle[row][column] != self.grid[row][column] and \
+                    if self.grid[row][column] != 0 and self.grid[row][
+                        column] == self.current_puzzle[row][column]:
+                        grid_string += "  " + colored(
+                            str(self.grid[row][column]), 'yellow',
+                            attrs=['bold']) + " "
+                    elif self.grid[row][column] == 0 and \
+                            self.current_puzzle[row][column] != self.grid[row][
+                        column] and \
                             self.current_puzzle[row][column] != 0:
-                        grid_string += "  " + colored(str(self.current_puzzle[row][column]), 'blue',
-                                                      attrs=['bold']) + " "
+                        grid_string += "  " + colored(
+                            str(self.current_puzzle[row][column]), 'blue',
+                            attrs=['bold']) + " "
                     else:
-                        grid_string += "  " + colored(str(self.grid[row][column]), attrs=['bold']) + " "
+                        grid_string += "  " + colored(
+                            str(self.grid[row][column]), attrs=['bold']) + " "
             grid_string += "\n"
 
             if (row + 1) % 3 == 0 and (row + 1) != 9:
                 grid_string += "   " + "-" * 43 + "\n"
 
-        print(grid_string)
+        on(10, 1, grid_string)
         # return grid_string
 
     def set_difficulty(self, difficulty):
@@ -327,20 +343,20 @@ class Sudoku:
                 self.grid[row][col] = 0
                 number_of_zeroes -= 1
 
-        self.grid = [[5, 3, 0, 0, 0, 4, 6, 0, 2],
-                     [0, 1, 0, 0, 3, 2, 0, 5, 0],
-                     [0, 2, 0, 0, 0, 0, 0, 0, 3],
-                     [8, 0, 2, 9, 0, 0, 0, 0, 6],
-                     [0, 0, 0, 0, 0, 1, 0, 0, 9],
-                     [3, 0, 0, 0, 5, 0, 0, 2, 8],
-                     [7, 0, 0, 0, 0, 0, 0, 4, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 6, 0],
-                     [1, 0, 3, 2, 0, 7, 9, 0, 5]]
+        # self.grid = [[5, 3, 0, 0, 0, 4, 6, 0, 2],
+        #              [0, 1, 0, 0, 3, 2, 0, 5, 0],
+        #              [0, 2, 0, 0, 0, 0, 0, 0, 3],
+        #              [8, 0, 2, 9, 0, 0, 0, 0, 6],
+        #              [0, 0, 0, 0, 0, 1, 0, 0, 9],
+        #              [3, 0, 0, 0, 5, 0, 0, 2, 8],
+        #              [7, 0, 0, 0, 0, 0, 0, 4, 0],
+        #              [0, 0, 0, 0, 0, 0, 0, 6, 0],
+        #              [1, 0, 3, 2, 0, 7, 9, 0, 5]]
 
-        pprint(self.grid)
+        # pprint(self.grid)
         self.current_puzzle = copy.deepcopy(self.grid)
-        self.current_puzzle[1][0] = 1
-        pprint(self.grid)
+        # self.current_puzzle[1][0] = 1
+        # pprint(self.grid)
         self.add_puzzle_style()
 
     def compare_current_puzzle_and_grid(self):
@@ -350,8 +366,10 @@ class Sudoku:
         """
         for row in range(9):
             for col in range(9):
-                if self.grid[row][col] != 0 and self.grid[row][col] == self.current_puzzle[row][col]:
-                    print('The number cannot be overwritten as part of the puzzle.')
+                if self.grid[row][col] != 0 and self.grid[row][col] == \
+                        self.current_puzzle[row][col]:
+                    print(
+                        'The number cannot be overwritten as part of the puzzle.')
                     # return False
 
         # return True
