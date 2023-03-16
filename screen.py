@@ -4,6 +4,12 @@ def clear_screen():
     """
     print(f"\x1b[2J")
 
+def clear_screen_from_pos(row, col):
+    """
+    Helper function to clear the screen from the position of row and column
+    """
+    print(f"\x1b[{row};{col}H\x1b[0J")
+
 
 def on(row, col, string, num_of_blanks=25):
     """

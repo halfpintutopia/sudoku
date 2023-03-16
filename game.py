@@ -3,8 +3,8 @@ from pyfiglet import Figlet
 from termcolor import colored
 from sudoku import Sudoku
 import time
-from screen import on, clear, write, clear_screen, write_input
-import keyboard
+from screen import on, clear, write, clear_screen, write_input, \
+    clear_screen_from_pos
 from helper_enums import Instructions, MainMenu, InputPrompt, DifficultyPrompt
 
 
@@ -68,7 +68,9 @@ class Game:
                 self.show_instructions()
 
     def create_username(self):
-        username = input(f"\x1b[10;55HEnter a username: \x1b[11;55H")
+        clear_screen_from_pos(10, 1)
+        write_input(10, 1, 'Enter a username: ')
+        # username = input(f"\x1b[10;55HEnter a username: \x1b[11;55H")
 
     def choose_difficulty(self):
         """
