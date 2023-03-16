@@ -51,6 +51,7 @@ class Grid:
         """
         self.create_empy_board()
         self.fill_diagonal_sections([(0, 3), (3, 6), (6, 9)])
+        self.find_zeroes()
         return self.grid
 
     def fill_diagonal_sections(self, range_array):
@@ -89,28 +90,8 @@ class Grid:
                 if self.grid[row][column] == 0:
                     random_number = random.randint(1, 9)
                     cell = self.find_zeroes()
-                    # print(self.find_zeroes()[0])
                     if self.check_cell(random_number, cell):
                         self.grid[cell[0]][cell[1]] = random_number
-
-        # print(type(self.grid[row]))
-        # print(self.grid[row].index(random_number))
-        # if random_number in self.grid[row]:
-        #     print(f"random number is already in {self.grid[row]}, {random_number}")
-        # elif random_number in self.grid[column]:
-        #     # return False
-        #     print(f"random number is already in {self.grid[column]}, {random_number}")
-        # else:
-        #     # self.grid[row][column] = random_number
-        #     print(f"random number is not in {self.grid[column]} or {self.grid[row]}, {random_number}")
-
-        # try:
-        #     self.grid[row].index(random_number)
-        #     return True
-        # except ValueError as e:
-        #     print(f"random: {random_number}")
-
-        # pprint(f"column: {self.grid[row]} {self.grid[column]}")
 
     def check_cell(self, number, cell):
         """
@@ -131,4 +112,4 @@ class Grid:
             return False
 
         return True
-        # print(f"three by three: {three_by_three}")
+

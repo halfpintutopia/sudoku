@@ -1,13 +1,11 @@
-from Grid import *
-from pprint import pprint
-from pprint import pprint
+from game import Game
+from screen import clear_screen
+
 
 def main():
-    grid = Grid()
-    print(grid)
-    pprint(grid.create_completed_game())
-    # grid.create_empy_board()
-    # pprint(grid.create_styled_board())
+    clear_screen()
+    game = Game()
 
 
-main()
+if __name__ == '__main__':
+    main()
