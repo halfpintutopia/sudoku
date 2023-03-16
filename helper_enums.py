@@ -33,5 +33,13 @@ class MainMenu(Enum):
     INSTRUCTIONS = '4. Instructions'
 
 
+class DifficultyPrompt(Enum):
+    CHOOSE = 'Please choose difficulty'
+    EASY = '1 for easy'
+    MEDIUM = '2 for medium'
+    HARD = '3 for hard'
+
+
 class InputPrompt(Enum):
     PRESS_ENTER = 'Press Enter to return to menu... '
+

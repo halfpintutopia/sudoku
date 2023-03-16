@@ -3,9 +3,9 @@ from pyfiglet import Figlet
 from termcolor import colored
 from sudoku import Sudoku
 import time
-from screen import on, clear, write, clear_screen
+from screen import on, clear, write, clear_screen, write_input
 import keyboard
-from helper_enums import Instructions, MainMenu, InputPrompt
+from helper_enums import Instructions, MainMenu, InputPrompt, DifficultyPrompt
 
 
 class Game:
@@ -35,25 +35,25 @@ class Game:
         """
         clear_screen()
         self.set_title()
+        # self.show_main_menu()
         on(10, 1, '1. Play')
         on(11, 1, '2. Enter your own puzzle')
         on(12, 1, '3. Solve a puzzle')
         on(13, 1, '4. Instructions')
 
-        choice = 0
-
         while True:
             try:
                 clear(16, 1)
-                choice = int(
-                    self.add_input_at_position(15, 1, 'Enter a number: '))
+                option = int(write_input(15, 1, 'Enter a number: '))
             except ValueError as e:
                 print(f"Please choose one of the options. 1, 2, 3, or 4")
                 continue
             else:
+                self.selected_user_choice(option)
                 break
 
-        match choice:
+    def selected_user_choice(self, option):
+        match option:
             case 1:
                 for row in range(10, 17):
                     clear(row, 55)
@@ -68,7 +68,7 @@ class Game:
                 self.show_instructions()
 
     def create_username(self):
-        username = int(input(f"\x1b[10;55HEnter a username: \x1b[11;55H"))
+        username = input(f"\x1b[10;55HEnter a username: \x1b[11;55H")
 
     def choose_difficulty(self):
         """
@@ -77,10 +77,10 @@ class Game:
         clear(15, 55)
         clear(16, 55)
 
-        on(10, 55, 'Please choose difficulty')
-        on(11, 55, '1 for easy')
-        on(12, 55, '2 for medium')
-        on(13, 55, '3 for hard')
+        on(10, 55, DifficultyPrompt.CHOOSE.value)
+        on(11, 55, DifficultyPrompt.EASY.value)
+        on(12, 55, DifficultyPrompt.MEDIUM.value)
+        on(13, 55, DifficultyPrompt.HARD.value)
 
         while True:
             try:
@@ -121,12 +121,5 @@ class Game:
         on(12, 1, Instructions.THIRD_LINE.value)
         on(13, 1, Instructions.FOURTH_LINE.value)
 
-        self.add_input_at_position(15, 1, InputPrompt.PRESS_ENTER.value)
+        write_input(15, 1, InputPrompt.PRESS_ENTER.value)
         self.add_initial_options()
-
-    def add_input_at_position(self, row, col, string):
-        """
-        Show the input
-        A helper function to return an input at a set row and column
-        """
-        return input(f"\x1b[{row};{col}H{string}\x1b[{row + 1};{col}H")
