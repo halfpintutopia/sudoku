@@ -238,6 +238,7 @@ References and guides used:
 * [ReeEx Testing](https://www.regextester.com/)
 * [Alphabet range in Python](https://stackoverflow.com/questions/16060899/alphabet-range-in-python)
 * [How to print Sudoku board using Python class?](https://stackoverflow.com/questions/72159405/how-to-print-sudoku-board-using-python-class)
+* [Convert Letter to Numbers and vice versa in Python](https://bobbyhadz.com/blog/python-convert-letters-to-numbers)
 
 ## Content
 
