@@ -1,4 +1,4 @@
-from Game import *
+from game import Game
 from screen import clear_screen
 
 
