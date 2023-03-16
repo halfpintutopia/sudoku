@@ -31,6 +31,8 @@ class MainMenu(Enum):
     ENTER_OWN = '2. Enter your own puzzle'
     SOLVE = '3. Solve a puzzle'
     INSTRUCTIONS = '4. Instructions'
+    LOADING = 'Just one moment... '
+    EXIT = 'X to exit'
 
 
 class DifficultyPrompt(Enum):
@@ -46,6 +48,8 @@ class InputPrompt(Enum):
     NUMBER = 'Enter a number: '
     INVALID_DIFFICULTY = 'Invalid input: Please enter a number between, ' \
                          '1, 2, or 3 please try again.'
+    COORDINATES = 'Enter a number and a letter or exit: '
+    INVALID_MAIN_MENU = 'Please choose one of the options. 1, 2, 3, or 4'
 
 
 class GoogleSheets(Enum):
@@ -65,3 +69,7 @@ class Username(Enum):
     PROMPT_2 = 'Username must only contain letters a-z and can contain a ' \
                'hyphen (-) or underscore (_).'
     PROMPT_3 = 'Username should not contain spaces.'
+
+
+class Guess(Enum):
+    PROMPT_1 = 'Please enter a row number and a column letter. e.g. 4E'
