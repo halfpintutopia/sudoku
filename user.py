@@ -21,6 +21,9 @@ class User:
 
         self.data = self.saved_games.get_all_values()
 
+    def get_username(self):
+        return self.username
+
     def create_username(self):
         """
         Get username from user input
@@ -40,7 +43,9 @@ class User:
                 print(f"game id = {game_id}")
                 break
 
-        print(f"Hello {self.username}")
+        print(self.username)
+        return self.username
+        # print(f"Hello {self.username}")
 
     def validate_username(self, username):
         """
@@ -81,7 +86,6 @@ class User:
             game_id_col = id_column[-num_of_entries:]
             game_id = int(game_id_col[0]) + 1
         return game_id
-
 
 # def create_username():
 #     """

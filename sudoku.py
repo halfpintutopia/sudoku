@@ -143,20 +143,7 @@ class Sudoku:
 
         return True
 
-    def validate_difficulty_input(self, difficulty):
-        # print(type(int(difficulty)))
-        try:
-            if difficulty.isdigit():
-                number = int(difficulty)
-            else:
-                raise ValueError(f"Please enter a number")
-            if not 1 <= number <= 3:
-                raise ValueError(f"Please enter a number between 1 and 3")
-        except ValueError as e:
-            print(f"Invalid input: {e}, please try again.\n")
-            return False
 
-        return True
 
     def solve_user_puzzle(self):
         """

@@ -43,14 +43,17 @@ class DifficultyPrompt(Enum):
 class InputPrompt(Enum):
     PRESS_ENTER = 'Press Enter to return to menu... '
     USERNAME = 'Enter your username: '
+    NUMBER = 'Enter a number: '
+    INVALID_DIFFICULTY = 'Invalid input: Please enter a number between, ' \
+                         '1, 2, or 3 please try again.'
 
 
 class GoogleSheets(Enum):
     SCOPE = [
-            "https://www.googleapis.com/auth/spreadsheets",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive"
-        ]
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+    ]
     CREDS_FILE = 'creds.json'
     SHEET = 'sudoku_games'
     USER_WORKSHEET = 'users'
@@ -62,5 +65,3 @@ class Username(Enum):
     PROMPT_2 = 'Username must only contain letters a-z and can contain a ' \
                'hyphen (-) or underscore (_).'
     PROMPT_3 = 'Username should not contain spaces.'
-
-

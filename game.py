@@ -69,35 +69,46 @@ class Game:
 
     def run_play(self):
         print(f"Just one sec... ")
-        User().create_username()
+        user = User()
+        user.create_username()
+
+        clear_screen_from_pos(10, 1)
+        on(10, 1, 'Hello ' + user.get_username())
+        self.choose_difficulty()
 
     def choose_difficulty(self):
         """
         Input should allow the user to choose the difficulty of the game
         """
-        clear(15, 55)
-        clear(16, 55)
-
-        on(10, 55, DifficultyPrompt.CHOOSE.value)
-        on(11, 55, DifficultyPrompt.EASY.value)
-        on(12, 55, DifficultyPrompt.MEDIUM.value)
-        on(13, 55, DifficultyPrompt.HARD.value)
+        on(12, 1, DifficultyPrompt.CHOOSE.value)
+        on(13, 1, DifficultyPrompt.EASY.value)
+        on(14, 1, DifficultyPrompt.MEDIUM.value)
+        on(15, 1, DifficultyPrompt.HARD.value)
 
         while True:
-            try:
-                difficulty_level = int(input(f"\x1b[15;55HEnter a number: "))
-                # self.validate_difficulty_input(difficulty_level)
-                # break
-            except ValueError as e:
-                print(f"Please choose one of the options. 1, 2, 3, or 4")
-                continue
+            clear(16, 1)
+            clear(17, 1)
 
-        # difficulty_level = input("Enter number: \n")
-        # # self.validate_difficulty_input(difficulty_level)
-        # # break
-        # if self.validate_difficulty_input(difficulty_level):
-        #     print(int(difficulty_level))
-        #     break
+            difficulty_level = write_input(16, 1, InputPrompt.NUMBER.value)
+
+            if self.validate_difficulty_input(difficulty_level):
+                Sudoku().set_difficulty(int(difficulty_level))
+                break
+
+    def validate_difficulty_input(self, difficulty):
+        """
+        Checks the input for difficulty entered is a number
+        """
+        # print(type(int(difficulty)))
+        try:
+            isinstance(int(difficulty), int)
+            if not 1 <= int(difficulty) <= 3:
+                raise ValueError
+        except ValueError:
+            print(InputPrompt.INVALID_DIFFICULTY.value)
+            return False
+
+        return True
 
     def show_main_menu(self, row, col):
         """
