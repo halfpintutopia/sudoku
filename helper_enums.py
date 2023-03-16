@@ -42,4 +42,25 @@ class DifficultyPrompt(Enum):
 
 class InputPrompt(Enum):
     PRESS_ENTER = 'Press Enter to return to menu... '
+    USERNAME = 'Enter your username: '
+
+
+class GoogleSheets(Enum):
+    SCOPE = [
+            "https://www.googleapis.com/auth/spreadsheets",
+            "https://www.googleapis.com/auth/drive.file",
+            "https://www.googleapis.com/auth/drive"
+        ]
+    CREDS_FILE = 'creds.json'
+    SHEET = 'sudoku_games'
+    USER_WORKSHEET = 'users'
+    GAMES_WORKSHEET = 'saved_games'
+
+
+class Username(Enum):
+    PROMPT_1 = 'Add your username. Username should be lowercase.'
+    PROMPT_2 = 'Username must only contain letters a-z and can contain a ' \
+               'hyphen (-) or underscore (_).'
+    PROMPT_3 = 'Username should not contain spaces.'
+
 
