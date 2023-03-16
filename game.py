@@ -6,6 +6,7 @@ import time
 from screen import on, clear, write, clear_screen, write_input, \
     clear_screen_from_pos
 from helper_enums import Instructions, MainMenu, InputPrompt, DifficultyPrompt
+from user import User
 
 
 class Game:
@@ -58,8 +59,7 @@ class Game:
                 for row in range(10, 17):
                     clear(row, 55)
 
-                self.create_username()
-                # self.choose_difficulty()
+                self.run_play()
             case 2:
                 print('You selected 2')
             case 3:
@@ -67,10 +67,9 @@ class Game:
             case 4:
                 self.show_instructions()
 
-    def create_username(self):
-        clear_screen_from_pos(10, 1)
-        write_input(10, 1, 'Enter a username: ')
-        # username = input(f"\x1b[10;55HEnter a username: \x1b[11;55H")
+    def run_play(self):
+        print(f"Just one sec... ")
+        User().create_username()
 
     def choose_difficulty(self):
         """
