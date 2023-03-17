@@ -18,15 +18,17 @@ def validate_coordinates(row_cell):
     """
     Check row_cell contains 2 characters and contains a letter and a number
     """
-    cell = [coord for coord in row_cell]
     try:
+        cell = [coord for coord in row_cell]
         if len(cell) == 2:
-            (
-                    cell[0].isdigit() and cell[1].isalpha()
-            ) or (
-                    cell[0].isalpha() and cell[1].isdigit()
-            )
+            if not cell[0].isdigit() and cell[1].isalpha():
+                raise ValueError()
+            if not cell[0].isalpha() and cell[1].isdigit():
+                raise ValueError()
+        else:
+            raise ValueError()
     except ValueError:
+        on(18, 55, "Invalid input")
         return False
     return True
 
