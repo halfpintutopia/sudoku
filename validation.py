@@ -63,3 +63,19 @@ def validate_username(username):
         return False
 
     return True
+
+
+def validate_menu_option(menu_choice):
+    """
+    Check the menu option chosen is a valid number,
+    a number from 1 to 4 inclusive
+    """
+    try:
+        int(menu_choice)
+        if 1 < int(menu_choice) > 4:
+            raise ValueError()
+    except ValueError as e:
+        print(InputPrompt.INVALID_MAIN_MENU.value)
+        return False
+
+    return True
