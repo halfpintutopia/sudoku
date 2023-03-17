@@ -5,8 +5,8 @@ from screen import on
 class StylePuzzle:
     def __init__(
             self,
-            original_puzzle: list[list[int]],
-            current_puzzle: list[list[int]]
+            original_puzzle: [list[int]],
+            current_puzzle: [list[int]]
     ):
         self.original_puzzle = original_puzzle
         self.current_puzzle = current_puzzle
