@@ -1,10 +1,19 @@
+from pyfiglet import Figlet
+from termcolor import colored
+
+game_title = 'SUDOKU'
+font_name = 'block'
+title_color = 'yellow'
+
+
 def clear_screen():
     """
     Helper function to clear the entire 24 row / 80 col screen
     """
     print(f"\x1b[2J")
 
-def clear_screen_from_pos(row, col):
+
+def clear_screen_from_pos(row: int, col: int):
     """
     Helper function to clear the screen from the position of row and column
     """
@@ -40,11 +49,19 @@ def write(row, col, string):
 
 def write_input(row, col, string):
     """
-    Show the input
-    A helper function to return an input at a set row and column
+    Show the input at the position of row and col
     """
     return input(f"\x1b[{row};{col}H{string}\x1b[{row + 1};{col}H")
 
 
-def esc(code):
-    return f'\033[{code}m'
+def set_cursor(row, col):
+    print(f"\x1b[{row}:{col}H")
+
+
+def set_title():
+    """
+    Create title for the start screen
+    """
+    print(f"\x1b[1;1H")
+    custom_fig = Figlet(font=font_name, justify="center")
+    print(colored(custom_fig.renderText(game_title), title_color))
