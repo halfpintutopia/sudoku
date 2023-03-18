@@ -4,18 +4,25 @@ import random
 from termcolor import colored
 from helper_enums import Difficulty, TermcolorSettings
 from screen import on
+from style_puzzle import StylePuzzle
 
 
 class Sudoku:
     def __init__(self):
+        self.completed_puzzle = None
+        self.original_puzzle = None
         self.current_puzzle = None
         self.puzzle = None
         self.grid = None
+        self.grid_sections = [(0, 2), (3, 5), (6, 8)]
+        self.missing_num_in_subgrid_range = (0, 5)
+        self.row_cell_range = (0, 8)
+        self.col_cell_range = (0, 8)
         self.create_blank_sudoku()
 
     def create_blank_sudoku(self):
-        self.grid = [[0 for x in range(9)] for y in range(9)]
-        return self.grid
+        self.completed_puzzle = [[0 for x in range(9)] for y in range(9)]
+        return self.completed_puzzle
 
     def creat_puzzle_with_difficulty(self, difficulty):
         self.create_puzzle()
@@ -38,30 +45,30 @@ class Sudoku:
                 for row in range(range_values[0], range_values[1]):
                     for col in range(range_values[0], range_values[1]):
                         rand_num = random.choice(nums)
-                        self.grid[row][col] = rand_num
+                        self.completed_puzzle[row][col] = rand_num
                         nums.remove(rand_num)
-        return self.grid
+        return self.completed_puzzle
 
     def create_solutions(self):
         """
         Copy the grid to find a solution or multiple solutions
         Get missing numbers in the row lists
         """
-        for row in range(len(self.grid)):
+        for row in range(len(self.completed_puzzle)):
             available_nums = self.get_missing_numbers_in_row(row)
-            for col in range(len(self.grid[row])):
-                if self.grid[row][col] == 0:
+            for col in range(len(self.completed_puzzle[row])):
+                if self.completed_puzzle[row][col] == 0:
                     for num in available_nums:
                         if self.check_row_column_3_by_3(num, (row, col)):
-                            self.grid[row][col] = num
+                            self.completed_puzzle[row][col] = num
 
                             # available_nums.remove(num)
 
                             if self.find_solution():
                                 self.create_solutions()
-                                return self.grid
+                                return self.completed_puzzle
 
-                            self.grid[row][col] = 0
+                            self.completed_puzzle[row][col] = 0
 
     def find_solution(self):
         """
@@ -79,35 +86,22 @@ class Sudoku:
 
         for num in available_nums:
             if self.check_row_column_3_by_3(num, (row, col)):
-                self.grid[row][col] = num
+                self.completed_puzzle[row][col] = num
 
                 if self.find_solution():
-                    return self.grid
+                    return self.completed_puzzle
 
-                self.grid[row][col] = 0
+                self.completed_puzzle[row][col] = 0
 
-        return False
-
-    def remove_last_filled_in_zero(self, cell):
-        """
-        Use recursion to find the previous column in the row that was a 0 in the original grid
-        """
-        if cell[1] != 0:
-            for i in range(cell[1] - 1, -1, -1):
-                if self.grid[cell[0]][i] == 0:
-                    print(f"i = column:  {cell[0]}, {i}")
-                    return i
-
-        print(f"return original: {cell[0]}, {cell[1]}")
         return False
 
     def find_next_zero(self):
         """
         Use recursion to check the row for zero
         """
-        for row in range(len(self.grid)):
-            for col in range(len(self.grid[row])):
-                if self.grid[row][col] == 0:
+        for row in range(len(self.completed_puzzle)):
+            for col in range(len(self.completed_puzzle[row])):
+                if self.completed_puzzle[row][col] == 0:
                     return row, col
 
     def get_missing_numbers_in_row(self, row):
@@ -116,7 +110,7 @@ class Sudoku:
         """
         missing_nums = []
         for num in range(1, 10):
-            if num not in self.grid[row]:
+            if num not in self.completed_puzzle[row]:
                 missing_nums.append(num)
 
         random.shuffle(missing_nums)
@@ -127,24 +121,84 @@ class Sudoku:
         """
         Check number is not in the row, column or 3 by 3
         """
-        if num in self.grid[cell[0]]:
+        if num in self.completed_puzzle[cell[0]]:
             return False
 
-        nums_in_column = [self.grid[row][cell[1]] for row in
-                          range(len(self.grid))]
-        # print(nums_in_column)
+        nums_in_column = [self.completed_puzzle[row][cell[1]] for row in
+                          range(len(self.completed_puzzle))]
         if num in nums_in_column:
             return False
 
-        three_by_three = [self.grid[row + ((cell[0] // 3) * 3)][
+        three_by_three = [self.completed_puzzle[row + ((cell[0] // 3) * 3)][
                               column + ((cell[1] // 3) * 3)] for row in
                           range(3) for
                           column in range(3)]
-        # print(three_by_three)
         if num in three_by_three:
             return False
 
         return True
+
+    def set_difficulty(self, difficulty):
+        """
+        Set the difficulty of the puzzle
+        """
+        match difficulty:
+            case 1:
+                self.create_puzzle_with_difficulty(Difficulty.EASY.value)
+            case 2:
+                self.create_puzzle_with_difficulty(Difficulty.MEDIUM.value)
+            case 3:
+                self.create_puzzle_with_difficulty(Difficulty.HARD.value)
+
+    def create_puzzle_with_difficulty(self, num_of_nums_to_remove):
+        """
+        Copy the completed puzzle and create a puzzle with missing numbers
+        Remove amount of numbers dependent on difficulty set.
+        """
+        self.create_puzzle()
+
+        self.original_puzzle = copy.deepcopy(self.completed_puzzle)
+
+        for across in self.grid_sections:
+            for down in self.grid_sections:
+                for num in range(self.missing_num_in_subgrid_range[0],
+                                 self.missing_num_in_subgrid_range[1]):
+                    row = random.randint(across[0], across[1])
+                    col = random.randint(down[0], down[1])
+                    if self.original_puzzle[row][col] != 0:
+                        self.original_puzzle[row][col] = 0
+                        num_of_nums_to_remove -= 1
+
+        while num_of_nums_to_remove > 0:
+            row = random.randint(self.row_cell_range[0],
+                                 self.row_cell_range[1])
+            col = random.randint(self.col_cell_range[0],
+                                 self.col_cell_range[1])
+            if self.original_puzzle[row][col] != 0:
+                self.original_puzzle[row][col] = 0
+                num_of_nums_to_remove -= 1
+
+        self.current_puzzle = copy.deepcopy(self.original_puzzle)
+        style_puzzle = StylePuzzle(
+            self.original_puzzle,
+            self.current_puzzle
+        )
+        style_puzzle.add_puzzle_style()
+
+    def compare_current_puzzle_and_grid(self):
+        """
+        Compare the set grid and current puzzle.
+        If number is part of the grid, must not be overwritten
+        """
+        for row in range(9):
+            for col in range(9):
+                if self.grid[row][col] != 0 and self.grid[row][col] == \
+                        self.current_puzzle[row][col]:
+                    print(
+                        'The number cannot be overwritten as part of the puzzle.')
+                    # return False
+
+        # return True
 
     def solve_user_puzzle(self):
         """
@@ -159,7 +213,8 @@ class Sudoku:
         puzzle = []
         for row in range(len(self.grid)):
             while True:
-                puzzle_row = input(f"Enter row {row + 1} of your puzzle.\n")
+                puzzle_row = input(
+                    f"Enter row {row + 1} of your puzzle.\n")
                 current_row = []
                 if self.create_nums_list(puzzle_row):
                     current_row = self.create_nums_list(puzzle_row)
@@ -228,148 +283,3 @@ class Sudoku:
     def create_user_puzzle(self, puzzle):
         self.grid = puzzle
         return self.grid
-
-    def add_grid_style(self):
-        grid_string = "    "
-        index = 1
-        for letter in range(ord('a'), ord('j')):
-            grid_string += "  " + chr(letter) + " "
-            if index % 3 == 0 and index != 9:
-                grid_string += "   "
-            index += 1
-
-        grid_string += "\n   " + "-" * 43 + "\n"
-
-        for row in range(9):
-            grid_string += str(row + 1) + " | "
-            for column in range(9):
-                if column % 3 == 0 and column != 0:
-                    grid_string += " | "
-                if column == 8:
-                    grid_string += "  " + str(self.grid[row][column]) + " "
-                else:
-                    grid_string += "  " + str(self.grid[row][column]) + " "
-            grid_string += "\n"
-
-            if (row + 1) % 3 == 0 and (row + 1) != 9:
-                grid_string += "   " + "-" * 43 + "\n"
-
-        return grid_string
-
-    def add_puzzle_style(self):
-        """
-        Print out the grid with style and headings for columns and rows
-        """
-        grid_string = "    "
-        index = 1
-        for letter in range(ord('A'), ord('J')):
-            grid_string += "  " + chr(letter) + " "
-            if index % 3 == 0 and index != 9:
-                grid_string += "   "
-            index += 1
-
-        grid_string += "\n   " + "-" * 43 + "\n"
-
-        for row in range(9):
-            grid_string += str(row + 1) + " | "
-            for column in range(9):
-                if column % 3 == 0 and column != 0:
-                    grid_string += " | "
-                if column == 8:
-                    if self.grid[row][column] != 0 and self.grid[row][
-                        column] == self.current_puzzle[row][column]:
-                        grid_string += "  " + colored(
-                            str(self.grid[row][column]), 'yellow',
-                            attrs=['bold']) + " "
-                    elif self.grid[row][column] == 0 and \
-                            self.current_puzzle[row][column] != self.grid[row][
-                        column] and \
-                            self.current_puzzle[row][column] != 0:
-                        grid_string += "  " + colored(
-                            str(self.current_puzzle[row][column]), 'blue',
-                            attrs=['bold']) + " "
-                    else:
-                        grid_string += "  " + colored(
-                            str(self.grid[row][column]), attrs=['bold']) + " "
-                else:
-                    if self.grid[row][column] != 0 and self.grid[row][
-                        column] == self.current_puzzle[row][column]:
-                        grid_string += "  " + colored(
-                            str(self.grid[row][column]), 'yellow',
-                            attrs=['bold']) + " "
-                    elif self.grid[row][column] == 0 and \
-                            self.current_puzzle[row][column] != self.grid[row][
-                        column] and \
-                            self.current_puzzle[row][column] != 0:
-                        grid_string += "  " + colored(
-                            str(self.current_puzzle[row][column]), 'blue',
-                            attrs=['bold']) + " "
-                    else:
-                        grid_string += "  " + colored(
-                            str(self.grid[row][column]), attrs=['bold']) + " "
-            grid_string += "\n"
-
-            if (row + 1) % 3 == 0 and (row + 1) != 9:
-                grid_string += "   " + "-" * 43 + "\n"
-
-        on(10, 1, grid_string)
-        # return grid_string
-
-    def set_difficulty(self, difficulty):
-        match difficulty:
-            case 1:
-                self.create_new_puzzle(Difficulty.EASY.value)
-            case 2:
-                self.create_new_puzzle(Difficulty.MEDIUM.value)
-            case 3:
-                self.create_new_puzzle(Difficulty.HARD.value)
-
-    def create_new_puzzle(self, number_of_zeroes):
-        self.create_puzzle()
-        threes = [(0, 2), (3, 5), (6, 8)]
-        for across in threes:
-            for down in threes:
-                for num in range(0, 5):
-                    row = random.randint(across[0], across[1])
-                    col = random.randint(down[0], down[1])
-                    if self.grid[row][col] != 0:
-                        self.grid[row][col] = 0
-                        number_of_zeroes -= 1
-
-        while number_of_zeroes > 0:
-            row = random.randint(0, 8)
-            col = random.randint(0, 8)
-            if self.grid[row][col] != 0:
-                self.grid[row][col] = 0
-                number_of_zeroes -= 1
-
-        # self.grid = [[5, 3, 0, 0, 0, 4, 6, 0, 2],
-        #              [0, 1, 0, 0, 3, 2, 0, 5, 0],
-        #              [0, 2, 0, 0, 0, 0, 0, 0, 3],
-        #              [8, 0, 2, 9, 0, 0, 0, 0, 6],
-        #              [0, 0, 0, 0, 0, 1, 0, 0, 9],
-        #              [3, 0, 0, 0, 5, 0, 0, 2, 8],
-        #              [7, 0, 0, 0, 0, 0, 0, 4, 0],
-        #              [0, 0, 0, 0, 0, 0, 0, 6, 0],
-        #              [1, 0, 3, 2, 0, 7, 9, 0, 5]]
-
-        # pprint(self.grid)
-        self.current_puzzle = copy.deepcopy(self.grid)
-        # self.current_puzzle[1][0] = 1
-        # pprint(self.grid)
-        self.add_puzzle_style()
-
-    def compare_current_puzzle_and_grid(self):
-        """
-        Compare the set grid and current puzzle.
-        If number is part of the grid, must not be overwritten
-        """
-        for row in range(9):
-            for col in range(9):
-                if self.grid[row][col] != 0 and self.grid[row][col] == \
-                        self.current_puzzle[row][col]:
-                    print(
-                        'The number cannot be overwritten as part of the puzzle.')
-                    # return False
-
-        # return True
