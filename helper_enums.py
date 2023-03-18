@@ -48,7 +48,7 @@ class InputPrompt(Enum):
     INVALID_DIFFICULTY = 'Invalid input: Please enter a number between, ' \
                          '1, 2, or 3 please try again.'
     COORDINATES = 'Enter a number and a letter or exit: '
-    INVALID_MAIN_MENU = 'Please choose one of the options. 1, 2, 3, or 4'
+    INVALID_MAIN_MENU = 'Please choose one of the options. 1, 2, or 3'
 
 
 class GoogleSheets(Enum):

@@ -1,13 +1,11 @@
-from pyfiglet import Figlet
-from termcolor import colored
 from sudoku import Sudoku
-from screen import on, clear, write, clear_screen, write_input, \
+from screen import on, clear, clear_screen, write_input, \
     clear_screen_from_pos, clear_right_side, set_title
 from helper_enums import Instructions, MainMenu, InputPrompt, \
-    DifficultyPrompt, Guess
+    DifficultyPrompt
 from user import User
 from validation import validate_number_guess, validate_coordinates, \
-    validate_difficulty_input, validate_grid_cell
+    validate_difficulty_input, validate_grid_cell, validate_menu_option
 from style_puzzle import StylePuzzle
 import copy
 
@@ -35,21 +33,16 @@ class Game(Sudoku):
         """
         Show options for the user to enter their choice
         """
-        clear_screen()
         set_title()
         on(10, 1, MainMenu.PLAY.value)
         on(11, 1, MainMenu.ENTER_OWN.value)
         on(12, 1, MainMenu.INSTRUCTIONS.value)
 
         while True:
-            try:
-                clear(15, 1)
-                option = int(write_input(14, 1, InputPrompt.NUMBER.value))
-            except ValueError as e:
-                print(InputPrompt.INVALID_MAIN_MENU.value)
-                continue
-            else:
-                self.selected_user_choice(option)
+            clear(15, 1)
+            option = write_input(14, 1, InputPrompt.NUMBER.value)
+            if validate_menu_option(option):
+                self.selected_user_choice(int(option))
                 break
 
     def selected_user_choice(self, option):
@@ -236,7 +229,6 @@ class Game(Sudoku):
             self.original_puzzle,
             self.completed_puzzle
         )
-
         set_title()
         style_puzzle.add_puzzle_style()
         on(10, 55, 'X to exit to main menu')

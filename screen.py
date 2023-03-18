@@ -62,9 +62,10 @@ def set_title():
     """
     Create title for the start screen
     """
-    print(f"\x1b[1;1H")
+    clear_screen()
     custom_fig = Figlet(font=font_name, justify="center")
-    print(colored(custom_fig.renderText(game_title), title_color))
+    print("\x1b[1;1H" + colored(custom_fig.renderText(game_title),
+                                title_color))
 
 
 def clear_right_side():

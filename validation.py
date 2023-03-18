@@ -100,3 +100,14 @@ def validate_grid_cell(puzzle, row, col):
         on(19, 55, "Choose another number")
         return False
     return True
+
+
+def validate_menu_option(option):
+    try:
+        int(option)
+        if not 1 <= int(option) <= 3:
+            raise ValueError()
+    except ValueError:
+        print(InputPrompt.INVALID_MAIN_MENU.value)
+        return False
+    return True
