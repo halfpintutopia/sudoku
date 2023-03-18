@@ -217,6 +217,7 @@ the game.*
 ## Remote Deployment
 
 *Before deploying, ensure a requirements.txt file in the project repository.*
+
 To create the requirements.txt file, run the following command from the
 terminal in the project.
 
@@ -332,8 +333,7 @@ attached to the README were used for the project.
 
 Huge thanks goes to everyone in the Code Institute Community on Slack,
 especially the
-[women-in-tech]
-(https://code-institute-room.slack.com/archives/C01QAAQGPNJ)
+[women-in-tech](https://code-institute-room.slack.com/archives/C01QAAQGPNJ)
 Slack channel. Thanks to their banter and support. Such a great group! In
 addition, my thanks to
 the [oct-2022-disdcc](https://code-institute-room.slack.com/archives/C044ZCYQ6CQ),
