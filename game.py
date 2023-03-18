@@ -34,13 +34,13 @@ class Game(Sudoku):
         Show options for the user to enter their choice
         """
         set_title()
-        on(10, 1, MainMenu.PLAY.value)
-        on(11, 1, MainMenu.ENTER_OWN.value)
-        on(12, 1, MainMenu.INSTRUCTIONS.value)
+        on(10, 5, MainMenu.PLAY.value)
+        on(11, 5, MainMenu.ENTER_OWN.value)
+        on(12, 5, MainMenu.INSTRUCTIONS.value)
 
         while True:
-            clear(15, 1)
-            option = write_input(14, 1, InputPrompt.NUMBER.value)
+            clear(15, 5)
+            option = write_input(14, 5, InputPrompt.NUMBER.value)
             if validate_menu_option(option):
                 self.selected_user_choice(int(option))
                 break
