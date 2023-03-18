@@ -129,7 +129,8 @@ the game.*
             * Add username
             * Be able to fill in the Sudoku puzzle
             * Be able to choose the difficulty of the puzzle
-            * Save progress see - [Future Implementations](#future-implementations)
+            * Save progress
+              see - [Future Implementations](#future-implementations)
             * Time progress see - [Future Implementations]
               (#future-implementations)
         * Be able to solve a Sudoku puzzle
@@ -192,9 +193,9 @@ the game.*
 
 * Save progress
 * Time progress
-* Load previous game and continue playing 
-* See your previous plays at different levels and see if your times have 
-  improved 
+* Load previous game and continue playing
+* See your previous plays at different levels and see if your times have
+  improved
 
 # Technologies Used
 
@@ -216,24 +217,27 @@ the game.*
 ## Remote Deployment
 
 *Before deploying, ensure a requirements.txt file in the project repository.*
-To create the requirements.txt file, run the following command from the terminal in the project.
+To create the requirements.txt file, run the following command from the
+terminal in the project.
+
+`pip freeze > requirements.txt`
 
 ### Deploying on Heroku
 
 1. Create or login into the Heroku account
-2. On the account's landing page, click "Create new app."    
+2. On the account's landing page, click "Create new app."
 3. Give the project a name and name the app
 4. Select Europe for the region and confirm by clicking "Create app."
-5. Click on the "Settings" tab 
-6. Click "Reveal Config Vars" to add the following environment variables. 
+5. Click on the "Settings" tab
+6. Click "Reveal Config Vars" to add the following environment variables.
    Click "Add" after adding each key-value pair:
-   - key: PORT; value: 8000
-   - copy and paste any other json credentials that are required to connect 
-     to additional APIs
-7. Click "Add buildpack". Add the following in this order and click "Save 
-     changes"  for each selection:
-   1. python
-   2. nodejs
+    - key: PORT; value: 8000
+    - copy and paste any other json credentials that are required to connect
+      to additional APIs
+7. Click "Add buildpack". Add the following in this order and click "Save
+   changes"  for each selection:
+    1. python
+    2. nodejs
 8. Click on the "Deploy" tab
 9. Select GitHub and confirm
 10. Search for the name of the project's repository and click "Connect."
@@ -241,7 +245,28 @@ To create the requirements.txt file, run the following command from the terminal
 
 ## Local Deployment
 
+### How to Clone
+
+1. Click "Code" at the top of the list of files on the repository page
+2. Clone the repository using HTTPS and click on the copy icon at the end of
+   the input
+3. Locally, using the terminal, navigate to the chosen directory
+4. Copy the project using the following command: <br>`git clone THE_URL_COPIED`
+5. Type the following command and then enter
+6. `cd THE_CLONED_DIRECTORY`
+7. `pip3 install -r requirements.txt` <br>(or `pip install -r requirements.
+   txt` for Python 2)
+
 ### How to Fork
+
+*For when you wish to contribute and share suggestions*
+
+1. Click "Fork" in the top right-hand corner of the repository page
+2. The settings will automatically choose the GitHub logged in user as the
+   owner of the forked repository
+3. Optional: change the name of the repository
+4. Options: add a description
+5. Click "Create fork."
 
 ### How to Clone
 
@@ -305,16 +330,17 @@ attached to the README were used for the project.
 
 ## Acknowledgments
 
-Huge thanks goes to everyone in the Code Institute Community on Slack, 
-especially the 
+Huge thanks goes to everyone in the Code Institute Community on Slack,
+especially the
 [women-in-tech]
 (https://code-institute-room.slack.com/archives/C01QAAQGPNJ)
-Slack channel. Thanks to their banter and support. Such a great group! In 
-addition, my thanks to the [oct-2022-disdcc](https://code-institute-room.slack.com/archives/C044ZCYQ6CQ),
+Slack channel. Thanks to their banter and support. Such a great group! In
+addition, my thanks to
+the [oct-2022-disdcc](https://code-institute-room.slack.com/archives/C044ZCYQ6CQ),
 especially Mark Cooper, Ger Tobin and Rebecca Tracey-Timoney.
 
 Thanks also goes to Andrea Tschudi for giving me the inspiration to make this
 game. Also, to Stefan Tschudi for his support and testing.
 
-And last but not least, special thanks to the Codebar community and to 
+And last but not least, special thanks to the Codebar community and to
 Nicolas Beney.
