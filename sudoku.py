@@ -29,6 +29,7 @@ class Sudoku:
         self.create_puzzle()
 
     def create_puzzle(self):
+        self.create_blank_sudoku()
         self.fill_diagonal_3_by_3([(0, 3), (3, 6), (6, 9)])
         self.create_solutions()
         return self.grid

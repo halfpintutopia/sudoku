@@ -39,35 +39,12 @@ class Game(Sudoku):
         set_title()
         on(10, 1, MainMenu.PLAY.value)
         on(11, 1, MainMenu.ENTER_OWN.value)
-        on(12, 1, MainMenu.SOLVE.value)
-        on(13, 1, MainMenu.INSTRUCTIONS.value)
+        on(12, 1, MainMenu.INSTRUCTIONS.value)
 
         while True:
             try:
-                clear(16, 1)
-                option = int(write_input(15, 1, InputPrompt.NUMBER.value))
-            except ValueError as e:
-                print(InputPrompt.INVALID_MAIN_MENU.value)
-                continue
-            else:
-                self.selected_user_choice(option)
-                break
-
-    def add_side_menu_initial_options(self):
-        """
-        Show options for the user to enter their choice
-        """
-        clear_screen()
-        set_title()
-        on(10, 1, MainMenu.PLAY.value)
-        on(11, 1, MainMenu.ENTER_OWN.value)
-        on(12, 1, MainMenu.SOLVE.value)
-        on(13, 1, MainMenu.INSTRUCTIONS.value)
-
-        while True:
-            try:
-                clear(16, 1)
-                option = int(write_input(15, 1, InputPrompt.NUMBER.value))
+                clear(15, 1)
+                option = int(write_input(14, 1, InputPrompt.NUMBER.value))
             except ValueError as e:
                 print(InputPrompt.INVALID_MAIN_MENU.value)
                 continue
@@ -162,6 +139,7 @@ class Game(Sudoku):
             style_puzzle.add_puzzle_style()
             self.guess_cell()
         else:
+            write_input(20, 55, "Enter to continue..")
             self.guess_cell()
 
     def set_guess(self, option):
@@ -263,4 +241,4 @@ class Game(Sudoku):
         style_puzzle.add_puzzle_style()
         on(10, 55, 'X to exit to main menu')
         write_input(10, 55, InputPrompt.PRESS_ENTER.value)
-        self.add_side_menu_initial_options()
+        self.add_initial_options()

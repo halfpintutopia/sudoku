@@ -29,8 +29,7 @@ class Instructions(Enum):
 class MainMenu(Enum):
     PLAY = '1. Play'
     ENTER_OWN = '2. Enter your own puzzle'
-    SOLVE = '3. Solve a puzzle'
-    INSTRUCTIONS = '4. Instructions'
+    INSTRUCTIONS = '3. Instructions'
     LOADING = 'Just one moment... '
     EXIT = 'X to exit'
 

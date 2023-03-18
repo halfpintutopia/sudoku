@@ -96,5 +96,7 @@ def validate_grid_cell(puzzle, row, col):
         if puzzle[row][col] != 0:
             raise ValueError()
     except ValueError:
+        on(18, 55, "Number is part of puzzle")
+        on(19, 55, "Choose another number")
         return False
     return True
