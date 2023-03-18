@@ -278,27 +278,27 @@ terminal in the project.
 
 ### Client Goals Testing
 
-| Client Goal                                            | Implementation | Tested | Successful |
-|--------------------------------------------------------|----------------|:------:|:----------:|
-| Be able to generate a new puzzle                       |                |        |            |
-| Add username                                           |                |        |            |
-| Be able to fill in the Sudoku puzzle                   |                |        |            |
-| Be able to choose the difficulty of the puzzle         |                |        |            |
-| Add numbers in a Sudoku puzzle and generate a solution |                |        |            |
+| Client Goal                                            | Implementation                                    | Tested | Successful |
+|--------------------------------------------------------|---------------------------------------------------|:------:|:----------:|
+| Be able to generate a new puzzle                       | Choose from main menu                             |  Yes   |    Yes     |
+| Add username                                           | Prompt to enter username                          |  Yes   |    Yes     |
+| Be able to fill in the Sudoku puzzle                   | Prompt to add row and column                      |  Yes   |    Yes     |
+| Be able to choose the difficulty of the puzzle         | Prompt to choose difficulty                       |  Yes   |    Yes     |
+| Add numbers in a Sudoku puzzle and generate a solution | Choose from main menu and add numbers in each row |  Yes   |    Yes     |
 
 ### First Time Visitor Goals
 
-| Client Goal                                    | Implementation | Tested | Successful |
-|------------------------------------------------|----------------|:------:|:----------:|
-| Be able to solve a Sudoku puzzle               |                |        |            |
-| Be able to fill in the Sudoku puzzle           |                |        |            |
-| Be able to choose the difficulty of the puzzle |                |        |            |
+| Client Goal                                    | Implementation                                                                        | Tested | Successful |
+|------------------------------------------------|---------------------------------------------------------------------------------------|:------:|:----------:|
+| Be able to solve a Sudoku puzzle               | See the entered puzzle and see the solution                                           |  Yes   |    Yes     |
+| Be able to play fill in the Sudoku puzzle      | For each cell (chosen by row and column) a number is added to the puzzle              |  Yes   |    Yes     |
+| Be able to choose the difficulty of the puzzle | Dependent on the difficulty chosen, the puzzle will generate a set of missing numbers |  Yes   |    Yes     |
 
 ### Return Visitor Goals
 
-| Client Goal                                          | Implementation | Tested | Successful |
-|------------------------------------------------------|----------------|:------:|:----------:|
-| Try another puzzle with a different difficulty level |                |        |            |
+| Client Goal                                          | Implementation                                         | Tested | Successful |
+|------------------------------------------------------|--------------------------------------------------------|:------:|:----------:|
+| Try another puzzle with a different difficulty level | Start another game and choose another difficulty level |  Yes   |    Yes     |
 
 ## Bugs
 
