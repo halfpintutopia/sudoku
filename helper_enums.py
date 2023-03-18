@@ -73,3 +73,4 @@ class Username(Enum):
 
 class Guess(Enum):
     PROMPT_1 = 'Please enter a row number and a column letter. e.g. 4E'
+    PROMPT_2 = 'Please enter a number (1-9) you want to put in the cell'
