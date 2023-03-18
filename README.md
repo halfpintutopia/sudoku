@@ -132,8 +132,8 @@ the game.*
             * Be able to choose the difficulty of the puzzle
             * Save progress
               see - [Future Implementations](#future-implementations)
-            * Time progress see - [Future Implementations]
-              (#future-implementations)
+            * Time progress see - 
+          [Future Implementations](#future-implementations)
         * Be able to solve a Sudoku puzzle
             * Add numbers in a Sudoku puzzle and generate a solution
     * ## First Time Visitor Goals
