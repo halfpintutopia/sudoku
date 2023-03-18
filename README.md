@@ -215,6 +215,30 @@ the game.*
 
 ## Remote Deployment
 
+*Before deploying, ensure a requirements.txt file in the project repository.*
+To create the requirements.txt file, run the following command from the terminal in the project.
+
+### Deploying on Heroku
+
+1. Create or login into the Heroku account
+2. On the account's landing page, click "Create new app."    
+3. Give the project a name and name the app
+4. Select Europe for the region and confirm by clicking "Create app."
+5. Click on the "Settings" tab 
+6. Click "Reveal Config Vars" to add the following environment variables. 
+   Click "Add" after adding each key-value pair:
+   - key: PORT; value: 8000
+   - copy and paste any other json credentials that are required to connect 
+     to additional APIs
+7. Click "Add buildpack". Add the following in this order and click "Save 
+     changes"  for each selection:
+   1. python
+   2. nodejs
+8. Click on the "Deploy" tab
+9. Select GitHub and confirm
+10. Search for the name of the project's repository and click "Connect."
+11. Click on "Enable Automatic Deploys"
+
 ## Local Deployment
 
 ### How to Fork
