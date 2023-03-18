@@ -65,3 +65,8 @@ def set_title():
     print(f"\x1b[1;1H")
     custom_fig = Figlet(font=font_name, justify="center")
     print(colored(custom_fig.renderText(game_title), title_color))
+
+
+def clear_right_side():
+    for num in range(10, 25):
+        clear(num, 55)
