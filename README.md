@@ -43,9 +43,10 @@ Tschudi in mind.
         * [How to Clone](#how-to-clone)
 
 * [Testing](#testing)
-    * [Bugs](#bugs)
-    * [Remaining Bugs](#remaining-bugs)
-    * [Validator Testing](#validator-testing)
+  * [User experience](#user-experience)
+  * [Bugs](#bugs)
+  * [Remaining Bugs](#remaining-bugs)
+  * [Validator Testing](#validator-testing)
 
 * [Credits](#credits)
     * [Code Used](#code-used)
@@ -272,6 +273,32 @@ terminal in the project.
 ### How to Clone
 
 # Testing
+
+## User experience
+
+### Client Goals Testing
+
+| Client Goal                                            | Implementation | Tested | Successful |
+|--------------------------------------------------------|----------------|:------:|:----------:|
+| Be able to generate a new puzzle                       |                |        |            |
+| Add username                                           |                |        |            |
+| Be able to fill in the Sudoku puzzle                   |                |        |            |
+| Be able to choose the difficulty of the puzzle         |                |        |            |
+| Add numbers in a Sudoku puzzle and generate a solution |                |        |            |
+
+### First Time Visitor Goals
+
+| Client Goal                                    | Implementation | Tested | Successful |
+|------------------------------------------------|----------------|:------:|:----------:|
+| Be able to solve a Sudoku puzzle               |                |        |            |
+| Be able to fill in the Sudoku puzzle           |                |        |            |
+| Be able to choose the difficulty of the puzzle |                |        |            |
+
+### Return Visitor Goals
+
+| Client Goal                                          | Implementation | Tested | Successful |
+|------------------------------------------------------|----------------|:------:|:----------:|
+| Try another puzzle with a different difficulty level |                |        |            |
 
 ## Bugs
 
