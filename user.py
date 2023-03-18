@@ -3,11 +3,12 @@ from google.oauth2.service_account import Credentials
 import re
 from helper_enums import GoogleSheets, InputPrompt, Username
 from screen import on, clear_screen_from_pos, write_input, clear
+from validation import validate_username
 
 
 class User:
-    def __init__(self):
-        self.username = None
+    def __init__(self, username=None):
+        self.username = username
         self.pattern = "^[a-z0-9_-]*$"
 
         self.CREDS = Credentials.from_service_account_file(
@@ -16,10 +17,13 @@ class User:
         self.GSPREAD_CLIENT = gspread.authorize(self.SCOPED_CREDS)
         self.SHEET = self.GSPREAD_CLIENT.open(GoogleSheets.SHEET.value)
 
+        self.users = self.SHEET.worksheet(GoogleSheets.USER_WORKSHEET.value)
         self.saved_games = self.SHEET.worksheet(
             GoogleSheets.GAMES_WORKSHEET.value)
 
-        self.data = self.saved_games.get_all_values()
+        self.users_data = self.users.get_all_values()
+        self.saved_games_data = self.saved_games.get_all_values()
+        self.user_id = None
 
     def get_username(self):
         return self.username
@@ -36,35 +40,21 @@ class User:
         while True:
             username = write_input(14, 1, InputPrompt.USERNAME.value)
 
-            if self.validate_username(username):
+            if validate_username(username):
                 self.username = username
+                # self.save_username()
                 # self.get_last_entry()
-                game_id = self.get_last_id_entry()
-                print(f"game id = {game_id}")
+                # game_id = self.get_last_id_entry()
+                # print(f"game id = {game_id}")
                 break
 
-        print(self.username)
         return self.username
-        # print(f"Hello {self.username}")
 
-    def validate_username(self, username):
-        """
-        Check string inputted by user to meet the conditions:
-        - lowercase
-        - no special characters except underscore and or hyphen
-        - contains no spaces
-        """
-        try:
-            if not bool(re.match(self.pattern, username)):
-                raise ValueError(
-                    f"Name entered contains capital letters or special characters"
-                )
-        except ValueError as e:
-            clear(15, 1)
-            print(f"Invalid username: {e}, please try again.\n")
-            return False
-
-        return True
+    # def save_username(self):
+    #     cell_list = self.saved_games.findall('siri')
+    #     for cell in cell_list:
+    #
+    #     print(cell_list)
 
     def get_last_entry(self):
         """
