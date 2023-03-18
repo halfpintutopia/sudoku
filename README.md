@@ -6,11 +6,14 @@
 [Here is the live version of my project](https://sudoku-creator-solver.herokuapp.com/)
 
 The application is based on
-a [Guardian newspaper Sudoku puzzle](https://www.theguardian.com/lifeandstyle/series/sudoku). The difficulty range was
+a [Guardian newspaper Sudoku puzzle](https://www.theguardian.com/lifeandstyle/series/sudoku).
+The difficulty range was
 inspired by the online version.
 
-My partner's mother, Andrea Tschudi, really enjoys puzzles such as [Doplo](https://sumaddle.com/fundamentals.html) (also
-known as Smashed Sums) and Sudoku. As I am more familiar to Sudoku, I thought I would create an application with Andrea
+My partner's mother, Andrea Tschudi, really enjoys puzzles such
+as [Doplo](https://sumaddle.com/fundamentals.html) (also
+known as Smashed Sums) and Sudoku. As I am more familiar to Sudoku, I thought I
+would create an application with Andrea
 Tschudi in mind.
 
 ## Table of contents
@@ -55,6 +58,7 @@ Tschudi in mind.
 # How to Use
 
 The 4 options are:
+
 1. [Play](#play)
 2. [Enter your own puzzle](#enter-your-own-puzzle)
 3. [Solve a puzzle](#solve-a-puzzle)
@@ -66,39 +70,50 @@ The 4 options are:
 
 * User is asked for their username
 * They are then asked for the difficulty level they would like to play<br>
-    :: Choosing from the following options<br>
-  * 1 - Easy
-  * 2 - Medium
-  * 3 - Hard
-* User is then prompted to enter the column letter (A-J, or a-j) and row number (1-9)
-* User is then prompted to enter a number 1-9 to be placed in the row and cell they provided in the last prompt
-* If the cell they selected already has a number that is part of the puzzle then they will receive feedback informing them that it is not possible to add a number in this cell
-* If the cell they selected does not have a number that is not part of the puzzle, then the number will be printed into the grid
-* Once there are no more numbers to enter, they user will be prompted to check the solution or exit the game
+  :: Choosing from the following options<br>
+    * 1 - Easy
+    * 2 - Medium
+    * 3 - Hard
+* User is then prompted to enter the column letter (A-J, or a-j) and row
+  number (1-9)
+* User is then prompted to enter a number 1-9 to be placed in the row and cell
+  they provided in the last prompt
+* If the cell they selected already has a number that is part of the puzzle
+  then they will receive feedback informing them that it is not possible to add
+  a number in this cell
+* If the cell they selected does not have a number that is not part of the
+  puzzle, then the number will be printed into the grid
+* Once there are no more numbers to enter, they user will be prompted to check
+  the solution or exit the game
 
 ### Enter your own puzzle
 
 *This option allows the user to enter their own puzzle into the grid.*<br>
-*For example if they find a newspaper sudoku puzzle, but instead of using pen and paper they would like to view the puzzle in the application.*
+*For example if they find a newspaper sudoku puzzle, but instead of using pen
+and paper they would like to view the puzzle in the application.*
 
 * User is prompted to add 9 rows
 * A new grid with the puzzle will be printed on the screen
-* The game will proceed as from the regular game play, from choosing the row and column
+* The game will proceed as from the regular game play, from choosing the row
+  and column
 
 ### Solve a puzzle
 
-*This option provides the user enter a puzzle that they are struggling with.*<br>
+*This option provides the user enter a puzzle that they are struggling
+with.*<br>
 *When the user would like to get the solution to a puzzle they have found.*
 
 * User is prompted to add 9 rows
-* A solution is then printed on the screen 
+* A solution is then printed on the screen
 
 ### Instructions
 
-*This option provides the user with the instructions if they would like to play the game.*
+*This option provides the user with the instructions if they would like to play
+the game.*
 
 * A Sudoku puzzle is created with a 9 by 9 square (9 rows and 9 columns).
-* The 9 by 9 square is also divided into 3 by 3 areas (a total of 9 x 3 by 3 areas).
+* The 9 by 9 square is also divided into 3 by 3 areas (a total of 9 x 3 by 3
+  areas).
 * Each row, column and 3 by 3 area must contain numbers 1 - 9 (inclusive).
 * Numbers cannot be repeated in the row, column nor 3 by 3 area
 
@@ -239,10 +254,12 @@ References and guides used:
 * [Alphabet range in Python](https://stackoverflow.com/questions/16060899/alphabet-range-in-python)
 * [How to print Sudoku board using Python class?](https://stackoverflow.com/questions/72159405/how-to-print-sudoku-board-using-python-class)
 * [Convert Letter to Numbers and vice versa in Python](https://bobbyhadz.com/blog/python-convert-letters-to-numbers)
+* [Extend Class Method in Python](https://www.geeksforgeeks.org/extend-class-method-in-python/)
 
 ## Content
 
-All text content and prompts created was kept short and direct. Ensuring the characters would not wrap.
+All text content and prompts created was kept short and direct. Ensuring the
+characters would not wrap.
 Puzzle difficulty was inspired by
 the [Sudoku puzzles printed in the Guardian newspaper](https://www.theguardian.com/lifeandstyle/series/sudoku)
 
@@ -250,11 +267,16 @@ the [Sudoku puzzles printed in the Guardian newspaper](https://www.theguardian.c
 
 ## Acknowledgments
 
-Huge thanks goes to everyone in the [women-in-tech](https://code-institute-room.slack.com/archives/C01QAAQGPNJ) Slack
+Huge thanks goes to everyone in
+the [women-in-tech](https://code-institute-room.slack.com/archives/C01QAAQGPNJ)
+Slack
 channel. Thanks to their banter and support.
 
-Thanks also goes to Andrea Tschudi for giving me the inspiration to make this game. Also, to Stefan Tschudi for his
+Thanks also goes to Andrea Tschudi for giving me the inspiration to make this
+game. Also, to Stefan Tschudi for his
 support and testing.
 
-Many thanks goes to the [oct-2022-disdcc](https://code-institute-room.slack.com/archives/C044ZCYQ6CQ), especially Mark
+Many thanks goes to
+the [oct-2022-disdcc](https://code-institute-room.slack.com/archives/C044ZCYQ6CQ),
+especially Mark
 Cooper, Ger Tobin and Rebecca Tracey-Timoney.
