@@ -88,14 +88,15 @@ class Game(Sudoku):
         Prompt for player to add their guess
         """
         clear_right_side()
-        on(10, 55, 'Please enter one row number')
+        on(10, 55, 'Enter row number')
         on(11, 55, 'and one column letter.')
         on(12, 55, 'e.g. 4E or e4')
         on(14, 55, MainMenu.EXIT.value)
 
         while True:
             clear(17, 55)
-            option = write_input(16, 55, 'Enter number and letter:')
+            option = write_input(16, 55, 'Enter number and letter:') # near
+            # perfect character length
             if option == 'x' or option == 'X':
                 self.add_initial_options()
             elif validate_coordinates(option):

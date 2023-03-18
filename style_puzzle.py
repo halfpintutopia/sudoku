@@ -16,12 +16,17 @@ class StylePuzzle:
         self.num_style_bold = 'bold'
         self.double_space = '  '
         self.single_space = ' '
+        self.counter = 8
 
     def add_column_headings(self):
         """
         Add letters A through J for each column heading
         """
-        self.grid_string = "    "
+        # Add 2
+        # start column 6 row 10
+        self.grid_string = f"\x1b[{self.counter};7H"
+        self.counter += 1
+        # self.grid_string = "    "
         index = 1
         for letter in range(ord('A'), ord('J')):
             self.grid_string += "  " + chr(letter) + " "
@@ -29,7 +34,8 @@ class StylePuzzle:
                 self.grid_string += "   "
             index += 1
 
-        self.grid_string += "\n   " + "-" * 43 + "\n"
+        self.grid_string += f"\x1b[{self.counter};8H" + "-" * 43
+        self.counter += 1
         return self.grid_string
 
     def add_subgrid_row_lines(self, row: int):
@@ -37,7 +43,8 @@ class StylePuzzle:
         Add style for every three rows
         """
         if (row + 1) % 3 == 0 and (row + 1) != 9:
-            self.grid_string += "   " + "-" * 43 + "\n"
+            self.grid_string += f"\x1b[{self.counter};8H" + "-" * 43
+            self.counter += 1
 
         return self.grid_string
 
@@ -54,7 +61,9 @@ class StylePuzzle:
         """
         Add style for row headings
         """
-        self.grid_string += str(row + 1) + " | "
+        # start row 12
+        self.grid_string += f"\x1b[{self.counter};5H" + str(row + 1) + " | "
+        self.counter += 1
         return self.grid_string
 
     def color_original_numbers(self, row: int, col: int):
@@ -107,7 +116,7 @@ class StylePuzzle:
                 else:
                     self.set_zero_num_to_white(row, col)
 
-            self.grid_string += "\n"
+            # self.grid_string += "\n"
 
             self.add_subgrid_row_lines(row)
-        on(10, 1, self.grid_string)
+        print(self.grid_string)
