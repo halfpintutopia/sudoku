@@ -2,13 +2,14 @@ from pyfiglet import Figlet
 from termcolor import colored
 from sudoku import Sudoku
 from screen import on, clear, write, clear_screen, write_input, \
-    clear_screen_from_pos, clear_right_side
+    clear_screen_from_pos, clear_right_side, set_title
 from helper_enums import Instructions, MainMenu, InputPrompt, \
     DifficultyPrompt, Guess
 from user import User
 from validation import validate_number_guess, validate_coordinates, \
     validate_difficulty_input, validate_grid_cell
 from style_puzzle import StylePuzzle
+import copy
 
 
 class Game(Sudoku):
@@ -30,20 +31,34 @@ class Game(Sudoku):
         """
         self.add_initial_options()
 
-    def set_title(self):
-        """
-        Create title for the start screen
-        """
-        custom_fig = Figlet(font='block')
-        print(f"\x1b[1;50H")
-        print(colored(custom_fig.renderText('SUDOKU'), 'yellow'))
-
     def add_initial_options(self):
         """
         Show options for the user to enter their choice
         """
         clear_screen()
-        self.set_title()
+        set_title()
+        on(10, 1, MainMenu.PLAY.value)
+        on(11, 1, MainMenu.ENTER_OWN.value)
+        on(12, 1, MainMenu.SOLVE.value)
+        on(13, 1, MainMenu.INSTRUCTIONS.value)
+
+        while True:
+            try:
+                clear(16, 1)
+                option = int(write_input(15, 1, InputPrompt.NUMBER.value))
+            except ValueError as e:
+                print(InputPrompt.INVALID_MAIN_MENU.value)
+                continue
+            else:
+                self.selected_user_choice(option)
+                break
+
+    def add_side_menu_initial_options(self):
+        """
+        Show options for the user to enter their choice
+        """
+        clear_screen()
+        set_title()
         on(10, 1, MainMenu.PLAY.value)
         on(11, 1, MainMenu.ENTER_OWN.value)
         on(12, 1, MainMenu.SOLVE.value)
@@ -71,10 +86,19 @@ class Game(Sudoku):
 
                 self.run_play()
             case 2:
-                print('You selected 2')
+                for row in range(10, 17):
+                    clear(row, 55)
+
+                # self.solve_user_puzzle()
             case 3:
-                print('You selected 3')
+                for row in range(10, 17):
+                    clear(row, 55)
+
+                self.solve_user_puzzle()
             case 4:
+                for row in range(10, 17):
+                    clear(row, 55)
+
                 self.show_instructions()
 
     def run_play(self):
@@ -189,7 +213,6 @@ class Game(Sudoku):
         Show the instructions for the game, when option chosen
         """
         clear_screen_from_pos(10, 1)
-        self.set_title()
         on(10, 1, Instructions.FIRST_LINE.value)
         on(11, 1, Instructions.SECOND_LINE.value)
         on(12, 1, Instructions.THIRD_LINE.value)
@@ -197,3 +220,47 @@ class Game(Sudoku):
 
         write_input(15, 1, InputPrompt.PRESS_ENTER.value)
         self.add_initial_options()
+
+    def solve_user_puzzle(self):
+        """
+        Prompt the user to add 9 rows, to solve a puzzle
+        """
+        # on(10, 1, 'Please enter each row when prompted.')
+        clear_screen_from_pos(10, 1)
+        on(10, 1, 'Every row must contain 9 numbers, each number must be  '
+                  'separated by a comma.')
+        on(11, 1, 'Each number must be 1 to 9. Use 0 for a blank.')
+        on(12, 1, 'e.g. 4,7,0,0,2,6,9,0,0')
+        self.original_puzzle = []
+        for row in range(9):
+            clear_screen_from_pos(14, 1)
+            while True:
+                clear(15, 1, 80)
+                puzzle_row = write_input(14, 1, 'Enter row ' + str(row + 1))
+                list_of_nums = puzzle_row.replace(" ", "").rstrip(",").split(
+                    ",")
+                if self.validate_list_contains_integers(list_of_nums):
+                    if self.validate_row(list_of_nums):
+                        current_row = self.create_nums_list(puzzle_row)
+                        if self.validate_row_for_duplicates(current_row):
+                            self.original_puzzle.append(current_row)
+                            break
+        self.completed_puzzle = copy.deepcopy(self.original_puzzle)
+        on(17, 1, 'Just one moment, generating solution')
+        self.solve_puzzle()
+
+    def solve_puzzle(self):
+        clear_screen_from_pos(10, 1)
+        self.completed_puzzle = copy.deepcopy(self.original_puzzle)
+        # self.create_user_puzzle()
+        self.create_solutions()
+        style_puzzle = StylePuzzle(
+            self.original_puzzle,
+            self.completed_puzzle
+        )
+
+        set_title()
+        style_puzzle.add_puzzle_style()
+        on(10, 55, 'X to exit to main menu')
+        write_input(10, 55, InputPrompt.PRESS_ENTER.value)
+        self.add_side_menu_initial_options()

@@ -2,8 +2,9 @@ import copy
 from pprint import pprint
 import random
 from termcolor import colored
-from helper_enums import Difficulty, TermcolorSettings
-from screen import on, write_input, clear_screen_from_pos, clear, write
+from helper_enums import Difficulty, TermcolorSettings, MainMenu
+from screen import on, write_input, clear_screen_from_pos, clear, write, \
+    set_title, clear_screen
 from style_puzzle import StylePuzzle
 
 
@@ -201,32 +202,6 @@ class Sudoku:
 
         # return True
 
-    def solve_user_puzzle(self):
-        """
-        Prompt the user to add 9 rows, to solve a puzzle
-        """
-        # on(10, 1, 'Please enter each row when prompted.')
-        clear_screen_from_pos(10, 1)
-        on(10, 1, 'Every row must contain 9 numbers, each number must be  '
-                  'separated by a comma.')
-        on(11, 1, 'Each number must be 1 to 9. Use 0 for a blank.')
-        on(12, 1, 'e.g. 4,7,0,0,2,6,9,0,0')
-        self.original_puzzle = []
-        for row in range(9):
-            clear_screen_from_pos(14, 1)
-            while True:
-                clear(15, 1, 80)
-                puzzle_row = write_input(14, 1, 'Enter row ' + str(row + 1))
-                list_of_nums = puzzle_row.replace(" ", "").rstrip(",").split(
-                    ",")
-                if self.validate_list_contains_integers(list_of_nums):
-                    if self.validate_row(list_of_nums):
-                        current_row = self.create_nums_list(puzzle_row)
-                        if self.validate_row_for_duplicates(current_row):
-                            self.original_puzzle.append(current_row)
-                            break
-        self.solve_puzzle()
-
     def validate_row_for_duplicates(self, row):
         """
         Validate the row and check whether there are duplicate numbers in
@@ -320,14 +295,6 @@ class Sudoku:
 
         return True
 
-    def solve_puzzle(self):
-        self.completed_puzzle = copy.deepcopy(self.original_puzzle)
-        self.create_solutions()
-        style_puzzle = StylePuzzle(
-            self.original_puzzle,
-            self.completed_puzzle
-        )
-        style_puzzle.add_puzzle_style()
         # print(f"\x1b[35:0H{self.add_grid_style()}")
 
     def create_user_puzzle(self, puzzle):
