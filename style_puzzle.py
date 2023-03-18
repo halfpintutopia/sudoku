@@ -1,5 +1,4 @@
 from termcolor import colored
-from screen import on
 
 
 class StylePuzzle:
@@ -16,17 +15,14 @@ class StylePuzzle:
         self.num_style_bold = 'bold'
         self.double_space = '  '
         self.single_space = ' '
-        self.counter = 8
+        self.counter = 9
 
     def add_column_headings(self):
         """
         Add letters A through J for each column heading
         """
-        # Add 2
-        # start column 6 row 10
-        self.grid_string = f"\x1b[{self.counter};7H"
+        self.grid_string = f"\x1b[{self.counter};9H"
         self.counter += 1
-        # self.grid_string = "    "
         index = 1
         for letter in range(ord('A'), ord('J')):
             self.grid_string += "  " + chr(letter) + " "
@@ -61,7 +57,6 @@ class StylePuzzle:
         """
         Add style for row headings
         """
-        # start row 12
         self.grid_string += f"\x1b[{self.counter};5H" + str(row + 1) + " | "
         self.counter += 1
         return self.grid_string
@@ -115,8 +110,6 @@ class StylePuzzle:
                     self.color_guesses(row, col)
                 else:
                     self.set_zero_num_to_white(row, col)
-
-            # self.grid_string += "\n"
 
             self.add_subgrid_row_lines(row)
         print(self.grid_string)
