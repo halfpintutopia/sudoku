@@ -3,7 +3,7 @@ from pprint import pprint
 import random
 from termcolor import colored
 from helper_enums import Difficulty, TermcolorSettings
-from screen import on
+from screen import on, write_input, clear_screen_from_pos, clear, write
 from style_puzzle import StylePuzzle
 
 
@@ -21,8 +21,8 @@ class Sudoku:
         self.create_blank_sudoku()
 
     def create_blank_sudoku(self):
-        self.completed_puzzle = [[0 for x in range(9)] for y in range(9)]
-        return self.completed_puzzle
+        self.grid = [[0 for x in range(9)] for y in range(9)]
+        return self.grid
 
     def creat_puzzle_with_difficulty(self, difficulty):
         self.create_puzzle()
@@ -39,6 +39,7 @@ class Sudoku:
         Provides a unique number for each line and row and makes recursion a bit easier
         Once the numbers are filled in for the 3 sections the rest of the numbers can be added
         """
+        self.completed_puzzle = copy.deepcopy(self.grid)
         for range_values in range_list:
             nums = list(range(1, 10))
             if type(range_values) is tuple:
@@ -204,39 +205,95 @@ class Sudoku:
         """
         Prompt the user to add 9 rows, to solve a puzzle
         """
-        print("Sudoku puzzles are a 9 by 9 grid.")
-        print("Each puzzle has 9 rows. There are 9 numbers in each row.")
-        print("Please enter each row when prompted.")
-        print("Enter 9 numbers separated by a comma.")
-        print("Each number must be between 0-9. Please use 0 for a blank.")
-        print("e.g. 4,7,0,0,2,6,9,0,0")
-        puzzle = []
-        for row in range(len(self.grid)):
+        # on(10, 1, 'Please enter each row when prompted.')
+        clear_screen_from_pos(10, 1)
+        on(10, 1, 'Every row must contain 9 numbers, each number must be  '
+                  'separated by a comma.')
+        on(11, 1, 'Each number must be 1 to 9. Use 0 for a blank.')
+        on(12, 1, 'e.g. 4,7,0,0,2,6,9,0,0')
+        self.original_puzzle = []
+        for row in range(9):
+            clear_screen_from_pos(14, 1)
             while True:
-                puzzle_row = input(
-                    f"Enter row {row + 1} of your puzzle.\n")
-                current_row = []
-                if self.create_nums_list(puzzle_row):
-                    current_row = self.create_nums_list(puzzle_row)
-                if self.check_amount_of_nums(current_row):
-                    print("you have entered the correct number")
+                clear(15, 1, 80)
+                puzzle_row = write_input(14, 1, 'Enter row ' + str(row + 1))
+                list_of_nums = puzzle_row.replace(" ", "").rstrip(",").split(
+                    ",")
+                if self.validate_list_contains_integers(list_of_nums):
+                    if self.validate_row(list_of_nums):
+                        current_row = self.create_nums_list(puzzle_row)
+                        if self.validate_row_for_duplicates(current_row):
+                            self.original_puzzle.append(current_row)
+                            break
+        self.solve_puzzle()
+
+    def validate_row_for_duplicates(self, row):
+        """
+        Validate the row and check whether there are duplicate numbers in
+        the row
+        """
+        try:
+            duplicates = {str(x) for x in row if x != 0 and row.count(x)
+                          > 1}
+            if len(duplicates) > 0:
+                raise ValueError(
+                    f"You have entered the {', '.join(duplicates)} multiple "
+                    f"times in the same row"
+                )
+        except ValueError as e:
+            clear(16, 1, 80)
+            on(16, 1, e)
+            return False
+        return True
+
+    def validate_row(self, row):
+        """
+        Validates the string of numbers inputted
+        Removes all spaces from the string if the user has entered them
+        Splits the string up and creates a list
+        """
+        try:
+            if len(row) < 9:
+                raise ValueError(
+                    f"You have only entered {len(row)}"
+                )
+            elif len(row) > 9:
+                raise ValueError(
+                    f"You have entered {len(row)}"
+                )
+
+        except ValueError as e:
+            clear(16, 1, 60)
+            clear(17, 1, 60)
+            on(16, 1, e)
+            on(17, 1, 'Please enter exactly 9 numbers')
+            return False
+
+        return True
+
+    def validate_list_contains_integers(self, row):
+        """
+        Validate list from user's input
+        """
+        try:
+            for num in row:
+                int(num)
+        except ValueError:
+            clear(16, 1, 60)
+            on(16, 1, 'You have entered letters. Please enter only numbers.')
+            return False
+
+        return True
 
     def create_nums_list(self, numbers):
         """
         Create list from user's input
         """
         list_of_nums = numbers.replace(" ", "").rstrip(",").split(",")
-        if self.check_inputs_are_numbers(list_of_nums):
-            return [int(num) for num in list_of_nums]
-
-        return False
+        return [int(num) for num in list_of_nums]
 
     def check_amount_of_nums(self, numbers):
-        """
-        Validates the string of numbers inputted
-        Removes all spaces from the string if the user has entered them
-        Splits the string up and creates a list
-        """
+
         try:
             if not len(numbers) == 9:
                 raise ValueError(
@@ -264,20 +321,13 @@ class Sudoku:
         return True
 
     def solve_puzzle(self):
-        puzzle = [
-            [4, 7, 0, 0, 2, 6, 9, 0, 0],
-            [0, 0, 5, 0, 0, 0, 0, 0, 0],
-            [1, 0, 6, 0, 0, 0, 0, 0, 8],
-            [0, 3, 0, 0, 0, 9, 0, 0, 7],
-            [0, 8, 0, 5, 0, 0, 0, 0, 4],
-            [0, 0, 2, 0, 1, 0, 0, 0, 0],
-            [2, 0, 0, 6, 0, 0, 7, 4, 0],
-            [8, 4, 0, 0, 5, 2, 0, 0, 1],
-            [0, 5, 9, 0, 0, 0, 8, 0, 2]
-        ]
-        self.create_user_puzzle(puzzle)
-        self.find_solution()
-        self.add_grid_style()
+        self.completed_puzzle = copy.deepcopy(self.original_puzzle)
+        self.create_solutions()
+        style_puzzle = StylePuzzle(
+            self.original_puzzle,
+            self.completed_puzzle
+        )
+        style_puzzle.add_puzzle_style()
         # print(f"\x1b[35:0H{self.add_grid_style()}")
 
     def create_user_puzzle(self, puzzle):
