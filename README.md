@@ -29,7 +29,7 @@ Tschudi in mind.
     * [Data Model](#data-model)
 
 * [Features](#features)
-    * [General Features on Each Page](#general-features-on-each-page)
+    * [General Features](#general-features)
     * [Future Implementations](#future-implementations)
 
 * [Technologies Used](#technologies-used)
@@ -125,21 +125,26 @@ the game.*
 
 * ## User stories
     * ### Client Goals
+        * Be able to generate a new puzzle
+            * Add username
+            * Be able to fill in the Sudoku puzzle
+            * Be able to choose the difficulty of the puzzle
+            * Save progress see - [Future Implementations](#future-implementations)
+            * Time progress see - [Future Implementations]
+              (#future-implementations)
         * Be able to solve a Sudoku puzzle
-        * Be able to fill in the Sudoku puzzle
-        * Be able to choose the difficulty of the puzzle
+            * Add numbers in a Sudoku puzzle and generate a solution
     * ## First Time Visitor Goals
         * Be able to solve a Sudoku puzzle
         * Be able to fill in the Sudoku puzzle
         * Be able to choose the difficulty of the puzzle
     * ## Return Visitor Goals
-        * Be able to solve a Sudoku puzzle
-        * Be able to fill in the Sudoku puzzle
-        * Be able to choose the difficulty of the puzzle
+        * Try another puzzle with a different difficulty level
+        * Load previous game and continue
+          playing see - [Future Implementations](#future-implementations)
     * ## Frequent Visitor Goals
-        * Be able to solve a Sudoku puzzle
-        * Be able to fill in the Sudoku puzzle
-        * Be able to choose the difficulty of the puzzle
+        * See your previous plays at different levels and see if your times
+          have improved see - [Future Implementations](#future-implementations)
 
 # Design
 
@@ -181,9 +186,15 @@ the game.*
 
 # Features
 
-## General Features on Each Page
+## General Features
 
 ## Future Implementations
+
+* Save progress
+* Time progress
+* Load previous game and continue playing 
+* See your previous plays at different levels and see if your times have 
+  improved 
 
 # Technologies Used
 
@@ -265,18 +276,21 @@ the [Sudoku puzzles printed in the Guardian newspaper](https://www.theguardian.c
 
 ## Media
 
+No media, such as images or videos other than screenshots and screencast
+attached to the README were used for the project.
+
 ## Acknowledgments
 
-Huge thanks goes to everyone in
-the [women-in-tech](https://code-institute-room.slack.com/archives/C01QAAQGPNJ)
-Slack
-channel. Thanks to their banter and support.
+Huge thanks goes to everyone in the Code Institute Community on Slack, 
+especially the 
+[women-in-tech]
+(https://code-institute-room.slack.com/archives/C01QAAQGPNJ)
+Slack channel. Thanks to their banter and support. Such a great group! In 
+addition, my thanks to the [oct-2022-disdcc](https://code-institute-room.slack.com/archives/C044ZCYQ6CQ),
+especially Mark Cooper, Ger Tobin and Rebecca Tracey-Timoney.
 
 Thanks also goes to Andrea Tschudi for giving me the inspiration to make this
-game. Also, to Stefan Tschudi for his
-support and testing.
+game. Also, to Stefan Tschudi for his support and testing.
 
-Many thanks goes to
-the [oct-2022-disdcc](https://code-institute-room.slack.com/archives/C044ZCYQ6CQ),
-especially Mark
-Cooper, Ger Tobin and Rebecca Tracey-Timoney.
+And last but not least, special thanks to the Codebar community and to 
+Nicolas Beney.
