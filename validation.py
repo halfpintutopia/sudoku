@@ -8,8 +8,11 @@ pattern = "^[a-z0-9_-]*$"
 def validate_number_guess(guess):
     try:
         number = int(guess)
+        if not 1 <= number <= 9:
+            raise ValueError()
     except ValueError:
-        print("Please enter a number")
+        on(16, 55, "Number invalid.")
+        on(17, 55, "Number must be 1 - 9")
         return False
     return True
 
@@ -28,7 +31,8 @@ def validate_coordinates(row_cell):
         else:
             raise ValueError()
     except ValueError:
-        on(18, 55, "Invalid input")
+        on(18, 55, "Enter one letter and one number")
+        on(19, 55, "Must not contain spaces")
         return False
     return True
 
@@ -80,4 +84,17 @@ def validate_menu_option(menu_choice):
         print(InputPrompt.INVALID_MAIN_MENU.value)
         return False
 
+    return True
+
+
+def validate_grid_cell(puzzle, row, col):
+    """
+    Compare the set grid and current puzzle.
+    If number is part of the grid, must not be overwritten
+    """
+    try:
+        if puzzle[row][col] != 0:
+            raise ValueError()
+    except ValueError:
+        return False
     return True
