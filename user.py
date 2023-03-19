@@ -1,8 +1,9 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from string_enums import GoogleSheets, InputPrompt
-from screen import on, clear_screen_from_pos, write_input
+from screen import on, clear_screen_from_pos, write_input, clear
 from validation import validate_username
+from global_constants import *
 
 
 class User:
@@ -23,7 +24,6 @@ class User:
         self.users_data = self.users.get_all_values()
         self.saved_games_data = self.saved_games.get_all_values()
         self.user_id = None
-        self.left_margin = 5
 
     def get_username(self):
         """
@@ -37,12 +37,13 @@ class User:
         Save username and game ID to google sheets
         """
         clear_screen_from_pos(10, 1)
-        on(10, self.left_margin, 'Add your username.')
-        on(11, self.left_margin, 'Username should be lowercase.')
-        on(12, self.left_margin, 'Username must only contain letters a-z')
-        on(13, self.left_margin, 'and can contain a hyphen or underscore')
+        on(10, LEFT_MARGIN, 'Add your username.')
+        on(11, LEFT_MARGIN, 'Username should be lowercase.')
+        on(12, LEFT_MARGIN, 'Username must only contain letters a-z')
+        on(13, LEFT_MARGIN, 'and can contain a hyphen or underscore')
         while True:
-            username = write_input(15, self.left_margin,
+            clear(16, LEFT_MARGIN)
+            username = write_input(15, LEFT_MARGIN,
                                    InputPrompt.USERNAME.value)
 
             if validate_username(username):

@@ -9,7 +9,7 @@ class Difficulty(Enum):
 
 class MainMenu(Enum):
     PLAY = '1. Play'
-    ENTER_OWN = '2. Enter your own puzzle'
+    ENTER_OWN = '2. Solve your own puzzle'
     INSTRUCTIONS = '3. Instructions'
     LOADING = 'Just one moment... '
     EXIT = 'X to exit'
