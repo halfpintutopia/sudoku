@@ -189,23 +189,33 @@ see - [Future Implementations](#future-implementations)
 Classes:
 
 - Sudoku
-- Game inherits from Sudoku
+    - the main class which creates the grids, a list of list for game
+- Game inherits from Sudoku*
   see - [Future Implementations](#future-implementations)
+    - the class adds the interaction prompts
 - Style Puzzle
-- User
+    - the class which styles the grid after each guess or when the solver is
+      used, to present a user-friendly Sudoku grid
+- User* see - [Future Implementations](#future-implementations)
+    - A class which will be developed further in future implementations
+    - Currently, just add the username
 
 Modules:
 
 - validation
+    - file dedicated for validation of all prompts
 - screen
+    - helper functions for positioning the cursor using ANSI Escape Characters
 
 Enums:
 
 - string enums
+  - file to prevent typos and reusable strings
 
 Constants
 
 - global constants
+  - file for meaningful constants that are used throughout the project
 
 # Features
 
@@ -419,7 +429,7 @@ terminal in the project.
 | r shows instead of 1 (looks askew like above at the BUT). the r seems to be from the word number at the far right side | Play                  |         |  Yes  | Fixed alignment by removing newlines and adding ANSI characters, as some lines were being overwritten |
 | after entering number the title SUDOKU is overwritten by ABC DEF GHI                                                   | Play                  |         |  Yes  | Fixed alignment by removing newlines and adding ANSI characters                                       |
 | top right shows e 9 e 9 e 9 in a vertical column after several inputs                                                  | Play                  |         |  Yes  | Fixed alignment by removing newlines and adding ANSI characters                                       |
-| Able to add blank username                                                <br/>                                        | Play                  |         |  Yes  | Fixed validation to prevent user from adding a blank username                                         |
+| Able to add blank username                                                                                             | Play                  |         |  Yes  | Fixed validation to prevent user from adding a blank username                                         |
 
 ## Remaining Bugs
 
