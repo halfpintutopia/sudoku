@@ -7,14 +7,6 @@ class Difficulty(Enum):
     HARD = 56
 
 
-class TermcolorSettings(Enum):
-    RED = 'red'
-    YELLOW = 'yellow'
-    BLUE = 'blue'
-    BOLD = 'bold'
-    DARK = 'dark'
-
-
 class MainMenu(Enum):
     PLAY = '1. Play'
     ENTER_OWN = '2. Enter your own puzzle'
@@ -49,15 +41,3 @@ class GoogleSheets(Enum):
     SHEET = 'sudoku_games'
     USER_WORKSHEET = 'users'
     GAMES_WORKSHEET = 'saved_games'
-
-
-class Username(Enum):
-    PROMPT_1 = 'Add your username. Username should be lowercase.'
-    PROMPT_2 = 'Username must only contain letters a-z and can contain a ' \
-               'hyphen (-) or underscore (_).'
-    PROMPT_3 = 'Username should not contain spaces.'
-
-
-class Guess(Enum):
-    PROMPT_1 = 'Please enter a row number and a column letter. e.g. 4E'
-    PROMPT_2 = 'Enter a number \n(1-9)'
