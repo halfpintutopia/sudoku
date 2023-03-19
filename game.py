@@ -15,6 +15,7 @@ from global_constants import *
 class Game(Sudoku):
     def __init__(self):
         super().__init__()
+        self.cell = None
         self.user = User()
         self.guess = None
         self.row = None
@@ -114,7 +115,7 @@ class Game(Sudoku):
             clear(16, 55)
             clear(17, 55)
             clear(18, 55)
-            option = write_input(14, 55, 'Add number:')
+            option = write_input(14, 55, f"Add number to {self.cell}:")
             if option == 'x' or option == 'X':
                 self.add_initial_options()
             elif validate_number_guess(option):
@@ -146,6 +147,7 @@ class Game(Sudoku):
         Minus one needs to be taken from the values of inputs
         due to index starting at 0
         """
+        self.cell = cell.upper()
         letter = ''
         if cell[0].isdigit() and cell[1].isalpha():
             if 0 <= (int(cell[0]) - 1) <= 8:
@@ -160,6 +162,7 @@ class Game(Sudoku):
             self.col = ord(letter) - 64 - 1
         else:
             self.col = ord(letter) - 96 - 1
+
 
     def choose_difficulty(self):
         """
