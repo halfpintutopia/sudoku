@@ -1,4 +1,5 @@
 from termcolor import colored
+from global_constants import *
 
 
 class StylePuzzle:
@@ -15,14 +16,14 @@ class StylePuzzle:
         self.num_style_bold = 'bold'
         self.double_space = '  '
         self.single_space = ' '
-        self.counter = 9
+        self.current_row = 9
 
     def add_column_headings(self):
         """
         Add letters A through J for each column heading
         """
-        self.grid_string = f"\x1b[{self.counter};9H"
-        self.counter += 1
+        self.grid_string = f"\x1b[{self.current_row};9H"
+        self.current_row += 1
         index = 1
         for letter in range(ord('A'), ord('J')):
             self.grid_string += "  " + chr(letter) + " "
@@ -30,8 +31,9 @@ class StylePuzzle:
                 self.grid_string += "   "
             index += 1
 
-        self.grid_string += f"\x1b[{self.counter};8H" + "-" * 43
-        self.counter += 1
+        self.grid_string += f"\x1b[{self.current_row};8H" + "-" * \
+                            GRID_LINE_LENGTH
+        self.current_row += 1
         return self.grid_string
 
     def add_subgrid_row_lines(self, row: int):
@@ -39,8 +41,9 @@ class StylePuzzle:
         Add style for every three rows
         """
         if (row + 1) % 3 == 0 and (row + 1) != 9:
-            self.grid_string += f"\x1b[{self.counter};8H" + "-" * 43
-            self.counter += 1
+            self.grid_string += f"\x1b[{self.current_row};8H" + "-" * \
+                                GRID_LINE_LENGTH
+            self.current_row += 1
 
         return self.grid_string
 
@@ -57,8 +60,9 @@ class StylePuzzle:
         """
         Add style for row headings
         """
-        self.grid_string += f"\x1b[{self.counter};5H" + str(row + 1) + " | "
-        self.counter += 1
+        self.grid_string += f"\x1b[{self.current_row};5H" + str(
+            row + 1) + " | "
+        self.current_row += 1
         return self.grid_string
 
     def color_original_numbers(self, row: int, col: int):
@@ -100,18 +104,18 @@ class StylePuzzle:
         """
         self.add_column_headings()
 
-        for row in range(9):
+        for row in range(NUM_OF_ROWS):
             self.add_row_heading_lines(row)
-            for col in range(9):
+            for col in range(NUM_OF_COLS):
                 self.add_subgrid_col_lines(col)
-                if self.original_puzzle[row][col] != 0:
+                if self.original_puzzle[row][col] != EMPTY_CELL:
                     self.color_original_numbers(row, col)
-                elif self.current_puzzle[row][col] != 0:
+                elif self.current_puzzle[row][col] != EMPTY_CELL:
                     self.color_guesses(row, col)
                 else:
                     self.set_zero_num_to_white(row, col)
 
             self.add_subgrid_row_lines(row)
 
-        self.counter = 9
+        self.current_row = 9
         print(self.grid_string)

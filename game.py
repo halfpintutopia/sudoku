@@ -176,7 +176,6 @@ class Game(Sudoku):
         else:
             self.col = ord(letter) - 96 - 1
 
-
     def choose_difficulty(self):
         """
         Input should allow the user to choose the difficulty of the game
