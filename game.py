@@ -257,5 +257,6 @@ class Game(Sudoku):
         set_title()
         style_puzzle.add_puzzle_style()
         on(10, 55, 'X to exit to main menu')
-        write_input(10, 55, InputPrompt.PRESS_ENTER.value)
+        write_input(10, 55, "Press Enter to return")
+        write_input(11, 55, "to main menu")
         self.add_initial_options()
