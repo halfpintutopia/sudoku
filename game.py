@@ -78,7 +78,7 @@ class Game(Sudoku):
 
         clear_screen()
         set_title()
-        on(10, left_margin, 'Hello ' + self.user.get_username())
+        on(10, LEFT_MARGIN, 'Hello ' + self.user.get_username())
         self.choose_difficulty()
         self.guess_cell()
 
@@ -130,6 +130,10 @@ class Game(Sudoku):
                 break
 
     def set_number_to_coordinates(self):
+        """
+        Add the number to the cell chosen by the user
+        Update the puzzle and then style the grid
+        """
         if validate_grid_cell(self.original_puzzle, self.row, self.col):
             self.current_puzzle[self.row][self.col] = self.guess
             style_puzzle = StylePuzzle(
@@ -145,6 +149,9 @@ class Game(Sudoku):
             self.guess_cell()
 
     def set_guess(self, option):
+        """
+        Set the guess to the instance
+        """
         self.guess = int(option)
 
     def set_coordinates(self, cell):
@@ -174,16 +181,16 @@ class Game(Sudoku):
         """
         Input should allow the user to choose the difficulty of the game
         """
-        on(12, left_margin, DifficultyPrompt.CHOOSE.value)
-        on(13, left_margin, DifficultyPrompt.EASY.value)
-        on(14, left_margin, DifficultyPrompt.MEDIUM.value)
-        on(15, left_margin, DifficultyPrompt.HARD.value)
+        on(12, LEFT_MARGIN, DifficultyPrompt.CHOOSE.value)
+        on(13, LEFT_MARGIN, DifficultyPrompt.EASY.value)
+        on(14, LEFT_MARGIN, DifficultyPrompt.MEDIUM.value)
+        on(15, LEFT_MARGIN, DifficultyPrompt.HARD.value)
 
         while True:
-            clear(17, left_margin)
-            clear(18, left_margin)
+            clear(17, LEFT_MARGIN)
+            clear(18, LEFT_MARGIN)
 
-            difficulty_level = write_input(17, left_margin,
+            difficulty_level = write_input(17, LEFT_MARGIN,
                                            InputPrompt.NUMBER.value)
 
             if validate_difficulty_input(difficulty_level):
@@ -194,35 +201,35 @@ class Game(Sudoku):
         """
         Show the instructions for the game, when option chosen
         """
-        clear_screen_from_pos(10, left_margin)
-        on(10, left_margin, 'A Sudoku puzzle is created with a 9 by 9 square')
-        on(11, left_margin, '(9 rows and 9 columns).')
-        on(12, left_margin, 'The 9 x 9 square is divided into 3 by 3 areas')
-        on(13, left_margin, 'a total of 9 x 3 by 3 areas.')
-        on(14, left_margin, 'Each row, column and 3 x 3 area')
-        on(15, left_margin, 'must contain numbers 1 - 9.')
-        on(16, left_margin, 'Numbers cannot be repeated in the row')
-        on(17, left_margin, 'column nor 3 by 3 area.')
+        clear_screen_from_pos(10, LEFT_MARGIN)
+        on(10, LEFT_MARGIN, 'A Sudoku puzzle is created with a 9 by 9 square')
+        on(11, LEFT_MARGIN, '(9 rows and 9 columns).')
+        on(12, LEFT_MARGIN, 'The 9 x 9 square is divided into 3 by 3 areas')
+        on(13, LEFT_MARGIN, 'a total of 9 x 3 by 3 areas.')
+        on(14, LEFT_MARGIN, 'Each row, column and 3 x 3 area')
+        on(15, LEFT_MARGIN, 'must contain numbers 1 - 9.')
+        on(16, LEFT_MARGIN, 'Numbers cannot be repeated in the row')
+        on(17, LEFT_MARGIN, 'column nor 3 by 3 area.')
 
-        write_input(19, left_margin, InputPrompt.PRESS_ENTER.value)
+        write_input(19, LEFT_MARGIN, InputPrompt.PRESS_ENTER.value)
         self.add_initial_options()
 
     def solve_user_puzzle(self):
         """
         Prompt the user to add 9 rows, to solve a puzzle
         """
-        clear_screen_from_pos(10, left_margin)
-        on(10, left_margin, 'Every row must contain 9 numbers,')
-        on(11, left_margin, 'each number must be  separated by a comma.')
-        on(12, left_margin, 'Each number must be 1 to 9.')
-        on(13, left_margin, 'Use 0 for a blank.')
-        on(14, left_margin, 'e.g. 4,7,0,0,2,6,9,0,0')
+        clear_screen_from_pos(10, LEFT_MARGIN)
+        on(10, LEFT_MARGIN, 'Every row must contain 9 numbers,')
+        on(11, LEFT_MARGIN, 'each number must be  separated by a comma.')
+        on(12, LEFT_MARGIN, 'Each number must be 1 to 9.')
+        on(13, LEFT_MARGIN, 'Use 0 for a blank.')
+        on(14, LEFT_MARGIN, 'e.g. 4,7,0,0,2,6,9,0,0')
         self.original_puzzle = []
         for row in range(9):
             clear_screen_from_pos(14, 1)
             while True:
-                clear(15, left_margin, 80)
-                puzzle_row = write_input(16, left_margin, 'Enter row ' +
+                clear(15, LEFT_MARGIN, 80)
+                puzzle_row = write_input(16, LEFT_MARGIN, 'Enter row ' +
                                          str(row + 1))
                 list_of_nums = puzzle_row.replace(" ", "").rstrip(",").split(
                     ",")
@@ -233,10 +240,13 @@ class Game(Sudoku):
                             self.original_puzzle.append(current_row)
                             break
         self.completed_puzzle = copy.deepcopy(self.original_puzzle)
-        on(20, left_margin, 'Just one moment, generating solution')
+        on(20, LEFT_MARGIN, 'Just one moment, generating solution')
         self.solve_puzzle()
 
     def solve_puzzle(self):
+        """
+        Provides the solution and then styles the grid
+        """
         if self.completed_puzzle is None:
             self.completed_puzzle = copy.deepcopy(self.original_puzzle)
             self.create_solutions()

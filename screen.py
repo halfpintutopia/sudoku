@@ -1,9 +1,6 @@
 from pyfiglet import Figlet
 from termcolor import colored
-
-game_title = 'SUDOKU'
-font_name = 'block'
-title_color = 'yellow'
+from global_constants import *
 
 
 def clear_screen():
@@ -54,20 +51,11 @@ def write_input(row, col, string):
     return input(f"\x1b[{row};{col}H{string}\x1b[{row + 1};{col}H\x1b[5m")
 
 
-def set_cursor(row, col):
-    print(f"\x1b[{row}:{col}H")
-
-
 def set_title():
     """
     Create title for the start screen
     """
     clear_screen()
-    custom_fig = Figlet(font=font_name, justify="center")
-    print("\x1b[1;1H" + colored(custom_fig.renderText(game_title),
-                                title_color))
-
-
-def clear_right_side():
-    for num in range(10, 25):
-        clear(num, 55)
+    custom_fig = Figlet(font=FONT_NAME, justify=CENTER)
+    print("\x1b[1;1H" + colored(custom_fig.renderText(GAME_TITLE),
+                                TITLE_COLOR))

@@ -3,7 +3,6 @@ import random
 from string_enums import Difficulty
 from screen import clear_screen, set_title
 from style_puzzle import StylePuzzle
-from global_constants import *
 
 
 class Sudoku:
@@ -190,19 +189,6 @@ class Sudoku:
         clear_screen()
         set_title()
         style_puzzle.add_puzzle_style()
-
-    def compare_current_puzzle_and_grid(self):
-        """
-        Compare the set grid and current puzzle.
-        If number is part of the grid, must not be overwritten
-        """
-        for row in range(9):
-            for col in range(9):
-                if self.grid[row][col] != 0 and self.grid[row][col] == \
-                        self.current_puzzle[row][col]:
-                    # TODO fix this line
-                    print(
-                        'The number cannot be overwritten as part of the puzzle.')
 
     def create_nums_list(self, numbers):
         """

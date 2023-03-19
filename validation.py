@@ -46,7 +46,7 @@ def validate_difficulty_input(difficulty):
         if not 1 <= int(difficulty) <= 3:
             raise ValueError
     except ValueError:
-        on(19, left_margin, InputPrompt.INVALID_DIFFICULTY.value)
+        on(19, LEFT_MARGIN, InputPrompt.INVALID_DIFFICULTY.value)
         return False
 
     return True
@@ -60,11 +60,11 @@ def validate_username(username):
     - contains no spaces
     """
     try:
-        if not bool(re.match(pattern, username)):
+        if not bool(re.match(PATTERN, username)):
             raise ValueError()
     except ValueError:
-        clear(15, left_margin)
-        on(15, left_margin,
+        clear(15, LEFT_MARGIN)
+        on(15, LEFT_MARGIN,
            'Name entered contains capital letters or special characters')
         return False
 
@@ -92,7 +92,7 @@ def validate_menu_option(option):
         if not 1 <= int(option) <= 3:
             raise ValueError()
     except ValueError:
-        on(16, left_margin, InputPrompt.INVALID_MAIN_MENU.value)
+        on(16, LEFT_MARGIN, InputPrompt.INVALID_MAIN_MENU.value)
         return False
     return True
 
@@ -112,7 +112,7 @@ def validate_row_for_duplicates(row):
             )
     except ValueError as e:
         clear(16, 1, 80)
-        on(16, left_margin, e)
+        on(16, LEFT_MARGIN, e)
         return False
     return True
 
@@ -136,8 +136,8 @@ def validate_row(row):
     except ValueError as e:
         clear(16, 1, 60)
         clear(17, 1, 60)
-        on(16, left_margin, e)
-        on(17, left_margin, 'Please enter exactly 9 numbers')
+        on(16, LEFT_MARGIN, e)
+        on(17, LEFT_MARGIN, 'Please enter exactly 9 numbers')
         return False
 
     return True
@@ -153,8 +153,8 @@ def validate_list_contains_integers(row):
     except ValueError:
         clear(16, 1, 60)
         clear(17, 1, 60)
-        on(16, left_margin, 'You have entered letters.')
-        on(17, left_margin, 'Please enter only numbers.')
+        on(16, LEFT_MARGIN, 'You have entered letters.')
+        on(17, LEFT_MARGIN, 'Please enter only numbers.')
         return False
 
     return True
