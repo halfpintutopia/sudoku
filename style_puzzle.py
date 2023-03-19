@@ -112,4 +112,6 @@ class StylePuzzle:
                     self.set_zero_num_to_white(row, col)
 
             self.add_subgrid_row_lines(row)
+
+        self.counter = 9
         print(self.grid_string)
