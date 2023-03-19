@@ -51,7 +51,7 @@ def write_input(row, col, string):
     """
     Show the input at the position of row and col
     """
-    return input(f"\x1b[{row};{col}H{string}\x1b[{row + 1};{col}H")
+    return input(f"\x1b[{row};{col}H{string}\x1b[{row + 1};{col}H\x1b[5m")
 
 
 def set_cursor(row, col):
