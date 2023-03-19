@@ -1,7 +1,7 @@
 import copy
 import random
 from helper_enums import Difficulty
-from screen import on, clear
+from screen import clear_screen, set_title
 from style_puzzle import StylePuzzle
 from global_constants import *
 
@@ -189,6 +189,8 @@ class Sudoku:
             self.original_puzzle,
             self.current_puzzle
         )
+        clear_screen()
+        set_title()
         style_puzzle.add_puzzle_style()
 
     def compare_current_puzzle_and_grid(self):

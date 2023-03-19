@@ -128,6 +128,8 @@ class Game(Sudoku):
                 self.original_puzzle,
                 self.current_puzzle
             )
+            clear_screen()
+            set_title()
             style_puzzle.add_puzzle_style()
             self.guess_cell()
         else:
@@ -175,7 +177,6 @@ class Game(Sudoku):
                                            InputPrompt.NUMBER.value)
 
             if validate_difficulty_input(difficulty_level):
-                clear_screen_from_pos(10, left_margin)
                 self.set_difficulty(int(difficulty_level))
                 break
 
@@ -226,13 +227,13 @@ class Game(Sudoku):
         self.solve_puzzle()
 
     def solve_puzzle(self):
-        clear_screen_from_pos(10, left_margin)
         self.completed_puzzle = copy.deepcopy(self.original_puzzle)
         self.create_solutions()
         style_puzzle = StylePuzzle(
             self.original_puzzle,
             self.completed_puzzle
         )
+        clear_screen()
         set_title()
         style_puzzle.add_puzzle_style()
         on(10, 55, 'X to exit to main menu')
