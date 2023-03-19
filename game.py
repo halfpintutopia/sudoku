@@ -1,6 +1,6 @@
 from sudoku import Sudoku
 from screen import on, clear, clear_screen, write_input, \
-    clear_screen_from_pos, clear_right_side, set_title
+    clear_screen_from_pos, set_title
 from helper_enums import MainMenu, InputPrompt, \
     DifficultyPrompt
 from user import User
@@ -85,7 +85,6 @@ class Game(Sudoku):
         """
         Prompt for player to add their guess
         """
-        clear_right_side()
         on(10, 55, 'Enter row number')
         on(11, 55, 'and one column letter.')
         on(12, 55, 'e.g. 4E or e4')
@@ -106,7 +105,6 @@ class Game(Sudoku):
         """
         Prompt for player to choose a number to place in cell
         """
-        clear_right_side()
         on(10, 55, 'Enter number 1 - 9')
 
         on(12, 55, MainMenu.EXIT.value)
