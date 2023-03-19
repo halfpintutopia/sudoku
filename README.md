@@ -43,10 +43,10 @@ Tschudi in mind.
         * [How to Clone](#how-to-clone)
 
 * [Testing](#testing)
-  * [User experience](#user-experience)
-  * [Bugs](#bugs)
-  * [Remaining Bugs](#remaining-bugs)
-  * [Validator Testing](#validator-testing)
+    * [User experience](#user-experience)
+    * [Bugs](#bugs)
+    * [Remaining Bugs](#remaining-bugs)
+    * [Validator Testing](#validator-testing)
 
 * [Credits](#credits)
     * [Code Used](#code-used)
@@ -132,8 +132,8 @@ the game.*
             * Be able to choose the difficulty of the puzzle
             * Save progress
               see - [Future Implementations](#future-implementations)
-            * Time progress see - 
-          [Future Implementations](#future-implementations)
+            * Time progress see -
+              [Future Implementations](#future-implementations)
         * Be able to solve a Sudoku puzzle
             * Add numbers in a Sudoku puzzle and generate a solution
     * ## First Time Visitor Goals
@@ -212,6 +212,8 @@ the game.*
 - GitHub
 - PyCharm
     - including debugging tools
+- fig
+    - This library was ussed to set th eititl
 
 # Remote & Local Development
 
@@ -302,39 +304,28 @@ terminal in the project.
 
 ## Bugs
 
-| Bug / Errors                                                                                                                                          | Where / Location      | Remarks   |  Fixed  | Solution   |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|-----------|:-------:|------------|
-| inputting a number higher than 3 does not show an error message                                                                                       | Starting page         | --------- | :-----: | ---------- |
-| user cannot go back after that                                                                                                                        | Starting page         | --------- | :-----: | ---------- |
-| input 2: nothing happens. the user cannot go back after that                                                                                          | Starting page         | --------- | :-----: | ---------- |
-| input 3 leads to 2 (enter your own puzzle) this was not clear to me                                                                                   | Starting page         | --------- | :-----: | ---------- |
-| once puzzle is entered, what you see is slightly off. instructions reach into the puzzle                                                              | Enter your own puzzle | --------- | :-----: | ---------- |
-| when i try starting to solve my own puzzle i enter e.g. 1a then enter and baam. i am back on the home screen                                          | Enter your own puzzle | --------- | :-----: | ---------- |
-| maybe use another command to go back (like return). enter is needed to solve puzzle                                                                   | Enter your own puzzle | --------- | :-----: | ---------- |
-| entering wrong name (capital letters etc.) results in error message showing in the command line                                                       | Play                  | --------- | :-----: | ---------- |
-| user can continue by writing over error message                                                                                                       | Play                  | --------- | :-----: | ---------- |
-| using ctrl+c in command line crashes program. error message: keyboard interrupt (tried to copy the error message. a full stop is missing after 3 :) ) | Play                  | --------- | :-----: | ---------- |
-| r shows instead of 1 (looks askew like above at the BUT). the r seems to be from the word number at the far right side                                | Play                  | --------- | :-----: | ---------- |
-| after entering number the title SUDOKU is overwritten by ABC DEF GHI                                                                                  | Play                  | --------- | :-----: | ---------- |
-| top right shows e 9 e 9 e 9 in a vertical column after several inputs                                                                                 | Play                  | --------- | :-----: | ---------- |
+| Bug / Errors                                                                                                           | Where / Location      | Remarks | Fixed | Solution                                                                                              |
+|------------------------------------------------------------------------------------------------------------------------|-----------------------|---------|:-----:|-------------------------------------------------------------------------------------------------------|
+| inputting a number higher than 3 does not show an error message                                                        | Starting page         |         |  Yes  | Add validation to handle this error.                                                                  |
+| input 2: nothing happens. the user cannot go back after that                                                           | Starting page         |         |  Yes  | Removed unset option                                                                                  |
+| input 3 leads to 2 (enter your own puzzle) this was not clear to me                                                    | Starting page         |         |  Yes  | This was resolved when the correct number were set to the correct option                              |
+| once puzzle is entered, what you see is slightly off. instructions reach into the puzzle                               | Enter your own puzzle |         |  Yes  | Fixed alignment by removing newlines and adding ANSI characters                                       |
+| when i try starting to solve my own puzzle i enter e.g. 1a then enter and baam. i am back on the home screen           | Enter your own puzzle |         |  Yes  | Fixed the logic of reprinting the grid instead than going back to the initial options                 |
+| maybe use another command to go back (like return). enter is needed to solve puzzle                                    | Enter your own puzzle |         |  Yes  | Back prompt added to page for enter your own - Also changed this page to Solve your own               |
+| entering wrong name (capital letters etc.) results in error message showing in the command line                        | Play                  |         |  Yes  | Clear this input line. Move the cursor and set the message onto the line below the input              |
+| user can continue by writing over error message                                                                        | Play                  |         |  Yes  | Clear this input line. Move the cursor and set the message onto the line below the input              |
+| r shows instead of 1 (looks askew like above at the BUT). the r seems to be from the word number at the far right side | Play                  |         |  Yes  | Fixed alignment by removing newlines and adding ANSI characters, as some lines were being overwritten |
+| after entering number the title SUDOKU is overwritten by ABC DEF GHI                                                   | Play                  |         |  Yes  | Fixed alignment by removing newlines and adding ANSI characters                                       |
+| top right shows e 9 e 9 e 9 in a vertical column after several inputs                                                  | Play                  |         |  Yes  | Fixed alignment by removing newlines and adding ANSI characters                                       |
+| Able to add blank username                                                <br/>                                        | Play                  |         |  Yes  | Fixed validation to prevent user from adding a blank username                                         |
 
 ## Remaining Bugs
 
-| Bug / Errors                                                                                                                                          | Where / Location      | Remarks   |  Fixed  | Solution   |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|-----------|:-------:|------------|
-| inputting a number higher than 3 does not show an error message                                                                                       | Starting page         | --------- | :-----: | ---------- |
-| user cannot go back after that                                                                                                                        | Starting page         | --------- | :-----: | ---------- |
-| input 2: nothing happens. the user cannot go back after that                                                                                          | Starting page         | --------- | :-----: | ---------- |
-| input 3 leads to 2 (enter your own puzzle) this was not clear to me                                                                                   | Starting page         | --------- | :-----: | ---------- |
-| once puzzle is entered, what you see is slightly off. instructions reach into the puzzle                                                              | Enter your own puzzle | --------- | :-----: | ---------- |
-| when i try starting to solve my own puzzle i enter e.g. 1a then enter and baam. i am back on the home screen                                          | Enter your own puzzle | --------- | :-----: | ---------- |
-| maybe use another command to go back (like return). enter is needed to solve puzzle                                                                   | Enter your own puzzle | --------- | :-----: | ---------- |
-| entering wrong name (capital letters etc.) results in error message showing in the command line                                                       | Play                  | --------- | :-----: | ---------- |
-| user can continue by writing over error message                                                                                                       | Play                  | --------- | :-----: | ---------- |
-| using ctrl+c in command line crashes program. error message: keyboard interrupt (tried to copy the error message. a full stop is missing after 3 :) ) | Play                  | --------- | :-----: | ---------- |
-| r shows instead of 1 (looks askew like above at the BUT). the r seems to be from the word number at the far right side                                | Play                  | --------- | :-----: | ---------- |
-| after entering number the title SUDOKU is overwritten by ABC DEF GHI                                                                                  | Play                  | --------- | :-----: | ---------- |
-| top right shows e 9 e 9 e 9 in a vertical column after several inputs                                                                                 | Play                  | --------- | :-----: | ---------- |
+| Bug / Errors                                                                                                                                          | Where / Location | Remarks                                                                               | Fixed | Solution                                                                                                                      |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|---------------------------------------------------------------------------------------|:-----:|-------------------------------------------------------------------------------------------------------------------------------|
+| user cannot go back after that                                                                                                                        | Starting page    | Unable to duplicate consistently, as it looks like the program stalls occasionally    |  No   |                                                                                                                               |
+| using ctrl+c in command line crashes program. error message: keyboard interrupt (tried to copy the error message. a full stop is missing after 3 :) ) | Play             | Not sure if this should be fixed                                                      |  No   | Possible solution may be [Is there a way to never exit on KeyboardInterrupt in python?](https://stackoverflow.com/a/59003480) |
+| odd behaviour with cursor outline on the screen when not moving                                                                                       | Play             | When the cursor has been idle for a longer time it seems to leave print on the screen |  No   |                                                                                                                               |
 
 ## Validator Testing
 
