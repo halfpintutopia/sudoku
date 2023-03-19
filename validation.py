@@ -30,9 +30,9 @@ def validate_coordinates(row_cell):
         else:
             raise ValueError()
     except ValueError:
-        on(18, 55, "Only one letter")
-        on(19, 55, "and one number")
-        on(20, 55, "Must not contain spaces")
+        on(19, 55, "Only one letter")
+        on(20, 55, "and one number")
+        on(21, 55, "Must not contain spaces")
         return False
     return True
 

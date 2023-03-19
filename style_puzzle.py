@@ -10,8 +10,8 @@ class StylePuzzle:
         self.original_puzzle = original_puzzle
         self.current_puzzle = current_puzzle
         self.grid_string = None
-        self.original_num_colour = 'yellow'
-        self.guess_num_colour = 'blue'
+        self.original_num_colour = 'light_green'
+        self.guess_num_colour = 'cyan'
         self.num_style_bold = 'bold'
         self.double_space = '  '
         self.single_space = ' '

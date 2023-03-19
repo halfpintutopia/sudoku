@@ -89,14 +89,17 @@ class Game(Sudoku):
         on(10, 55, 'Enter row number')
         on(11, 55, 'and one column letter.')
         on(12, 55, 'e.g. 4E or e4')
-        on(14, 55, MainMenu.EXIT.value)
+
+        on(14, 55, 'XS for solution')
+        on(15, 55, 'X to exit')
 
         while True:
-            clear(17, 55)
-            option = write_input(16, 55, 'Enter number and letter:')  # near
-            # perfect character length
-            if option == 'x' or option == 'X':
+            clear(18, 55)
+            option = write_input(17, 55, 'Enter number and letter:')
+            if option.lower() == 'x':
                 self.add_initial_options()
+            elif option.lower() == 'xs':
+                self.solve_puzzle()
             elif validate_coordinates(option):
                 self.set_coordinates(option)
                 self.guess_number()
@@ -115,6 +118,9 @@ class Game(Sudoku):
             clear(16, 55)
             clear(17, 55)
             clear(18, 55)
+            clear(19, 55)
+            clear(20, 55)
+            clear(21, 55)
             option = write_input(14, 55, f"Add number to {self.cell}:")
             if option == 'x' or option == 'X':
                 self.add_initial_options()
@@ -231,8 +237,9 @@ class Game(Sudoku):
         self.solve_puzzle()
 
     def solve_puzzle(self):
-        self.completed_puzzle = copy.deepcopy(self.original_puzzle)
-        self.create_solutions()
+        if self.completed_puzzle is None:
+            self.completed_puzzle = copy.deepcopy(self.original_puzzle)
+            self.create_solutions()
         style_puzzle = StylePuzzle(
             self.original_puzzle,
             self.completed_puzzle
