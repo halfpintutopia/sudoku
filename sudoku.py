@@ -67,8 +67,6 @@ class Sudoku:
                         if self.check_row_column_3_by_3(num, (row, col)):
                             self.completed_puzzle[row][col] = num
 
-                            # available_nums.remove(num)
-
                             if self.find_solution():
                                 self.create_solutions()
                                 return self.completed_puzzle

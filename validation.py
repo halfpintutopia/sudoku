@@ -71,22 +71,6 @@ def validate_username(username):
     return True
 
 
-# def validate_menu_option(menu_choice):
-#     """
-#     Check the menu option chosen is a valid number,
-#     a number from 1 to 4 inclusive
-#     """
-#     try:
-#         int(menu_choice)
-#         if 1 < int(menu_choice) > 4:
-#             raise ValueError()
-#     except ValueError:
-#         on(16, left_margin, InputPrompt.INVALID_MAIN_MENU.value)
-#         return False
-#
-#     return True
-
-
 def validate_grid_cell(puzzle, row, col):
     """
     Compare the set grid and current puzzle.
