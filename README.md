@@ -320,11 +320,21 @@ terminal in the project.
 
 ## Remaining Bugs
 
-| Bug / Errors                                                                                                 | Where / Location      | Remarks   |  Fixed  | Solution   |
-|--------------------------------------------------------------------------------------------------------------|-----------------------|-----------|:-------:|------------|
-| once puzzle is entered, what you see is slightly off. instructions reach into the puzzle                     | Enter your own puzzle | --------- | :-----: | ---------- |
-| when i try starting to solve my own puzzle i enter e.g. 1a then enter and baam. i am back on the home screen | ------------------    | --------- | :-----: | ---------- |
-| maybe use another command to go back (like return). enter is needed to solve puzzle                          | ------------------    | --------- | :-----: | ---------- |
+| Bug / Errors                                                                                                                                          | Where / Location      | Remarks   |  Fixed  | Solution   |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|-----------|:-------:|------------|
+| inputting a number higher than 3 does not show an error message                                                                                       | Starting page         | --------- | :-----: | ---------- |
+| user cannot go back after that                                                                                                                        | Starting page         | --------- | :-----: | ---------- |
+| input 2: nothing happens. the user cannot go back after that                                                                                          | Starting page         | --------- | :-----: | ---------- |
+| input 3 leads to 2 (enter your own puzzle) this was not clear to me                                                                                   | Starting page         | --------- | :-----: | ---------- |
+| once puzzle is entered, what you see is slightly off. instructions reach into the puzzle                                                              | Enter your own puzzle | --------- | :-----: | ---------- |
+| when i try starting to solve my own puzzle i enter e.g. 1a then enter and baam. i am back on the home screen                                          | Enter your own puzzle | --------- | :-----: | ---------- |
+| maybe use another command to go back (like return). enter is needed to solve puzzle                                                                   | Enter your own puzzle | --------- | :-----: | ---------- |
+| entering wrong name (capital letters etc.) results in error message showing in the command line                                                       | Play                  | --------- | :-----: | ---------- |
+| user can continue by writing over error message                                                                                                       | Play                  | --------- | :-----: | ---------- |
+| using ctrl+c in command line crashes program. error message: keyboard interrupt (tried to copy the error message. a full stop is missing after 3 :) ) | Play                  | --------- | :-----: | ---------- |
+| r shows instead of 1 (looks askew like above at the BUT). the r seems to be from the word number at the far right side                                | Play                  | --------- | :-----: | ---------- |
+| after entering number the title SUDOKU is overwritten by ABC DEF GHI                                                                                  | Play                  | --------- | :-----: | ---------- |
+| top right shows e 9 e 9 e 9 in a vertical column after several inputs                                                                                 | Play                  | --------- | :-----: | ---------- |
 
 ## Validator Testing
 
