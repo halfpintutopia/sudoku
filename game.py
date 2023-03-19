@@ -1,7 +1,7 @@
 from sudoku import Sudoku
 from screen import on, clear, clear_screen, write_input, \
     clear_screen_from_pos, clear_right_side, set_title
-from helper_enums import Instructions, MainMenu, InputPrompt, \
+from helper_enums import MainMenu, InputPrompt, \
     DifficultyPrompt
 from user import User
 from validation import validate_number_guess, validate_coordinates, \
@@ -184,12 +184,16 @@ class Game(Sudoku):
         Show the instructions for the game, when option chosen
         """
         clear_screen_from_pos(10, left_margin)
-        on(10, left_margin, Instructions.FIRST_LINE.value)
-        on(11, left_margin, Instructions.SECOND_LINE.value)
-        on(12, left_margin, Instructions.THIRD_LINE.value)
-        on(13, left_margin, Instructions.FOURTH_LINE.value)
+        on(10, left_margin, 'A Sudoku puzzle is created with a 9 by 9 square')
+        on(11, left_margin, '(9 rows and 9 columns).')
+        on(12, left_margin, 'The 9 x 9 square is divided into 3 by 3 areas')
+        on(13, left_margin, 'a total of 9 x 3 by 3 areas.')
+        on(14, left_margin, 'Each row, column and 3 x 3 area')
+        on(15, left_margin, 'must contain numbers 1 - 9.')
+        on(16, left_margin, 'Numbers cannot be repeated in the row')
+        on(17, left_margin, 'column nor 3 by 3 area.')
 
-        write_input(15, left_margin, InputPrompt.PRESS_ENTER.value)
+        write_input(19, left_margin, InputPrompt.PRESS_ENTER.value)
         self.add_initial_options()
 
     def solve_user_puzzle(self):
