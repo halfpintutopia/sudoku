@@ -57,12 +57,11 @@ Tschudi in mind.
 
 # How to Use
 
-The 4 options are:
+The 3 options are:
 
 1. [Play](#play)
-2. [Enter your own puzzle](#enter-your-own-puzzle)
-3. [Solve a puzzle](#solve-a-puzzle)
-4. [Instructions](#instructions)
+2. [Solve a puzzle](#solve-a-puzzle)
+3. [Instructions](#instructions)
 
 ### Play
 
@@ -85,17 +84,6 @@ The 4 options are:
   puzzle, then the number will be printed into the grid
 * Once there are no more numbers to enter, they user will be prompted to check
   the solution or exit the game
-
-### Enter your own puzzle
-
-*This option allows the user to enter their own puzzle into the grid.*<br>
-*For example if they find a newspaper sudoku puzzle, but instead of using pen
-and paper they would like to view the puzzle in the application.*
-
-* User is prompted to add 9 rows
-* A new grid with the puzzle will be printed on the screen
-* The game will proceed as from the regular game play, from choosing the row
-  and column
 
 ### Solve a puzzle
 
@@ -183,19 +171,107 @@ the game.*
 </details>
 <br>
 
+<details>
+<summary>A basic game flow</summary>
+<br>
+
+![Flowchart - a basic game flow](./docs/media/images/flowchart/game_flow.png)
+
+*Flowchart - a basic game flow*
+</details>
+<br>
+
 ## Data Model
+
+Implement separation of concerns
+see - [Future Implementations](#future-implementations)
+
+Classes:
+
+- Sudoku
+- Game inherits from Sudoku
+  see - [Future Implementations](#future-implementations)
+- Style Puzzle
+- User
+
+Modules:
+
+- validation
+- screen
+
+Enums:
+
+- string enums
+
+Constants
+
+- global constants
 
 # Features
 
 ## General Features
 
+### Main Menu
+
+![Screenshot of main menu](./docs/media/features/main_menu.png)<br>
+*Screenshot of the main menu, on the start of the app*
+
+<br>
+
+![Screenshot of entering username](./docs/media/features/username.png)<br>
+*Screenshot of entering username, when Play is chosen from the main menu*
+
+<br>
+
+![Screenshot of entering difficulty](./docs/media/features/difficulty.png)<br>
+*Screenshot of entering the difficulty of the puzzle, when Play is chosen from
+the main menu*
+
+<br>
+
+![Screenshot of the puzzle board](./docs/media/features/puzzle.png)<br>
+*Screenshot of the puzzle dependent on the difficulty chosen*
+
+<br>
+
+![Screenshot of a completed board](./docs/media/features/completed_puzzle.png)<br>
+*Screenshot of a solved board, when playing the game and when using the solver*
+
+<br>
+
+![Screenshot of the solver steps](./docs/media/features/solver.png)<br>
+*Screenshot of the process of what the user needs to do when the Solve
+Puzzle option is chosen*
+
+<br>
+
+The solver prompts the user to add each row for the the puzzle they wish to
+solve
+
 ## Future Implementations
 
-* Save progress
-* Time progress
-* Load previous game and continue playing
-* See your previous plays at different levels and see if your times have
-  improved
+* Use Google Drive and Google Sheets to:
+    * Save progress
+    * Time progress
+    * Load previous game and continue playing
+    * See your previous plays at different levels and see if your times have
+      improved
+* Allow the user to turn on hints
+    * When the user is adding numbers to the row and column a hint would be
+      displayed to inform the user that the number and placement are
+      incorrect
+* Change the view of the Sudoku grid and provide more feedback
+    * When the user has completed the puzzle
+        * Check the numbers are placed correctly
+            * Show light-green for original puzzle
+            * Show cyan for user's answers
+            * Show red or 0 for wrong answers
+
+---
+
+* Within the code:
+    * Move the solver to its own class.
+    * Improve the file structure and separating out concerns further
 
 # Technologies Used
 
@@ -211,8 +287,34 @@ the game.*
 - GitHub
 - PyCharm
     - including debugging tools
-- fig
-    - This library was ussed to set th eititl
+
+### Python Libraries Used:
+
+- pyfiglet
+  - Used to set font, color and size for application title, to make it 
+    stand out
+- google.oauth2
+    - see [Future Implementations](#future-implementations)
+- gspread
+    - see [Future Implementations](#future-implementations)
+- copy
+  - Multiple versions are used for reference during the game and while 
+    using the solver
+  - for creating deep copies of the grid to create different versions of the 
+    grid
+    - solved puzzle
+    - puzzle the user starts with
+    - the updated puzzle that the user fills in
+- random
+  - used in recursion when generating a solved Sudoku puzzle
+  - for the numbers in the grid to randomise the 
+- termcolor
+  - set the color of the numbers in the grid
+    - one color for the puzzle
+    - one color for the user input / missing numbers when puzzle has been 
+      solved
+- enum
+  - create string enums to prevent typos and make data consistent
 
 # Remote & Local Development
 
@@ -328,14 +430,10 @@ terminal in the project.
 
 ## Validator Testing
 
-| Bug / Errors                                                                                                                                          | Where / Location | Remarks   |  Fixed  | Solution   |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|-----------|:-------:|------------|
-| entering wrong name (capital letters etc.) results in error message showing in the command line                                                       | Play             | --------- | :-----: | ---------- |
-| user can continue by writing over error message                                                                                                       | Play             | --------- | :-----: | ---------- |
-| using ctrl+c in command line crashes program. error message: keyboard interrupt (tried to copy the error message. a full stop is missing after 3 :) ) | Play             | --------- | :-----: | ---------- |
-| r shows instead of 1 (looks askew like above at the BUT). the r seems to be from the word number at the far right side                                | Play             | --------- | :-----: | ---------- |
-| after entering number the title SUDOKU is overwritten by ABC DEF GHI                                                                                  | Play             | --------- | :-----: | ---------- |
-| top right shows e 9 e 9 e 9 in a vertical column after several inputs                                                                                 | Play             | --------- | :-----: | ---------- |
+Successfully validated each .py extended file
+with [CI Python Linter](https://pep8ci.herokuapp.com/).
+
+No errors found.
 
 # Credits
 
