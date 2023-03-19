@@ -45,8 +45,7 @@ class InputPrompt(Enum):
     PRESS_ENTER = 'Press Enter to return to menu... '
     USERNAME = 'Enter your username: '
     NUMBER = 'Enter a number: '
-    INVALID_DIFFICULTY = 'Invalid input: Please enter a number between, ' \
-                         '1, 2, or 3 please try again.'
+    INVALID_DIFFICULTY = 'Please enter a number between, 1, 2, 3'
     COORDINATES = 'Enter a number and a letter or exit: '
     INVALID_MAIN_MENU = 'Please choose one of the options. 1, 2, or 3'
 
@@ -72,4 +71,4 @@ class Username(Enum):
 
 class Guess(Enum):
     PROMPT_1 = 'Please enter a row number and a column letter. e.g. 4E'
-    PROMPT_2 = 'Please enter a number (1-9) you want to put in the cell'
+    PROMPT_2 = 'Enter a number \n(1-9)'
