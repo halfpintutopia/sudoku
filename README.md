@@ -1,7 +1,6 @@
 # Sudoku
 
-[//]: # (TODO Add screen shot of app)
-![Screenshot of app]()
+![Screenshot of app](./docs/media/features/main_menu.png)
 
 [Here is the live version of my project](https://sudoku-creator-solver.herokuapp.com/)
 
