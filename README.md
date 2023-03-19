@@ -290,31 +290,32 @@ solve
 
 ### Python Libraries Used:
 
+The following libraries were imported:
+
 - pyfiglet
-  - Used to set font, color and size for application title, to make it 
-    stand out
+    - Used to set font, color and size for application title, to make it
+      stand out
 - google.oauth2
     - see [Future Implementations](#future-implementations)
 - gspread
     - see [Future Implementations](#future-implementations)
 - copy
-  - Multiple versions are used for reference during the game and while 
-    using the solver
-  - for creating deep copies of the grid to create different versions of the 
-    grid
-    - solved puzzle
-    - puzzle the user starts with
-    - the updated puzzle that the user fills in
+    - as multiple versions are used for reference during the game and while
+      using the solver
+    - for creating deep copies of the grid to create different versions of the
+      grid
+        - solved puzzle
+        - puzzle the user starts with
+        - the updated puzzle that the user fills in
 - random
-  - used in recursion when generating a solved Sudoku puzzle
-  - for the numbers in the grid to randomise the 
+    - used in recursion when generating a solved Sudoku puzzle
+    - randomly select number 1 - 9
 - termcolor
-  - set the color of the numbers in the grid
-    - one color for the puzzle
-    - one color for the user input / missing numbers when puzzle has been 
-      solved
+    - set the color of the numbers in the grid
+        - one color for the puzzle
+        - one color for the user's input and the puzzles solved numbers
 - enum
-  - create string enums to prevent typos and make data consistent
+    - create string enums to prevent typos and make data consistent
 
 # Remote & Local Development
 
