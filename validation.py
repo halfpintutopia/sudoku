@@ -158,6 +158,7 @@ def validate_row(row):
 
     return True
 
+
 def validate_list_contains_integers(row):
     """
     Validate list from user's input
