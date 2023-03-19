@@ -1,0 +1,10 @@
+LEFT_MARGIN = 5
+PATTERN = "^[a-z0-9_-]*$"
+GAME_TITLE = 'SUDOKU'
+FONT_NAME = 'block'
+TITLE_COLOR = 'yellow'
+CENTER = "center"
+NUM_OF_COLS = 9
+NUM_OF_ROWS = 9
+EMPTY_CELL = 0
+GRID_LINE_LENGTH = 43

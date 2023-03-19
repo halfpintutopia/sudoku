@@ -1,66 +1,56 @@
 import gspread
 from google.oauth2.service_account import Credentials
-import re
+from string_enums import GoogleSheets, InputPrompt
+from screen import on, clear_screen_from_pos, write_input, clear
+from validation import validate_username
+from global_constants import *
 
 
 class User:
-    def __init__(self):
-        self.username = None
+    def __init__(self, username=None):
+        self.username = username
         self.pattern = "^[a-z0-9_-]*$"
-        self.SCOPE = [
-            "https://www.googleapis.com/auth/spreadsheets",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive"
-        ]
 
-        self.CREDS = Credentials.from_service_account_file('creds.json')
-        self.SCOPED_CREDS = self.CREDS.with_scopes(self.SCOPE)
+        self.CREDS = Credentials.from_service_account_file(
+            GoogleSheets.CREDS_FILE.value)
+        self.SCOPED_CREDS = self.CREDS.with_scopes(GoogleSheets.SCOPE.value)
         self.GSPREAD_CLIENT = gspread.authorize(self.SCOPED_CREDS)
-        self.SHEET = self.GSPREAD_CLIENT.open('sudoku_games')
+        self.SHEET = self.GSPREAD_CLIENT.open(GoogleSheets.SHEET.value)
 
-        self.saved_games = self.SHEET.worksheet('saved_games')
+        self.users = self.SHEET.worksheet(GoogleSheets.USER_WORKSHEET.value)
+        self.saved_games = self.SHEET.worksheet(
+            GoogleSheets.GAMES_WORKSHEET.value)
 
-        self.data = self.saved_games.get_all_values()
+        self.users_data = self.users.get_all_values()
+        self.saved_games_data = self.saved_games.get_all_values()
+        self.user_id = None
+
+    def get_username(self):
+        """
+        Returns the user's username
+        """
+        return self.username
 
     def create_username(self):
         """
         Get username from user input
         Save username and game ID to google sheets
         """
+        clear_screen_from_pos(10, 1)
+        on(10, LEFT_MARGIN, 'Add your username.')
+        on(11, LEFT_MARGIN, 'Username should be lowercase.')
+        on(12, LEFT_MARGIN, 'Username must only contain letters a-z')
+        on(13, LEFT_MARGIN, 'and can contain a hyphen or underscore')
         while True:
-            print("Add your username.")
-            print("Username can contain numbers, and be in lowercase.")
-            print("Username should not contain spaces")
-            print("Username should not contain special characters, except underscore ('_') and hyphen ('-')\n")
+            clear(16, LEFT_MARGIN)
+            username = write_input(15, LEFT_MARGIN,
+                                   InputPrompt.USERNAME.value)
 
-            username = input("Enter your username: \n")
-
-            if self.validate_username(username):
+            if validate_username(username):
                 self.username = username
-                # self.get_last_entry()
-                game_id = self.get_last_id_entry()
-                print(f"game id = {game_id}")
                 break
 
-        print(f"Hello {self.username}")
-
-    def validate_username(self, username):
-        """
-        Check string inputted by user to meet the conditions:
-        - lowercase
-        - no special characters except underscore and or hyphen
-        - contains no spaces
-        """
-        try:
-            if not bool(re.match(self.pattern, username)):
-                raise ValueError(
-                    f"Name entered contains capital letters or special characters"
-                )
-        except ValueError as e:
-            print(f"Invalid username: {e}, please try again.\n")
-            return False
-
-        return True
+        return self.username
 
     def get_last_entry(self):
         """

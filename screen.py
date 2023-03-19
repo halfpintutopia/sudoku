@@ -1,8 +1,20 @@
+from pyfiglet import Figlet
+from termcolor import colored
+from global_constants import *
+
+
 def clear_screen():
     """
     Helper function to clear the entire 24 row / 80 col screen
     """
     print(f"\x1b[2J")
+
+
+def clear_screen_from_pos(row: int, col: int):
+    """
+    Helper function to clear the screen from the position of row and column
+    """
+    print(f"\x1b[{row};{col}H\x1b[0J")
 
 
 def on(row, col, string, num_of_blanks=25):
@@ -34,11 +46,16 @@ def write(row, col, string):
 
 def write_input(row, col, string):
     """
-    Show the input
-    A helper function to return an input at a set row and column
+    Show the input at the position of row and col
     """
-    return input(f"\x1b[{row};{col}H{string}\x1b[{row + 1};{col}H")
+    return input(f"\x1b[{row};{col}H{string}\x1b[{row + 1};{col}H\x1b[5m")
 
 
-def esc(code):
-    return f'\033[{code}m'
+def set_title():
+    """
+    Create title for the start screen
+    """
+    clear_screen()
+    custom_fig = Figlet(font=FONT_NAME, justify=CENTER)
+    print("\x1b[1;1H" + colored(custom_fig.renderText(GAME_TITLE),
+                                TITLE_COLOR))
