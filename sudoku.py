@@ -40,8 +40,8 @@ class Sudoku:
         """
         Initial 3 x 3 by 3 sections filled in
         Fills the grid with the 1/9 5/9 and 9/9 3x3 areas on sudoku grid
-        Provides a unique number for each line and row and makes recursion a bit easier
-        Once the numbers are filled in for the 3 sections the rest of the numbers can be added
+        Provides a unique number for each line and row.
+        Should save memory from this way of  recursion
         """
         self.completed_puzzle = copy.deepcopy(self.grid)
         for range_values in range_list:
@@ -78,7 +78,8 @@ class Sudoku:
     def find_solution(self):
         """
         Checking cell to fill in
-        If possible to fill in then will set a number otherwise will reset the number to 0
+        If possible to fill in then will set a number,
+        otherwise will reset the number to 0
         """
         available_cell = self.find_next_zero()
 
@@ -199,68 +200,9 @@ class Sudoku:
             for col in range(9):
                 if self.grid[row][col] != 0 and self.grid[row][col] == \
                         self.current_puzzle[row][col]:
+                    # TODO fix this line
                     print(
                         'The number cannot be overwritten as part of the puzzle.')
-
-    def validate_row_for_duplicates(self, row):
-        """
-        Validate the row and check whether there are duplicate numbers in
-        the row
-        """
-        try:
-            duplicates = {str(x) for x in row if x != 0 and row.count(x)
-                          > 1}
-            if len(duplicates) > 0:
-                raise ValueError(
-                    f"You have entered the {', '.join(duplicates)} multiple "
-                    f"times in the same row"
-                )
-        except ValueError as e:
-            clear(16, 1, 80)
-            on(16, left_margin, e)
-            return False
-        return True
-
-    def validate_row(self, row):
-        """
-        Validates the string of numbers inputted
-        Removes all spaces from the string if the user has entered them
-        Splits the string up and creates a list
-        """
-        try:
-            if len(row) < 9:
-                raise ValueError(
-                    f"You have only entered {len(row)}"
-                )
-            elif len(row) > 9:
-                raise ValueError(
-                    f"You have entered {len(row)}"
-                )
-
-        except ValueError as e:
-            clear(16, 1, 60)
-            clear(17, 1, 60)
-            on(16, left_margin, e)
-            on(17, left_margin, 'Please enter exactly 9 numbers')
-            return False
-
-        return True
-
-    def validate_list_contains_integers(self, row):
-        """
-        Validate list from user's input
-        """
-        try:
-            for num in row:
-                int(num)
-        except ValueError:
-            clear(16, 1, 60)
-            clear(17, 1, 60)
-            on(16, left_margin, 'You have entered letters.')
-            on(17, left_margin, 'Please enter only numbers.')
-            return False
-
-        return True
 
     def create_nums_list(self, numbers):
         """
@@ -268,34 +210,6 @@ class Sudoku:
         """
         list_of_nums = numbers.replace(" ", "").rstrip(",").split(",")
         return [int(num) for num in list_of_nums]
-
-    def check_amount_of_nums(self, numbers):
-
-        try:
-            if not len(numbers) == 9:
-                raise ValueError(
-                    f"You have entered {len(numbers)}. Please enter 9 numbers per row")
-        except ValueError as e:
-            print(f"Invalid input: {e}, please try again")
-            return False
-
-        return True
-
-    def check_inputs_are_numbers(self, numbers):
-        """
-        Check the list of numbers are all integers
-        """
-        for num in numbers:
-            try:
-                if isinstance(num, int):
-                    continue
-                else:
-                    raise ValueError(f"Please enter a number")
-            except ValueError as e:
-                print(f"Invalid input: {e}, please try again")
-                return False
-
-        return True
 
     def create_user_puzzle(self, puzzle):
         self.grid = puzzle

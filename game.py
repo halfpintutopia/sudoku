@@ -5,7 +5,8 @@ from helper_enums import Instructions, MainMenu, InputPrompt, \
     DifficultyPrompt
 from user import User
 from validation import validate_number_guess, validate_coordinates, \
-    validate_difficulty_input, validate_grid_cell, validate_menu_option
+    validate_difficulty_input, validate_grid_cell, validate_menu_option, \
+    validate_row_for_duplicates, validate_row, validate_list_contains_integers
 from style_puzzle import StylePuzzle
 import copy
 from global_constants import *
@@ -210,10 +211,10 @@ class Game(Sudoku):
                                          str(row + 1))
                 list_of_nums = puzzle_row.replace(" ", "").rstrip(",").split(
                     ",")
-                if self.validate_list_contains_integers(list_of_nums):
-                    if self.validate_row(list_of_nums):
+                if validate_list_contains_integers(list_of_nums):
+                    if validate_row(list_of_nums):
                         current_row = self.create_nums_list(puzzle_row)
-                        if self.validate_row_for_duplicates(current_row):
+                        if validate_row_for_duplicates(current_row):
                             self.original_puzzle.append(current_row)
                             break
         self.completed_puzzle = copy.deepcopy(self.original_puzzle)

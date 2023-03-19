@@ -111,3 +111,65 @@ def validate_menu_option(option):
         on(16, left_margin, InputPrompt.INVALID_MAIN_MENU.value)
         return False
     return True
+
+
+def validate_row_for_duplicates(row):
+    """
+    Validate the row and check whether there are duplicate numbers in
+    the row
+    """
+    try:
+        duplicates = {str(x) for x in row if x != 0 and row.count(x)
+                      > 1}
+        if len(duplicates) > 0:
+            raise ValueError(
+                f"You have entered the {', '.join(duplicates)} multiple "
+                f"times in the same row"
+            )
+    except ValueError as e:
+        clear(16, 1, 80)
+        on(16, left_margin, e)
+        return False
+    return True
+
+
+def validate_row(row):
+    """
+    Validates the string of numbers inputted
+    Removes all spaces from the string if the user has entered them
+    Splits the string up and creates a list
+    """
+    try:
+        if len(row) < 9:
+            raise ValueError(
+                f"You have only entered {len(row)}"
+            )
+        elif len(row) > 9:
+            raise ValueError(
+                f"You have entered {len(row)}"
+            )
+
+    except ValueError as e:
+        clear(16, 1, 60)
+        clear(17, 1, 60)
+        on(16, left_margin, e)
+        on(17, left_margin, 'Please enter exactly 9 numbers')
+        return False
+
+    return True
+
+def validate_list_contains_integers(row):
+    """
+    Validate list from user's input
+    """
+    try:
+        for num in row:
+            int(num)
+    except ValueError:
+        clear(16, 1, 60)
+        clear(17, 1, 60)
+        on(16, left_margin, 'You have entered letters.')
+        on(17, left_margin, 'Please enter only numbers.')
+        return False
+
+    return True
