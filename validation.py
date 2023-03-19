@@ -60,12 +60,17 @@ def validate_username(username):
     - contains no spaces
     """
     try:
+        if username == '':
+            raise ValueError(
+                "Username cannot be blank"
+            )
         if not bool(re.match(PATTERN, username)):
-            raise ValueError()
-    except ValueError:
-        clear(15, LEFT_MARGIN)
-        on(15, LEFT_MARGIN,
-           'Name entered contains capital letters or special characters')
+            raise ValueError(
+                "Name entered contains capital letters or special characters"
+            )
+    except ValueError as e:
+        clear(17, LEFT_MARGIN)
+        on(17, LEFT_MARGIN, e)
         return False
 
     return True
