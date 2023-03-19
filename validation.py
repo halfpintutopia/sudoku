@@ -159,6 +159,7 @@ def validate_list_contains_integers(row):
                 raise ValueError()
     except ValueError:
         clear(20, 1, 60)
+        clear(21, 1, 60)
         on(20, LEFT_MARGIN, 'Only numbers 1 - 9')
         return False
 
