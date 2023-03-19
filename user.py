@@ -1,6 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from helper_enums import GoogleSheets, InputPrompt
+from string_enums import GoogleSheets, InputPrompt
 from screen import on, clear_screen_from_pos, write_input
 from validation import validate_username
 

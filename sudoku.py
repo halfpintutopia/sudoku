@@ -1,6 +1,6 @@
 import copy
 import random
-from helper_enums import Difficulty
+from string_enums import Difficulty
 from screen import clear_screen, set_title
 from style_puzzle import StylePuzzle
 from global_constants import *

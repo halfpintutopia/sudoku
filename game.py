@@ -1,7 +1,7 @@
 from sudoku import Sudoku
 from screen import on, clear, clear_screen, write_input, \
     clear_screen_from_pos, set_title
-from helper_enums import MainMenu, InputPrompt, \
+from string_enums import MainMenu, InputPrompt, \
     DifficultyPrompt
 from user import User
 from validation import validate_number_guess, validate_coordinates, \

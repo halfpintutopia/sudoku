@@ -1,4 +1,4 @@
-from helper_enums import InputPrompt
+from string_enums import InputPrompt
 import re
 from screen import on, clear
 from global_constants import *
