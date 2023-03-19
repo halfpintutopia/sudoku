@@ -8,6 +8,7 @@ from validation import validate_number_guess, validate_coordinates, \
     validate_difficulty_input, validate_grid_cell, validate_menu_option
 from style_puzzle import StylePuzzle
 import copy
+from global_constants import *
 
 
 class Game(Sudoku):
@@ -59,13 +60,8 @@ class Game(Sudoku):
                 for row in range(10, 17):
                     clear(row, 55)
 
-                # self.solve_user_puzzle()
-            case 3:
-                for row in range(10, 17):
-                    clear(row, 55)
-
                 self.solve_user_puzzle()
-            case 4:
+            case 3:
                 for row in range(10, 17):
                     clear(row, 55)
 
@@ -78,8 +74,9 @@ class Game(Sudoku):
         print(MainMenu.LOADING.value)
         self.user.create_username()
 
-        clear_screen_from_pos(10, 1)
-        on(10, 1, 'Hello ' + self.user.get_username())
+        clear_screen()
+        set_title()
+        on(10, left_margin, 'Hello ' + self.user.get_username())
         self.choose_difficulty()
         self.guess_cell()
 
@@ -95,7 +92,7 @@ class Game(Sudoku):
 
         while True:
             clear(17, 55)
-            option = write_input(16, 55, 'Enter number and letter:') # near
+            option = write_input(16, 55, 'Enter number and letter:')  # near
             # perfect character length
             if option == 'x' or option == 'X':
                 self.add_initial_options()
@@ -109,13 +106,13 @@ class Game(Sudoku):
         Prompt for player to choose a number to place in cell
         """
         clear_right_side()
-        on(10, 55, 'Please enter a number (1-9)')
+        on(10, 55, 'Enter number 1 - 9')
 
         on(12, 55, MainMenu.EXIT.value)
 
         while True:
             clear(15, 55)
-            option = write_input(14, 55, InputPrompt.NUMBER.value)
+            option = write_input(14, 55, 'Add number:')
             if option == 'x' or option == 'X':
                 self.add_initial_options()
             elif validate_number_guess(option):
@@ -164,19 +161,20 @@ class Game(Sudoku):
         """
         Input should allow the user to choose the difficulty of the game
         """
-        on(12, 1, DifficultyPrompt.CHOOSE.value)
-        on(13, 1, DifficultyPrompt.EASY.value)
-        on(14, 1, DifficultyPrompt.MEDIUM.value)
-        on(15, 1, DifficultyPrompt.HARD.value)
+        on(12, left_margin, DifficultyPrompt.CHOOSE.value)
+        on(13, left_margin, DifficultyPrompt.EASY.value)
+        on(14, left_margin, DifficultyPrompt.MEDIUM.value)
+        on(15, left_margin, DifficultyPrompt.HARD.value)
 
         while True:
-            clear(16, 1)
-            clear(17, 1)
+            clear(17, left_margin)
+            clear(18, left_margin)
 
-            difficulty_level = write_input(16, 1, InputPrompt.NUMBER.value)
+            difficulty_level = write_input(17, left_margin,
+                                           InputPrompt.NUMBER.value)
 
             if validate_difficulty_input(difficulty_level):
-                clear_screen_from_pos(10, 1)
+                clear_screen_from_pos(10, left_margin)
                 self.set_difficulty(int(difficulty_level))
                 break
 
@@ -184,31 +182,32 @@ class Game(Sudoku):
         """
         Show the instructions for the game, when option chosen
         """
-        clear_screen_from_pos(10, 1)
-        on(10, 1, Instructions.FIRST_LINE.value)
-        on(11, 1, Instructions.SECOND_LINE.value)
-        on(12, 1, Instructions.THIRD_LINE.value)
-        on(13, 1, Instructions.FOURTH_LINE.value)
+        clear_screen_from_pos(10, left_margin)
+        on(10, left_margin, Instructions.FIRST_LINE.value)
+        on(11, left_margin, Instructions.SECOND_LINE.value)
+        on(12, left_margin, Instructions.THIRD_LINE.value)
+        on(13, left_margin, Instructions.FOURTH_LINE.value)
 
-        write_input(15, 1, InputPrompt.PRESS_ENTER.value)
+        write_input(15, left_margin, InputPrompt.PRESS_ENTER.value)
         self.add_initial_options()
 
     def solve_user_puzzle(self):
         """
         Prompt the user to add 9 rows, to solve a puzzle
         """
-        # on(10, 1, 'Please enter each row when prompted.')
-        clear_screen_from_pos(10, 1)
-        on(10, 1, 'Every row must contain 9 numbers, each number must be  '
-                  'separated by a comma.')
-        on(11, 1, 'Each number must be 1 to 9. Use 0 for a blank.')
-        on(12, 1, 'e.g. 4,7,0,0,2,6,9,0,0')
+        clear_screen_from_pos(10, left_margin)
+        on(10, left_margin, 'Every row must contain 9 numbers,')
+        on(11, left_margin, 'each number must be  separated by a comma.')
+        on(12, left_margin, 'Each number must be 1 to 9.')
+        on(13, left_margin, 'Use 0 for a blank.')
+        on(14, left_margin, 'e.g. 4,7,0,0,2,6,9,0,0')
         self.original_puzzle = []
         for row in range(9):
             clear_screen_from_pos(14, 1)
             while True:
-                clear(15, 1, 80)
-                puzzle_row = write_input(14, 1, 'Enter row ' + str(row + 1))
+                clear(15, left_margin, 80)
+                puzzle_row = write_input(16, left_margin, 'Enter row ' +
+                                         str(row + 1))
                 list_of_nums = puzzle_row.replace(" ", "").rstrip(",").split(
                     ",")
                 if self.validate_list_contains_integers(list_of_nums):
@@ -218,13 +217,12 @@ class Game(Sudoku):
                             self.original_puzzle.append(current_row)
                             break
         self.completed_puzzle = copy.deepcopy(self.original_puzzle)
-        on(17, 1, 'Just one moment, generating solution')
+        on(20, left_margin, 'Just one moment, generating solution')
         self.solve_puzzle()
 
     def solve_puzzle(self):
-        clear_screen_from_pos(10, 1)
+        clear_screen_from_pos(10, left_margin)
         self.completed_puzzle = copy.deepcopy(self.original_puzzle)
-        # self.create_user_puzzle()
         self.create_solutions()
         style_puzzle = StylePuzzle(
             self.original_puzzle,
