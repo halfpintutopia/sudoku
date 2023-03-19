@@ -223,13 +223,16 @@ class Game(Sudoku):
         on(12, LEFT_MARGIN, 'Each number must be 1 to 9.')
         on(13, LEFT_MARGIN, 'Use 0 for a blank.')
         on(14, LEFT_MARGIN, 'e.g. 4,7,0,0,2,6,9,0,0')
+        on(16, LEFT_MARGIN, 'X to exit')
         self.original_puzzle = []
         for row in range(9):
-            clear_screen_from_pos(14, 1)
+            # clear_screen_from_pos(14, 1)
             while True:
-                clear(15, LEFT_MARGIN, 80)
-                puzzle_row = write_input(16, LEFT_MARGIN, 'Enter row ' +
+                clear(19, LEFT_MARGIN, 80)
+                puzzle_row = write_input(18, LEFT_MARGIN, 'Enter row ' +
                                          str(row + 1))
+                if puzzle_row.lower() == 'x':
+                    self.add_initial_options()
                 list_of_nums = puzzle_row.replace(" ", "").rstrip(",").split(
                     ",")
                 if validate_list_contains_integers(list_of_nums):
@@ -248,7 +251,7 @@ class Game(Sudoku):
         """
         if self.completed_puzzle is None:
             self.completed_puzzle = copy.deepcopy(self.original_puzzle)
-            self.create_solutions()
+        self.create_solutions()
         style_puzzle = StylePuzzle(
             self.original_puzzle,
             self.completed_puzzle
@@ -256,7 +259,11 @@ class Game(Sudoku):
         clear_screen()
         set_title()
         style_puzzle.add_puzzle_style()
-        on(10, 55, 'X to exit to main menu')
-        write_input(10, 55, "Press Enter to return")
-        write_input(11, 55, "to main menu")
+        if self.original_puzzle == self.completed_puzzle:
+            on(10, 55, "Unsolvable")
+            on(11, 55, "Error in the puzzle")
+            on(12, 55, "Check the numbers in rows")
+            write_input(14, 55, "Press Enter to exit")
+        else:
+            write_input(10, 55, "Press Enter to exit")
         self.add_initial_options()

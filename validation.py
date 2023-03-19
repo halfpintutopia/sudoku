@@ -112,7 +112,7 @@ def validate_row_for_duplicates(row):
                       > 1}
         if len(duplicates) > 0:
             raise ValueError(
-                f"You have entered the {', '.join(duplicates)} multiple "
+                f"You have entered {', '.join(duplicates)} multiple "
                 f"times in the same row"
             )
     except ValueError as e:
@@ -139,10 +139,10 @@ def validate_row(row):
             )
 
     except ValueError as e:
-        clear(16, 1, 60)
-        clear(17, 1, 60)
-        on(16, LEFT_MARGIN, e)
-        on(17, LEFT_MARGIN, 'Please enter exactly 9 numbers')
+        clear(20, 1, 60)
+        clear(21, 1, 60)
+        on(20, LEFT_MARGIN, e)
+        on(21, LEFT_MARGIN, 'Please enter exactly 9 numbers')
         return False
 
     return True
@@ -155,11 +155,11 @@ def validate_list_contains_integers(row):
     try:
         for num in row:
             int(num)
+            if not 0 <= int(num) <= 9:
+                raise ValueError()
     except ValueError:
-        clear(16, 1, 60)
-        clear(17, 1, 60)
-        on(16, LEFT_MARGIN, 'You have entered letters.')
-        on(17, LEFT_MARGIN, 'Please enter only numbers.')
+        clear(20, 1, 60)
+        on(20, LEFT_MARGIN, 'Only numbers 1 - 9')
         return False
 
     return True
