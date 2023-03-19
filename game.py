@@ -111,6 +111,9 @@ class Game(Sudoku):
 
         while True:
             clear(15, 55)
+            clear(16, 55)
+            clear(17, 55)
+            clear(18, 55)
             option = write_input(14, 55, 'Add number:')
             if option == 'x' or option == 'X':
                 self.add_initial_options()
