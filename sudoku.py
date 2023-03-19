@@ -1,11 +1,9 @@
 import copy
-from pprint import pprint
 import random
-from termcolor import colored
-from helper_enums import Difficulty, TermcolorSettings, MainMenu
-from screen import on, write_input, clear_screen_from_pos, clear, write, \
-    set_title, clear_screen
+from helper_enums import Difficulty
+from screen import on, clear
 from style_puzzle import StylePuzzle
+from global_constants import *
 
 
 class Sudoku:
@@ -22,13 +20,17 @@ class Sudoku:
         self.create_blank_sudoku()
 
     def create_blank_sudoku(self):
+        """
+        Creates a grid made of a list of lists with 9 zeros in each list
+        """
         self.grid = [[0 for x in range(9)] for y in range(9)]
         return self.grid
 
-    def creat_puzzle_with_difficulty(self, difficulty):
-        self.create_puzzle()
-
     def create_puzzle(self):
+        """
+        Creates the puzzle grid, a completed sudoku puzzle
+        All numbers are filled in
+        """
         self.create_blank_sudoku()
         self.fill_diagonal_3_by_3([(0, 3), (3, 6), (6, 9)])
         self.create_solutions()
@@ -199,9 +201,6 @@ class Sudoku:
                         self.current_puzzle[row][col]:
                     print(
                         'The number cannot be overwritten as part of the puzzle.')
-                    # return False
-
-        # return True
 
     def validate_row_for_duplicates(self, row):
         """
@@ -218,7 +217,7 @@ class Sudoku:
                 )
         except ValueError as e:
             clear(16, 1, 80)
-            on(16, 1, e)
+            on(16, left_margin, e)
             return False
         return True
 
@@ -241,8 +240,8 @@ class Sudoku:
         except ValueError as e:
             clear(16, 1, 60)
             clear(17, 1, 60)
-            on(16, 1, e)
-            on(17, 1, 'Please enter exactly 9 numbers')
+            on(16, left_margin, e)
+            on(17, left_margin, 'Please enter exactly 9 numbers')
             return False
 
         return True
@@ -256,7 +255,9 @@ class Sudoku:
                 int(num)
         except ValueError:
             clear(16, 1, 60)
-            on(16, 1, 'You have entered letters. Please enter only numbers.')
+            clear(17, 1, 60)
+            on(16, left_margin, 'You have entered letters.')
+            on(17, left_margin, 'Please enter only numbers.')
             return False
 
         return True
@@ -295,8 +296,6 @@ class Sudoku:
                 return False
 
         return True
-
-        # print(f"\x1b[35:0H{self.add_grid_style()}")
 
     def create_user_puzzle(self, puzzle):
         self.grid = puzzle
